@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import AnnouncementBar from './components/AnnouncementBar'
 import Navbar from './components/Navbar'
 import MobileMenu from './components/MobileMenu'
 import HeroSection from './components/HeroSection'
@@ -23,7 +22,6 @@ export default function App() {
 
   return (
     <div className="bg-background-light dark:bg-background-dark text-gray-900 dark:text-gray-100 transition-colors duration-500 font-body">
-      <AnnouncementBar />
       <Navbar onMenuOpen={() => setMenuOpen(true)} onToggleDark={() => setDark(prev => !prev)} isDark={dark} />
       <MobileMenu isOpen={menuOpen} onClose={() => setMenuOpen(false)} />
       <HeroSection />

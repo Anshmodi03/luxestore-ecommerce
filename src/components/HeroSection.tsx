@@ -1,11 +1,14 @@
 import { MagnifyingGlass, ArrowDown } from '@phosphor-icons/react'
+import AnnouncementBar from './AnnouncementBar'
 
 export default function HeroSection() {
   return (
-    <header className="relative h-[95vh] w-full flex items-center justify-center overflow-hidden">
+    <header className="relative h-screen w-full flex items-center justify-center overflow-hidden">
+      <AnnouncementBar />
       <div className="hero-video-wrapper">
-        <video autoPlay loop muted playsInline poster="https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=2070&auto=format&fit=crop">
-          <source src="https://videos.pexels.com/video-files/3756003/3756003-uhd_2560_1440_25fps.mp4" type="video/mp4" />
+        <video autoPlay loop muted playsInline preload="auto" onLoadedData={(e) => { (e.target as HTMLVideoElement).playbackRate = 0.7 }} style={{ background: '#0a0a0a' }}>
+          <source src="/assets/videos/hero-bg.webm" type="video/webm" />
+          <source src="/assets/videos/hero-bg.mp4" type="video/mp4" />
           <img alt="Fashion runway fallback" className="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDCL_nsaxB0Od7ioWQk9Zt9R_jWHEfjK2IAwJBQsi7EmgmjD0QJFDJFtGedRYTv316JW-m6B_oPsjgb1Tjf1mG4WsxFZmRN6sJF_TQr9Yo__y2Eq8MrQEabb44od2hKypsqhVyw8_tpx4ET8paYV5qj7tFui0SrARFdAJaqEgRtcdgT8XSpuxJEoQMpORhfdgxC4FvaqJLHY-P9gl5vcn5JIrk7kEJ5yYPB8rZta0fNtyykH81QAd7YBh9oU1dkAbgYaSnqjqcCZoE" />
         </video>
         <div className="absolute inset-0 hero-overlay"></div>

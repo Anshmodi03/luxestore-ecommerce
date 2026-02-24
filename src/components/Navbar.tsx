@@ -8,7 +8,7 @@ interface NavbarProps {
 
 export default function Navbar({ onMenuOpen, onToggleDark, isDark }: NavbarProps) {
   return (
-    <nav className="absolute top-12 w-full z-50 py-6 px-4 sm:px-8 lg:px-16 border-b border-white/10 bg-gradient-to-b from-black/50 to-transparent">
+    <nav className="absolute top-0 w-full z-50 py-6 px-4 sm:px-8 lg:px-16 border-b border-white/10 bg-gradient-to-b from-black/50 to-transparent">
       <div className="flex items-center justify-between max-w-7xl mx-auto">
         <div className="flex items-center gap-8">
           <button
