@@ -16,7 +16,6 @@ export default function Navbar({ onMenuOpen, onToggleDark, isDark }: NavbarProps
             onClick={onMenuOpen}
           >
             <span className="material-symbols-outlined text-3xl">menu</span>
-            <span className="hidden sm:inline text-xs font-bold uppercase tracking-widest opacity-80 group-hover:opacity-100">Menu</span>
           </button>
           <div className="flex items-center gap-2">
             <div className="text-white text-2xl drop-shadow-md">

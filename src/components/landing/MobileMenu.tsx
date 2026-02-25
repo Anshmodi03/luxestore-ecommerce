@@ -25,7 +25,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
           </button>
         </div>
         <div className="flex flex-col gap-6">
-          {['Collections', 'New Arrivals', 'Atelier', 'Living'].map((item) => (
+          {['Collections', 'New Arrivals', 'Atelier', 'Living', 'About'].map((item) => (
             <a
               key={item}
               className="group flex items-center justify-between text-4xl sm:text-5xl font-serif text-gray-900 dark:text-white hover:text-primary dark:hover:text-primary transition-colors"
