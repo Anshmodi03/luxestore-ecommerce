@@ -1,4 +1,4 @@
-import { ArrowsHorizontal, ArrowRight, QrCode } from '@phosphor-icons/react'
+import { ArrowsHorizontal, ArrowRight, QrCode, ShieldCheck, Waves, Cube } from '@phosphor-icons/react'
 
 const headphonesImg = 'https://lh3.googleusercontent.com/aida-public/AB6AXuCPo8P4cDxfdUKmudDqePbAHX7zlYOJs13ae7xww1fEo3xASV-mBZoG-dNjSY0FoyCbSku_LPnCIwtZoYSWAnxIFPqC8OSYUwty71F3V-wDzdGDNfjKXq3SzzauZG0N4r486WMbOupdxI5Fv59HZIBsWqb2OScbdVLNlj9yLvQUynGHODZW2SFUPkDdXR2oP62ypFaYQISJdhCPRtu_FDma_ScZdsYv_gZASC3gF4PSvF6VH94TEFKVcR8AQzVFDZ_Ui42kUka_TH8'
 
@@ -15,18 +15,22 @@ export default function Product360() {
           {/* Left panel */}
           <div className="w-full lg:w-1/4 order-2 lg:order-1 space-y-8">
             <div>
-              <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4">Material &amp; Finish</h3>
-              <div className="flex flex-col gap-4">
+              <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4">Listening Modes</h3>
+              <div className="flex flex-col gap-3">
                 {[
-                  { id: 'matte-black', color: 'bg-gray-900', label: 'Matte Black', checked: true },
-                  { id: 'silver', color: 'bg-gray-300', label: 'Sterling Silver', checked: false },
-                  { id: 'gold', color: 'bg-[#E5C79E]', label: 'Champagne Gold', checked: false },
-                ].map((mat) => (
-                  <label key={mat.id} className="flex items-center gap-3 cursor-pointer">
-                    <input defaultChecked={mat.checked} className="hidden peer" name="material" type="radio" />
-                    <span className={`w-8 h-8 rounded-full ${mat.color} border border-gray-200 dark:border-gray-700 shadow-sm hover:scale-110 transition peer-checked:ring-2 peer-checked:ring-primary peer-checked:ring-offset-2 dark:peer-checked:ring-offset-surface-dark`}></span>
-                    <span className="text-sm text-gray-600 dark:text-gray-300 peer-checked:font-bold peer-checked:text-gray-900 dark:peer-checked:text-white">{mat.label}</span>
-                  </label>
+                  { id: 'anc', icon: ShieldCheck, title: 'Active Noise Cancelling', desc: 'Block the world out completely', active: true },
+                  { id: 'transparency', icon: Waves, title: 'Transparency Mode', desc: 'Let the environment in naturally', active: false },
+                  { id: 'spatial', icon: Cube, title: 'Spatial Audio', desc: 'Immersive 360° soundstage mapping', active: false },
+                ].map((mode) => (
+                  <button key={mode.id} className={`group flex items-start flex-row gap-4 p-3 rounded-xl transition-all border text-left ${mode.active ? 'bg-primary/5 border-primary/30 dark:border-primary/50 ring-1 ring-primary/20 shadow-sm' : 'bg-transparent border-gray-200 dark:border-gray-800 hover:border-gray-300 dark:hover:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800/40'}`}>
+                    <div className={`p-2 rounded-lg transition-colors flex shrink-0 items-center justify-center ${mode.active ? 'bg-primary text-white shadow-md' : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 group-hover:text-primary group-hover:bg-primary/10 dark:group-hover:bg-primary/20'}`}>
+                      <mode.icon weight={mode.active ? "fill" : "regular"} size={20} />
+                    </div>
+                    <div className="flex flex-col justify-center min-h-[36px]">
+                      <h4 className={`text-sm font-bold transition-colors ${mode.active ? 'text-primary dark:text-primary-light' : 'text-gray-900 dark:text-white group-hover:text-primary dark:group-hover:text-primary-light'}`}>{mode.title}</h4>
+                      <p className={`text-xs mt-0.5 transition-colors ${mode.active ? 'text-gray-700 dark:text-gray-300' : 'text-gray-500 dark:text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300'}`}>{mode.desc}</p>
+                    </div>
+                  </button>
                 ))}
               </div>
             </div>
@@ -50,19 +54,33 @@ export default function Product360() {
 
           {/* Center — product model */}
           <div className="w-full lg:w-1/2 order-1 lg:order-2 h-[500px] relative viewer-360-container flex items-center justify-center select-none">
-            <div className="absolute w-[400px] h-[400px] bg-gray-200 dark:bg-gray-800 rounded-full blur-3xl opacity-50 z-0"></div>
-            <div className="relative w-full h-full flex items-center justify-center product-model z-10">
-              <img
-                alt="Pro Audio ANC 360 View"
-                className="max-h-[400px] w-auto drop-shadow-2xl object-contain mix-blend-multiply dark:mix-blend-normal"
-                src={headphonesImg}
-              />
-              <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex items-center gap-3 bg-white/80 dark:bg-black/60 backdrop-blur-md px-4 py-2 rounded-full border border-gray-200 dark:border-gray-700 shadow-lg">
+            <div className="absolute w-[400px] h-[400px] bg-primary/20 dark:bg-primary/10 rounded-full blur-3xl opacity-50 z-0"></div>
+            
+            {/* 3D Model Premium Container */}
+            <div className="relative w-full max-w-md aspect-square flex flex-col items-center justify-center product-model z-10 bg-white/40 dark:bg-gray-900/40 backdrop-blur-xl border border-white/40 dark:border-white/10 rounded-3xl shadow-2xl p-6">
+              <model-viewer
+                src="/assets/models/headphones.glb"
+                alt="3D Headphones Model"
+                camera-controls
+                interaction-prompt="hover"
+                shadow-intensity="1"
+                environment-image="neutral"
+                ar
+                ar-modes="webxr scene-viewer quick-look"
+                className="w-full h-full min-h-[300px] z-10"
+                style={{ backgroundColor: 'transparent' }}
+              >
+                <div slot="poster" className="absolute inset-0 flex items-center justify-center bg-transparent">
+                  <div className="w-8 h-8 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
+                </div>
+              </model-viewer>
+              
+              <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-3 bg-white/80 dark:bg-black/60 backdrop-blur-md px-4 py-2 rounded-full border border-gray-200 dark:border-gray-700 shadow-md z-20 pointer-events-none w-max">
                 <ArrowsHorizontal weight="bold" className="text-gray-500 animate-pulse" />
-                <span className="text-xs font-bold uppercase tracking-wider text-gray-600 dark:text-gray-300">Drag to Rotate</span>
+                <span className="text-[10px] font-bold uppercase tracking-wider text-gray-600 dark:text-gray-300">Drag to Rotate</span>
               </div>
               {/* Hotspot: Aluminum */}
-              <div className="hotspot" style={{ top: '30%', right: '25%' }}>
+              <div className="hotspot" style={{ top: '30%', right: '15%' }}>
                 <div className="hotspot-card !w-64">
                   <h5 className="text-sm font-bold text-gray-900 dark:text-white mb-1">Aerospace-grade Aluminum</h5>
                   <p className="text-xs text-gray-500 mb-2 leading-relaxed">Lightweight yet incredibly durable frame construction for extended listening sessions without fatigue.</p>
@@ -73,14 +91,14 @@ export default function Product360() {
                 </div>
               </div>
               {/* Hotspot: Memory Foam */}
-              <div className="hotspot" style={{ bottom: '35%', left: '30%' }}>
+              <div className="hotspot" style={{ bottom: '30%', left: '20%' }}>
                 <div className="hotspot-card !w-64">
                   <h5 className="text-sm font-bold text-gray-900 dark:text-white mb-1">Memory Foam Comfort</h5>
                   <p className="text-xs text-gray-500 mb-2 leading-relaxed">Cloud-soft protein leather cushions that adapt to your unique ear shape for superior noise isolation.</p>
                 </div>
               </div>
-              {/* Hotspot: Drivers */}
-              <div className="hotspot" style={{ top: '50%', left: '50%' }}>
+              {/* Hotspot: Drivers (Center Earcup) */}
+              <div className="hotspot" style={{ top: '62%', left: '65%' }}>
                 <div className="hotspot-card !w-64">
                   <h5 className="text-sm font-bold text-gray-900 dark:text-white mb-1">High-Fidelity Drivers</h5>
                   <p className="text-xs text-gray-500 mb-2 leading-relaxed">Custom 40mm drivers delivering rich bass and crystal-clear highs across the entire frequency spectrum.</p>
