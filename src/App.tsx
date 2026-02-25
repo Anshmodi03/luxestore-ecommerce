@@ -1,39 +1,35 @@
 import { useState, useEffect } from 'react'
+import { Routes, Route, useLocation } from 'react-router-dom'
 import Navbar from './components/landing/Navbar'
 import MobileMenu from './components/landing/MobileMenu'
-import HeroSection from './components/landing/HeroSection'
-import ShopTheLook from './components/landing/ShopTheLook'
-import Product360 from './components/landing/Product360'
-import AtelierGallery from './components/landing/AtelierGallery'
-import FeaturesStrip from './components/landing/FeaturesStrip'
-import TrendingProducts from './components/landing/TrendingProducts'
-import WhyChooseUs from './components/landing/WhyChooseUs'
-import BrandMarquee from './components/landing/BrandMarquee'
-import Testimonial from './components/landing/Testimonial'
-import Footer from './components/landing/Footer'
+import LandingPage from './pages/LandingPage'
+import AboutPage from './pages/AboutPage'
 
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [dark, setDark] = useState(false)
+  const location = useLocation()
+
+  // Scroll to top on route change
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' })
+  }, [location.pathname])
 
   useEffect(() => {
     document.documentElement.classList.toggle('dark', dark)
   }, [dark])
 
   return (
-    <div className="bg-background-light dark:bg-background-dark text-gray-900 dark:text-gray-100 transition-colors duration-500 font-body">
+    <div className="bg-background-light dark:bg-background-dark text-gray-900 dark:text-gray-100 transition-colors duration-500 font-body relative">
+      {/* Global Navigation */}
       <Navbar onMenuOpen={() => setMenuOpen(true)} onToggleDark={() => setDark(prev => !prev)} isDark={dark} />
       <MobileMenu isOpen={menuOpen} onClose={() => setMenuOpen(false)} />
-      <HeroSection />
-      <ShopTheLook />
-      <Product360 />
-      <AtelierGallery />
-      <FeaturesStrip />
-      <TrendingProducts />
-      <WhyChooseUs />
-      <BrandMarquee />
-      <Testimonial />
-      <Footer />
+      
+      {/* Dynamic Routes */}
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/about" element={<AboutPage />} />
+      </Routes>
     </div>
   )
 }

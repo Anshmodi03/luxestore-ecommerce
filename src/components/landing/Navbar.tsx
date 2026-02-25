@@ -1,4 +1,5 @@
 import { MagnifyingGlass, Moon, Sun, ShoppingBag, Diamond } from '@phosphor-icons/react'
+import { Link } from 'react-router-dom'
 
 interface NavbarProps {
   onMenuOpen: () => void
@@ -17,12 +18,12 @@ export default function Navbar({ onMenuOpen, onToggleDark, isDark }: NavbarProps
           >
             <span className="material-symbols-outlined text-3xl">menu</span>
           </button>
-          <div className="flex items-center gap-2">
+          <Link to="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
             <div className="text-white text-2xl drop-shadow-md">
               <Diamond weight="fill" />
             </div>
             <span className="text-2xl font-bold text-white tracking-tight drop-shadow-md font-serif italic">LuxeStore</span>
-          </div>
+          </Link>
         </div>
         <div className="flex items-center gap-6">
           <button className="p-2 text-white hover:text-primary transition rounded-full hover:bg-white/10">

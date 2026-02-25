@@ -1,4 +1,5 @@
 import { Diamond, ArrowRight, InstagramLogo, TwitterLogo, PinterestLogo } from '@phosphor-icons/react'
+import { Link } from 'react-router-dom'
 
 interface MobileMenuProps {
   isOpen: boolean
@@ -25,15 +26,22 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
           </button>
         </div>
         <div className="flex flex-col gap-6">
-          {['Collections', 'New Arrivals', 'Atelier', 'Living', 'About'].map((item) => (
-            <a
-              key={item}
+          {[
+            { name: 'Collections', path: '/' },
+            { name: 'New Arrivals', path: '/' },
+            { name: 'Atelier', path: '/' },
+            { name: 'Living', path: '/' },
+            { name: 'About', path: '/about' }
+          ].map((item) => (
+            <Link
+              key={item.name}
+              to={item.path}
+              onClick={onClose}
               className="group flex items-center justify-between text-4xl sm:text-5xl font-serif text-gray-900 dark:text-white hover:text-primary dark:hover:text-primary transition-colors"
-              href="#"
             >
-              <span>{item}</span>
+              <span>{item.name}</span>
               <ArrowRight weight="bold" className="opacity-0 group-hover:opacity-100 -translate-x-4 group-hover:translate-x-0 transition-all duration-300 text-2xl" size={24} />
-            </a>
+            </Link>
           ))}
         </div>
         <div className="mt-12 pt-12 border-t border-gray-200 dark:border-gray-800">

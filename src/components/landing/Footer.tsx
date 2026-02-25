@@ -2,7 +2,7 @@ import { Diamond, InstagramLogo, TwitterLogo, PinterestLogo, ArrowRight } from '
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-900 text-white pt-20 pb-10 border-t border-gray-800">
+    <footer className="bg-[#050505] text-white pt-20 pb-10 border-t border-white/5">
       <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-16">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-16">
           <div className="lg:col-span-4 space-y-6">

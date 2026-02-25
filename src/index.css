@@ -14,6 +14,7 @@
 
   --font-display: 'Playfair Display', serif;
   --font-body: 'Plus Jakarta Sans', sans-serif;
+  --font-handwriting: 'Alex Brush', cursive;
 
   --animate-scroll-loop: scroll-loop 40s linear infinite;
   --animate-spin-slow: spin 12s linear infinite;
