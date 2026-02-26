@@ -4,10 +4,12 @@ import Navbar from './components/landing/Navbar'
 import MobileMenu from './components/landing/MobileMenu'
 import LandingPage from './pages/LandingPage'
 import AboutPage from './pages/AboutPage'
+import Preloader from './components/Preloader'
 
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [dark, setDark] = useState(false)
+  const [loading, setLoading] = useState(true)
   const location = useLocation()
 
   // Scroll to top on route change
@@ -30,6 +32,9 @@ export default function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/about" element={<AboutPage />} />
       </Routes>
+      
+      {/* Initial Page Loading Animation */}
+      {loading && <Preloader onComplete={() => setLoading(false)} />}
     </div>
   )
 }
