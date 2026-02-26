@@ -5,7 +5,7 @@ import Sustainability from '../components/about/Sustainability'
 import Materiality from '../components/about/Materiality'
 import FoundersQuote from '../components/about/FoundersQuote'
 import PersonalCommitment from '../components/about/PersonalCommitment'
-import Footer from '../components/landing/Footer'
+import Footer from '../components/common/Footer'
 
 export default function AboutPage() {
   return (

@@ -7,7 +7,7 @@ import TrendingProducts from '../components/landing/TrendingProducts'
 import WhyChooseUs from '../components/landing/WhyChooseUs'
 import BrandMarquee from '../components/landing/BrandMarquee'
 import Testimonial from '../components/landing/Testimonial'
-import Footer from '../components/landing/Footer'
+import Footer from '../components/common/Footer'
 
 export default function LandingPage() {
   return (

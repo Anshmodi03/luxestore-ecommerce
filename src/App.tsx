@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
-import Navbar from './components/landing/Navbar'
-import MobileMenu from './components/landing/MobileMenu'
+import Navbar from './components/common/Navbar'
+import MobileMenu from './components/common/MobileMenu'
 import LandingPage from './pages/LandingPage'
 import AboutPage from './pages/AboutPage'
-import Preloader from './components/Preloader'
+import Preloader from './components/common/Preloader'
 
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false)
