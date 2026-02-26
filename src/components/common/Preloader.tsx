@@ -17,8 +17,8 @@ export default function Preloader({ onComplete }: PreloaderProps) {
   const columns = 5
 
   useEffect(() => {
-    // Smoother cubic-ease-like counter simulation (extended for drama)
-    const duration = 3500 
+    // Smoother cubic-ease-like counter simulation (sped up significantly)
+    const duration = 1500 
     const intervalTime = 16 
     const steps = duration / intervalTime
     let currentStep = 0
@@ -29,11 +29,11 @@ export default function Preloader({ onComplete }: PreloaderProps) {
     const timer = setInterval(() => {
       currentStep++
       
-      // Advanced easing for counter - starts fast, slows down drastically at end
+      // Advanced easing for counter - starts fast but doesn't hang drastically at the end
       const t = currentStep / steps
-      const easeOutExpo = t === 1 ? 1 : 1 - Math.pow(2, -10 * t)
+      const easeOutSine = Math.sin((t * Math.PI) / 2)
       
-      setProgress(Math.min(easeOutExpo * 100, 100))
+      setProgress(Math.min(easeOutSine * 100, 100))
       
       if (currentStep >= steps) {
         clearInterval(timer)
@@ -98,17 +98,18 @@ export default function Preloader({ onComplete }: PreloaderProps) {
                   stroke="rgba(255,255,255,0.05)"
                   strokeWidth="1"
                 />
-                {/* Animated drawing trace */}
                 <motion.path
                   d="M50 5 L95 50 L50 95 L5 50 Z"
-                  fill="none"
                   stroke="#ffffff"
                   strokeWidth="1.5"
-                  initial={{ pathLength: 0 }}
-                  animate={{ pathLength: 1 }}
+                  initial={{ pathLength: 0, fill: "rgba(255, 255, 255, 0)" }}
+                  animate={{ 
+                    pathLength: 1, 
+                    fill: "rgba(255, 255, 255, 1)"
+                  }}
                   transition={{
-                    duration: 2.5, // Matches almost full progress duration
-                    ease: "easeInOut" // Smooth draw
+                    pathLength: { duration: 1.5, ease: "easeInOut" },
+                    fill: { duration: 0.8, ease: "easeInOut", delay: 0.7 } // Smoothly fades in while drawing finishes
                   }}
                 />
               </motion.svg>
@@ -123,17 +124,21 @@ export default function Preloader({ onComplete }: PreloaderProps) {
                       // Start very wide apart, blurry, and transparent
                       initial={{ opacity: 0, x: (index - 4) * 50, filter: 'blur(10px)' }}
                       animate={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
-                      exit={{ opacity: 0, y: -40, filter: 'blur(5px)' }}
-                      transition={{
-                        duration: 1.5,
-                        // Strong elastic spring for snap-into-place feel
-                        ease: [1, 0.01, 0, 0.99], 
-                        delay: 0.4 + (index * 0.03), // Wait for diamond to start drawing
-                        exit: { 
+                      exit={{ 
+                        opacity: 0, 
+                        y: -40, 
+                        filter: 'blur(5px)',
+                        transition: { 
                            duration: 0.6,
                            ease: [0.85, 0, 0.15, 1],
                            delay: index * 0.02 
                         }
+                      }}
+                      transition={{
+                        duration: 1.5,
+                        // Strong elastic spring for snap-into-place feel
+                        ease: [1, 0.01, 0, 0.99], 
+                        delay: 0.4 + (index * 0.03) // Wait for diamond to start drawing
                       }}
                     >
                       {char}

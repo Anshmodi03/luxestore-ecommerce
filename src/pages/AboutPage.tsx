@@ -6,18 +6,21 @@ import Materiality from '../components/about/Materiality'
 import FoundersQuote from '../components/about/FoundersQuote'
 import PersonalCommitment from '../components/about/PersonalCommitment'
 import Footer from '../components/common/Footer'
+import PageTransition from '../components/common/PageTransition'
 
 export default function AboutPage() {
   return (
-    <main className="flex-1 w-full flex flex-col pt-0">
+    <PageTransition>
+      <main className="min-h-screen bg-background-light dark:bg-background-dark">
       <AboutHero />
       <HeritageSection />
       <Milestones />
       <Sustainability />
       <Materiality />
       <FoundersQuote />
-      <PersonalCommitment />
-      <Footer />
-    </main>
+        <PersonalCommitment />
+        <Footer />
+      </main>
+    </PageTransition>
   )
 }

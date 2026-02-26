@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
+import { AnimatePresence } from 'framer-motion'
 import Navbar from './components/common/Navbar'
 import MobileMenu from './components/common/MobileMenu'
 import LandingPage from './pages/LandingPage'
@@ -26,12 +27,13 @@ export default function App() {
       {/* Global Navigation */}
       <Navbar onMenuOpen={() => setMenuOpen(true)} onToggleDark={() => setDark(prev => !prev)} isDark={dark} />
       <MobileMenu isOpen={menuOpen} onClose={() => setMenuOpen(false)} />
-      
-      {/* Dynamic Routes */}
-      <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/about" element={<AboutPage />} />
-      </Routes>
+      {/* Dynamic Routes wrapped with AnimatePresence for transitions */}
+      <AnimatePresence mode="wait">
+        <Routes location={location} key={location.pathname}>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/about" element={<AboutPage />} />
+        </Routes>
+      </AnimatePresence>
       
       {/* Initial Page Loading Animation */}
       {loading && <Preloader onComplete={() => setLoading(false)} />}

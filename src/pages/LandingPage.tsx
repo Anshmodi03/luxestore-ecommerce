@@ -8,20 +8,23 @@ import WhyChooseUs from '../components/landing/WhyChooseUs'
 import BrandMarquee from '../components/landing/BrandMarquee'
 import Testimonial from '../components/landing/Testimonial'
 import Footer from '../components/common/Footer'
+import PageTransition from '../components/common/PageTransition'
 
 export default function LandingPage() {
   return (
-    <>
-      <HeroSection />
-      <ShopTheLook />
-      <Product360 />
-      <AtelierGallery />
-      <FeaturesStrip />
-      <TrendingProducts />
-      <WhyChooseUs />
-      <BrandMarquee />
-      <Testimonial />
-      <Footer />
-    </>
+    <PageTransition>
+      <main className="min-h-screen bg-background-light dark:bg-background-dark">
+        <HeroSection />
+        <ShopTheLook />
+        <Product360 />
+        <AtelierGallery />
+        <FeaturesStrip />
+        <TrendingProducts />
+        <WhyChooseUs />
+        <BrandMarquee />
+        <Testimonial />
+        <Footer />
+      </main>
+    </PageTransition>
   )
 }
