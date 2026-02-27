@@ -13,9 +13,9 @@ export default function WhyChooseUs() {
         <div className="w-full lg:w-1/2 relative">
           <div className="relative z-10 rounded-2xl overflow-hidden shadow-2xl">
             <img
-              alt="Happy shopper"
+              alt="Portrait of two founders in a studio setting"
               className="w-full h-[500px] object-cover"
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuAu38LODM6F6ETMFe7VUQkqeJuKd5qhruCwyto_oih1a4RjHfHWP9HQR1GfCKCIFxd_yz7Pl_jhZzTj_HCQCIx57in0taOrGfWFgpAMNt5FAiOieCEZaP7a0gKYgzudLp40i1N4anemEBkJVVDG4axA786f2AEiWsQtFf75rBdAlnk5aQaigsUzOxrZj83tWnOCNuJoWyiG-6Qa9lCI3YVZzwX4a8GHVBs4E45yCJkvHt6G0Pp8iXokQDW_L8eUIRIo9X1ob4nfcfI"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuDTGm6JVzb6xR9PeHOdGJcOxNcq5qbZDlZuBoFFuHgbSJhPCC_QMAYSfnRdmDLUbaScgeN7Ez8BBujI5nomlCrd4k3oaXaQy77rdY-1Hm2SJlwRqMhdFwX05eMKWjfl6WyLmSmDPVm3yUd7J3XU41smE11HQ3KKjACokIKc2MG9h5dn-sddA4fVIDjwZF-WFLII0n9Wur6uz2eoMS52WwpLOtMCvBSwH6r12MsUA0owtN6_DD4L0LHxALrolCAgqiqe57aRB6Nduoc"
             />
             <div className="absolute inset-0 bg-primary/10 mix-blend-overlay"></div>
           </div>
