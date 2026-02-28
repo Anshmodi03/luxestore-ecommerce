@@ -8,6 +8,9 @@ export interface Product {
   isNew?: boolean
   isTrending?: boolean
   isPopular?: boolean
+  oldPrice?: number
+  badge?: string
+  badgeClass?: string
 }
 
 export const collectionProducts: Product[] = [
@@ -16,6 +19,9 @@ export const collectionProducts: Product[] = [
     name: "Pro Audio ANC",
     category: "Tech",
     price: 254.99,
+    oldPrice: 299.00,
+    badge: "-15% OFF",
+    badgeClass: "bg-white/90 dark:bg-black/80 backdrop-blur-sm text-gray-900 dark:text-white",
     image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=800&auto=format&fit=crop",
     description: "This item represents the pinnacle of our craftsmanship. Designed for the modern aesthete, it combines functionality with timeless elegance.",
     isTrending: true,
@@ -34,14 +40,18 @@ export const collectionProducts: Product[] = [
     name: "Urban Runner X",
     category: "Footwear",
     price: 129.50,
+    badge: "New In",
+    badgeClass: "bg-primary text-white",
     image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=800&auto=format&fit=crop",
-    description: "Seamlessly transition from the morning commute to evening runs with unmatched comfort."
+    description: "Seamlessly transition from the morning commute to evening runs with unmatched comfort.",
+    isTrending: true
   },
   {
     id: "radiance-serum",
     name: "Radiance Serum",
     category: "Beauty",
     price: 75.00,
+    oldPrice: 89.00,
     image: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?q=80&w=800&auto=format&fit=crop",
     description: "A potent blend of active ingredients designed to restore your skin's natural luminance.",
     isPopular: true,

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { MagnifyingGlass, ArrowDown } from '@phosphor-icons/react'
+import { motion } from 'framer-motion'
 import AnnouncementBar from './AnnouncementBar'
 
 export default function HeroSection() {
@@ -45,30 +45,32 @@ export default function HeroSection() {
         </div>
         <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-white leading-[1.1] font-serif tracking-tight drop-shadow-2xl">
           Curated Essentials <br />
-          <span className="font-light italic text-white/90">for Modern Life.</span>
+          <span className="font-light italic text-white/90 tracking-wide">for Modern Life.</span>
         </h1>
         <p className="text-lg md:text-xl text-gray-200 max-w-2xl mx-auto leading-relaxed font-light drop-shadow-md">
           Discover a world where premium quality meets everyday utility. From high-tech gadgets to artisanal home decor.
         </p>
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-6 max-w-lg mx-auto w-full">
-          <div className="relative flex-grow w-full">
-            <input
-              className="w-full pl-6 pr-12 py-4 rounded-full bg-white/10 backdrop-blur-md border border-white/30 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition shadow-lg"
-              placeholder="Search the collection..."
-              type="text"
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 0.8 }}
+          className="relative mt-16 flex flex-col items-center gap-4 w-full"
+        >
+          <span className="text-[10px] uppercase font-bold tracking-[0.3em] text-white/50">Discover</span>
+          <div className="w-px h-16 bg-white/20 relative overflow-hidden">
+            <motion.div
+              animate={{ 
+                y: ["-100%", "200%"],
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                ease: "linear",
+              }}
+              className="absolute top-0 left-0 w-full h-1/2 bg-white"
             />
-            <button className="absolute right-2 top-2 bottom-2 w-10 h-10 bg-white text-gray-900 rounded-full flex items-center justify-center hover:bg-gray-200 transition">
-              <MagnifyingGlass weight="bold" />
-            </button>
           </div>
-          <a
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white text-gray-900 px-8 py-4 rounded-full font-bold hover:bg-primary hover:text-white transition-all duration-300 shadow-xl min-w-[160px]"
-            href="#trending"
-          >
-            Start Shopping
-            <ArrowDown weight="bold" />
-          </a>
-        </div>
+        </motion.div>
       </div>
     </header>
   )

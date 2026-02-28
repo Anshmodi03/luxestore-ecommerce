@@ -10,7 +10,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
   if (!isOpen) return null
 
   return (
-    <div className="fixed inset-0 z-[70]">
+    <div className="fixed inset-0 z-70">
       <div className="absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity duration-500" onClick={onClose}></div>
       <div className="absolute left-0 top-0 h-full w-full sm:w-[480px] glass-drawer shadow-2xl animate-drawer-in flex flex-col justify-between p-8 sm:p-12 overflow-y-auto">
         <div className="flex items-center justify-between mb-12">
@@ -28,10 +28,9 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
         <div className="flex flex-col gap-6">
           {[
             { name: 'Collections', path: '/collection' },
-            { name: 'New Arrivals', path: '/' },
-            { name: 'Atelier', path: '/' },
-            { name: 'Living', path: '/' },
-            { name: 'About', path: '/about' }
+            { name: 'Editorial', path: '/editorial' },
+            { name: 'Our Story', path: '/about' },
+            { name: 'Client Services', path: '/' }
           ].map((item) => (
             <Link
               key={item.name}

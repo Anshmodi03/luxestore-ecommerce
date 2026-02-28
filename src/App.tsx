@@ -6,6 +6,7 @@ import MobileMenu from './components/common/MobileMenu'
 import LandingPage from './pages/LandingPage'
 import AboutPage from './pages/AboutPage'
 import CollectionPage from './pages/CollectionPage'
+import EditorialPage from './pages/EditorialPage'
 import Preloader from './components/common/Preloader'
 import CartDrawer from './components/common/CartDrawer'
 
@@ -37,6 +38,7 @@ export default function App() {
           <Route path="/" element={<LandingPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/collection" element={<CollectionPage />} />
+          <Route path="/editorial" element={<EditorialPage />} />
         </Routes>
       </AnimatePresence>
       

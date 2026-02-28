@@ -30,7 +30,7 @@ export default function ProductCard({ product, onQuickView }: ProductCardProps) 
   return (
     <motion.div 
       variants={itemVariants}
-      className="group"
+      className="group hover-lift"
     >
       <div className="relative overflow-hidden aspect-[4/5] rounded-2xl mb-6 bg-gray-50 dark:bg-white/5">
         <img
@@ -39,6 +39,13 @@ export default function ProductCard({ product, onQuickView }: ProductCardProps) 
           src={product.image}
         />
         
+        {/* Unified Badge */}
+        {product.badge && (
+          <div className={`absolute top-4 left-4 ${product.badgeClass || 'bg-primary text-white'} text-xs font-bold px-3 py-1.5 uppercase tracking-wider rounded-sm shadow-sm`}>
+            {product.badge}
+          </div>
+        )}
+
         {/* Quick Add Button */}
         <button 
           onClick={handleAddToCart}
@@ -55,9 +62,16 @@ export default function ProductCard({ product, onQuickView }: ProductCardProps) 
         <h3 className="text-lg text-gray-900 dark:text-white font-serif font-medium tracking-wide mb-1 group-hover:text-primary transition-colors duration-300">
           {product.name}
         </h3>
-        <p className="text-gray-600 dark:text-gray-400 text-sm font-light tracking-wide">
-          ${product.price.toFixed(2)}
-        </p>
+        <div className="flex items-center gap-3">
+          <p className="text-gray-900 dark:text-white text-sm font-bold tracking-wide">
+            ${product.price.toFixed(2)}
+          </p>
+          {product.oldPrice && (
+            <span className="text-sm text-gray-400 line-through">
+              ${product.oldPrice.toFixed(2)}
+            </span>
+          )}
+        </div>
       </div>
     </motion.div>
   )
