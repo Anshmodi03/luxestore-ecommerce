@@ -25,9 +25,15 @@ export default function ProductGrid({ activeCategory = 'All', sortOption = 'feat
   const isModalOpen = selectedProduct !== null
 
   const filteredAndSortedProducts = useMemo(() => {
-    let result = activeCategory === 'All'
-      ? [...collectionProducts]
-      : collectionProducts.filter(p => p.category === activeCategory)
+    let result = [...collectionProducts]
+
+    if (activeCategory === 'New Arrivals') {
+      result = result.filter(p => p.isNew)
+    } else if (activeCategory === 'Trending') {
+      result = result.filter(p => p.isTrending || p.isPopular)
+    } else if (activeCategory !== 'All') {
+      result = result.filter(p => p.category === activeCategory)
+    }
       
     if (sortOption === 'price-asc') {
       result.sort((a, b) => a.price - b.price)

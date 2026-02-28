@@ -85,7 +85,7 @@ export default function ProductCarousel({ products, title, subtitle, onShopAll }
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.5, delay: index * 0.05, ease: 'easeOut' }}
-              className="w-[240px] sm:w-[260px] md:w-[280px] lg:w-[320px] snap-start shrink-0"
+              className="w-[85vw] max-w-[320px] sm:w-[260px] md:w-[280px] lg:w-[320px] snap-start shrink-0"
             >
               <ProductCard product={product} onQuickView={() => {}} />
             </motion.div>

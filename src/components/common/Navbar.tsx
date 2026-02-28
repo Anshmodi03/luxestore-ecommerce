@@ -1,4 +1,4 @@
-import { MagnifyingGlass, Moon, Sun, ShoppingBag, Diamond } from '@phosphor-icons/react'
+import { Moon, Sun, ShoppingBag, Diamond } from '@phosphor-icons/react'
 import { Link } from 'react-router-dom'
 import { useCart } from '../../context/CartContext'
 
@@ -29,9 +29,6 @@ export default function Navbar({ onMenuOpen, onToggleDark, isDark }: NavbarProps
           </Link>
         </div>
         <div className="flex items-center gap-6">
-          <button className="p-2 text-white hover:text-primary transition rounded-full hover:bg-white/10">
-            <MagnifyingGlass weight="bold" size={20} />
-          </button>
           <button 
             className="p-2 text-white hover:text-primary transition rounded-full hover:bg-white/10"
             onClick={onToggleDark}
