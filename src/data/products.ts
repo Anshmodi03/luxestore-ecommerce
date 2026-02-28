@@ -5,6 +5,9 @@ export interface Product {
   price: number
   image: string
   description: string
+  isNew?: boolean
+  isTrending?: boolean
+  isPopular?: boolean
 }
 
 export const collectionProducts: Product[] = [
@@ -13,15 +16,17 @@ export const collectionProducts: Product[] = [
     name: "Pro Audio ANC",
     category: "Tech",
     price: 254.99,
-    image: "https://lh3.googleusercontent.com/aida-public/AB6AXuCPo8P4cDxfdUKmudDqePbAHX7zlYOJs13ae7xww1fEo3xASV-mBZoG-dNjSY0FoyCbSku_LPnCIwtZoYSWAnxIFPqC8OSYUwty71F3V-wDzdGDNfjKXq3SzzauZG0N4r486WMbOupdxI5Fv59HZIBsWqb2OScbdVLNlj9yLvQUynGHODZW2SFUPkDdXR2oP62ypFaYQISJdhCPRtu_FDma_ScZdsYv_gZASC3gF4PSvF6VH94TEFKVcR8AQzVFDZ_Ui42kUka_TH8",
-    description: "This item represents the pinnacle of our craftsmanship. Designed for the modern aesthete, it combines functionality with timeless elegance."
+    image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=800&auto=format&fit=crop",
+    description: "This item represents the pinnacle of our craftsmanship. Designed for the modern aesthete, it combines functionality with timeless elegance.",
+    isTrending: true,
+    isPopular: true
   },
   {
     id: "series-7-watch",
     name: "Series 7 Watch",
     category: "Accessories",
     price: 399.00,
-    image: "https://lh3.googleusercontent.com/aida-public/AB6AXuAj_r02CdbyrBNWXEw_9y-z1czwF7ud5m7rnVUOU1U6Y0KljdvPTGy3gtyCba1SCOuLyeAA8d0v_cogfg4TNwU9MS7v03famvMNC7rXNew1RVikSTJExzsyZfEUsHDLQnI37Frkv8lLvLb2meqXI1FX8o3wlu95AxWzLn1HOAknaQ4JUZk4tERGe0-MzwBxLgONP3i0OKpAK1Prh4-7J86P5Nme2IUJlIfZtssEaMsbF7vnXQU4TtphOGxhbaKe6VpNUw9dgZjgETw",
+    image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=800&auto=format&fit=crop",
     description: "Keep perfect time with a masterpiece of micro-engineering, wrapped in aerospace-grade titanium."
   },
   {
@@ -29,7 +34,7 @@ export const collectionProducts: Product[] = [
     name: "Urban Runner X",
     category: "Footwear",
     price: 129.50,
-    image: "https://lh3.googleusercontent.com/aida-public/AB6AXuClpuBCmqyopMT5mRC7eSwOmR_UFjtw5St-WrBm90Syh18ysH6XU7YB7UWrhwMGouD421q1-i9uOaBfD7XqYnvAivjDxfhMfi3cOE7bm2VRXcK0RLS9iNpeP5RC_A5U_WWwrhHWIY4M_wUj_43siKuaYfbBk3blTCSs3-ufUNWUiFBY8esRh5Our-f_q1vGHZN6eTitDX41HcgqkwDTSyIiOZ72b-oURYNHXyVfQpIGtMdMGVbPolcrWhaS0nYL5qvAGK2eMxSv8ds",
+    image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=800&auto=format&fit=crop",
     description: "Seamlessly transition from the morning commute to evening runs with unmatched comfort."
   },
   {
@@ -37,15 +42,17 @@ export const collectionProducts: Product[] = [
     name: "Radiance Serum",
     category: "Beauty",
     price: 75.00,
-    image: "https://lh3.googleusercontent.com/aida-public/AB6AXuA109h_srujTmf7cOHEilmenxQlFZ7dP5E-xEoK8zD12Kehq7QRZxUbC04YTlNg1pK-JEu4x_eb1dAGzYJP_k8VAmutKMYvMrqLKbdb0vaIgeFNynGQGFG6HXcdIPlt2KxZrzXn4rbmm1PpifiQk1zWv0wkeerfbFMY_Jepq_WhODi4WYGnf1nlt8SmqgqQrBG9ZIDPNTmUDMPzYEDEMrlugIYuX3kgJXrqZQlSqXTcTWI561nuCDiCd_lO-w5QM7XEtcaTEj-GuaA",
-    description: "A potent blend of active ingredients designed to restore your skin's natural luminance."
+    image: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?q=80&w=800&auto=format&fit=crop",
+    description: "A potent blend of active ingredients designed to restore your skin's natural luminance.",
+    isPopular: true,
+    isNew: true
   },
   {
     id: "arc-floor-lamp",
     name: "Arc Floor Lamp",
     category: "Home",
     price: 329.00,
-    image: "https://lh3.googleusercontent.com/aida-public/AB6AXuD5kLHcqLz_lJ5IICU7pcgfgUl6dFr3OZigARypjwtzNZoBOt33ldc6SMqYmN84ZqNFJy89CmLchoUWxr74eTQs7brB_fJ0ULgI03T9yOu_GoTLctFCehT3HK4suwYkhmm6z45pe4HJAgu7UD2FEgIOVF-plNTWSzg541feNHRIxAuHDgjyO--UUFSq2BNN8dt9zqOrMyYCyk6Y3CKu7Ri1Ai8r9y8Y7xcWHnDknMHOQBg13mxL0iyhlfw9x_VMOdyAPZB9maHF_QQ",
+    image: "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?q=80&w=800&auto=format&fit=crop",
     description: "Sculptural lighting that transforms any room into a gallery space with warm, ambient glow."
   },
   {
@@ -53,7 +60,7 @@ export const collectionProducts: Product[] = [
     name: "Velvet Lounge Chair",
     category: "Furniture",
     price: 850.00,
-    image: "https://lh3.googleusercontent.com/aida-public/AB6AXuAqw8xzMl7mB8PaL9Zjc7P3YswgWlPh6TO6uN-wnPvR7NvNyTvuLOgo9U3oeNxo22SeCwl5dNjhj_J8iMbnj2anuvS4e5QNIdSv3-vJ0BqNuv_Rb5RAYDxOaNde84RQEt9Z4mVo48xmq9ml7a1ZCFRld4ag4R3bNh-5R5ZTRhNObz_b5gs2sW-G5PnBv3PulIX4dOxd1F7N0u2e61ud8sACfxkedvYklkZg0YXYKDZ-3kMNnradL13aJN9bTlJM2I5cban544dMPF0",
+    image: "https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?q=80&w=800&auto=format&fit=crop",
     description: "Sink into premium velvet upholstery paired with mid-century modern architectural lines."
   },
   {
@@ -61,7 +68,7 @@ export const collectionProducts: Product[] = [
     name: "Aviator Classic",
     category: "Eyewear",
     price: 145.00,
-    image: "https://lh3.googleusercontent.com/aida-public/AB6AXuAu38LODM6F6ETMFe7VUQkqeJuKd5qhruCwyto_oih1a4RjHfHWP9HQR1GfCKCIFxd_yz7Pl_jhZzTj_HCQCIx57in0taOrGfWFgpAMNt5FAiOieCEZaP7a0gKYgzudLp40i1N4anemEBkJVVDG4axA786f2AEiWsQtFf75rBdAlnk5aQaigsUzOxrZj83tWnOCNuJoWyiG-6Qa9lCI3YVZzwX4a8GHVBs4E45yCJkvHt6G0Pp8iXokQDW_L8eUIRIo9X1ob4nfcfI",
+    image: "https://images.unsplash.com/photo-1511499767150-a48a237f0083?q=80&w=800&auto=format&fit=crop",
     description: "Iconic teardrop frames updated with polarized lenses and ultra-lightweight titanium."
   },
   {
@@ -69,7 +76,103 @@ export const collectionProducts: Product[] = [
     name: "Minimalist Vase",
     category: "Decor",
     price: 45.00,
-    image: "https://lh3.googleusercontent.com/aida-public/AB6AXuAFdH1pTN8IGGn7L2N8lub2v68G4T9o2YcO-727NFTBTe3gF_eWEWyjgspzGke20vSHTlTklCGowZdnCTtNgWMt4RiAUjDHdrD_fywwRCkSzv9KkJuccZQ846limJKNAEkzYySj_vQgHiCdDnKFrzEFKnI_czLsxXm2upg7_D6aXQ5Vp6R297dy0QeOFZKhS82DUl0SjPH1lnG6HBHlj7ThC_sQfnXSEtOW11v-KMRN4IzrwwRyjs5SJezo8O-xoG-nStSh44XEA6s",
-    description: "Matte ceramic beautifully shaped to enhance any floral arrangement."
+    image: "https://images.unsplash.com/photo-1581783898377-1c85bf937427?q=80&w=800&auto=format&fit=crop",
+    description: "Matte ceramic beautifully shaped to enhance any floral arrangement.",
+    isNew: true,
+    isTrending: true
+  },
+  {
+    id: "smart-thermostat",
+    name: "Aura Smart Thermostat",
+    category: "Tech",
+    price: 199.00,
+    image: "https://images.unsplash.com/photo-1558089687-f282ffcbc126?q=80&w=800&auto=format&fit=crop",
+    description: "Intelligent climate control enveloped in a sleek, minimalist glass design."
+  },
+  {
+    id: "leather-tote",
+    name: "Signature Leather Tote",
+    category: "Accessories",
+    price: 450.00,
+    image: "https://images.unsplash.com/photo-1590874103328-eac38a683ce7?q=80&w=800&auto=format&fit=crop",
+    description: "Handcrafted from full-grain Italian leather. Spacious enough for daily essentials.",
+    isPopular: true
+  },
+  {
+    id: "wireless-charger",
+    name: "Zenith Charging Pad",
+    category: "Tech",
+    price: 65.00,
+    image: "https://images.unsplash.com/photo-1584905066893-7d5c142ba4e1?q=80&w=800&auto=format&fit=crop",
+    description: "Fast-charging wireless pad featuring a premium walnut wood finish."
+  },
+  {
+    id: "cashmere-throw",
+    name: "Cloud Cashmere Throw",
+    category: "Home",
+    price: 295.00,
+    image: "https://images.unsplash.com/photo-1571508601891-ca5e7a713859?q=80&w=800&auto=format&fit=crop",
+    description: "Ethically sourced pure cashmere. The ultimate layer for cozy evenings."
+  },
+  {
+    id: "chelsea-boots",
+    name: "Heritage Chelsea Boots",
+    category: "Footwear",
+    price: 285.00,
+    image: "https://images.unsplash.com/photo-1638247025967-b4e38f787b76?q=80&w=800&auto=format&fit=crop",
+    description: "Classic Chelsea silhouette with a modern lug sole for everyday durability."
+  },
+  {
+    id: "night-cream",
+    name: "Restorative Night Cream",
+    category: "Beauty",
+    price: 95.00,
+    image: "https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?q=80&w=800&auto=format&fit=crop",
+    description: "Deeply hydrating formula that works overnight to rejuvenate tired skin."
+  },
+  {
+    id: "marble-bookends",
+    name: "Geometra Bookends",
+    category: "Decor",
+    price: 120.00,
+    image: "https://images.unsplash.com/photo-1589829085413-56de8ae18c73?q=80&w=800&auto=format&fit=crop",
+    description: "Solid Carrara marble bookends to elevate your home library aesthetic.",
+    isNew: true
+  },
+  {
+    id: "cashmere-beanie",
+    name: "Ribbed Cashmere Beanie",
+    category: "Accessories",
+    price: 85.00,
+    image: "https://images.unsplash.com/photo-1576871337632-b9aef4c17ab9?q=80&w=800&auto=format&fit=crop",
+    description: "Ultra-compact warmth woven from 100% sustainably sourced cashmere.",
+    isTrending: true
+  },
+  {
+    id: "ceramic-pour-over",
+    name: "Artisan Pour-Over Set",
+    category: "Home",
+    price: 135.00,
+    image: "https://images.unsplash.com/photo-1497935586351-b67a49e012bf?q=80&w=800&auto=format&fit=crop",
+    description: "Elevate your morning ritual with this hand-thrown ceramic coffee set.",
+    isNew: true,
+    isPopular: true
+  },
+  {
+    id: "linen-bedding",
+    name: "French Linen Sheet Set",
+    category: "Home",
+    price: 350.00,
+    image: "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?q=80&w=800&auto=format&fit=crop",
+    description: "Breathable, stone-washed French linen that gets softer with every wash.",
+    isTrending: true
+  },
+  {
+    id: "botanical-candle",
+    name: "Santal Voyage Candle",
+    category: "Decor",
+    price: 65.00,
+    image: "https://images.unsplash.com/photo-1603006905003-be475563bc59?q=80&w=800&auto=format&fit=crop",
+    description: "Hand-poured soy wax infused with rich sandalwood and amber notes."
   }
 ]

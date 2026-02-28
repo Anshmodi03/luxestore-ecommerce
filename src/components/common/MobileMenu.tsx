@@ -27,7 +27,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
         </div>
         <div className="flex flex-col gap-6">
           {[
-            { name: 'Collections', path: '/' },
+            { name: 'Collections', path: '/collection' },
             { name: 'New Arrivals', path: '/' },
             { name: 'Atelier', path: '/' },
             { name: 'Living', path: '/' },

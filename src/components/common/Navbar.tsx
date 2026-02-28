@@ -25,13 +25,8 @@ export default function Navbar({ onMenuOpen, onToggleDark, isDark }: NavbarProps
             <div className="text-white text-2xl drop-shadow-md">
               <Diamond weight="fill" />
             </div>
-            <span className="text-2xl font-bold text-white tracking-tight drop-shadow-md font-serif italic pr-8">LuxeStore</span>
+            <span className="text-2xl font-bold text-white tracking-tight drop-shadow-md font-serif italic">LuxeStore</span>
           </Link>
-          <div className="hidden md:flex items-center gap-6 border-l border-white/20 pl-8">
-            <Link to="/collection" className="text-white/80 hover:text-white transition-colors text-sm font-medium tracking-widest uppercase">
-              Collection
-            </Link>
-          </div>
         </div>
         <div className="flex items-center gap-6">
           <button className="p-2 text-white hover:text-primary transition rounded-full hover:bg-white/10">

@@ -30,25 +30,22 @@ export default function ProductCard({ product, onQuickView }: ProductCardProps) 
   return (
     <motion.div 
       variants={itemVariants}
-      className="group cursor-pointer"
-      onClick={() => onQuickView(product)}
+      className="group"
     >
-      <div className="relative overflow-hidden aspect-[3/4] mb-6 bg-gray-50 dark:bg-white/5 rounded-sm">
+      <div className="relative overflow-hidden aspect-[4/5] rounded-2xl mb-6 bg-gray-50 dark:bg-white/5">
         <img
           alt={product.name}
           className="w-full h-full object-cover transition-transform duration-[1.2s] ease-[cubic-bezier(0.165,0.84,0.44,1)] group-hover:scale-105"
           src={product.image}
         />
         
-        {/* Overlay Hover State */}
-        <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col items-center justify-center">
-          <button 
-            onClick={handleAddToCart}
-            className="w-14 h-14 rounded-full flex items-center justify-center text-white transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 delay-75 bg-white/20 dark:bg-black/30 backdrop-blur-md border border-white/30 shadow-xl hover:bg-white/40 dark:hover:bg-black/50"
-          >
-            <ShoppingBag weight="fill" size={20} />
-          </button>
-        </div>
+        {/* Quick Add Button */}
+        <button 
+          onClick={handleAddToCart}
+          className="absolute bottom-4 right-4 w-12 h-12 bg-white/90 backdrop-blur-sm text-gray-900 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-300 shadow-xl hover:bg-primary hover:text-white"
+        >
+          <ShoppingBag weight="fill" size={20} />
+        </button>
       </div>
       
       <div className="flex flex-col items-start text-center md:text-left">
