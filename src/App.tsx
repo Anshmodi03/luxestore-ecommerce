@@ -9,6 +9,8 @@ import CollectionPage from './pages/CollectionPage'
 import EditorialPage from './pages/EditorialPage'
 import Preloader from './components/common/Preloader'
 import CartDrawer from './components/common/CartDrawer'
+import ClientServicesPage from './pages/ClientServicesPage'
+import ProductDetailsPage from './pages/ProductDetailsPage'
 
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false)
@@ -39,6 +41,8 @@ export default function App() {
           <Route path="/about" element={<AboutPage />} />
           <Route path="/collection" element={<CollectionPage />} />
           <Route path="/editorial" element={<EditorialPage />} />
+          <Route path="/services" element={<ClientServicesPage />} />
+          <Route path="/product/:id" element={<ProductDetailsPage />} />
         </Routes>
       </AnimatePresence>
       
