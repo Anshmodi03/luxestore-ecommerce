@@ -76,7 +76,7 @@ export default function ServicesFAQ() {
                   <span className="font-serif text-lg md:text-xl text-gray-900 dark:text-white pr-8">
                     {faq.question}
                   </span>
-                  <div className="text-gray-400 flex-shrink-0">
+                  <div className="text-gray-400 shrink-0">
                     {isOpen ? <Minus size={20} /> : <Plus size={20} />}
                   </div>
                 </button>

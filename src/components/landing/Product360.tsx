@@ -5,7 +5,7 @@ const headphonesImg = 'https://lh3.googleusercontent.com/aida-public/AB6AXuCPo8P
 export default function Product360() {
   return (
     <section className="py-24 bg-surface-light dark:bg-surface-dark border-b border-border-light dark:border-border-dark overflow-hidden relative">
-      <div className="absolute inset-0 bg-gradient-to-br from-gray-50/50 via-white/10 to-gray-100/30 dark:from-black/50 dark:via-surface-dark dark:to-black/30 pointer-events-none"></div>
+      <div className="absolute inset-0 bg-linear-to-br from-gray-50/50 via-white/10 to-gray-100/30 dark:from-black/50 dark:via-surface-dark dark:to-black/30 pointer-events-none"></div>
       <div className="max-w-8xl mx-auto px-4 sm:px-8 lg:px-16 relative z-10">
         <div className="flex flex-col items-center text-center mb-16">
           <span className="text-primary font-bold tracking-[0.2em] text-xs uppercase font-body mb-3">Interactive Showcase</span>
@@ -81,7 +81,7 @@ export default function Product360() {
               </div>
               {/* Hotspot: Aluminum */}
               <div className="hotspot" style={{ top: '30%', right: '15%' }}>
-                <div className="hotspot-card !w-64">
+                <div className="hotspot-card w-64!">
                   <h5 className="text-sm font-bold text-gray-900 dark:text-white mb-1">Aerospace-grade Aluminum</h5>
                   <p className="text-xs text-gray-500 mb-2 leading-relaxed">Lightweight yet incredibly durable frame construction for extended listening sessions without fatigue.</p>
                   <div className="h-1 w-full bg-gray-100 rounded-full overflow-hidden">
@@ -92,14 +92,14 @@ export default function Product360() {
               </div>
               {/* Hotspot: Memory Foam */}
               <div className="hotspot" style={{ bottom: '30%', left: '20%' }}>
-                <div className="hotspot-card !w-64">
+                <div className="hotspot-card w-64!">
                   <h5 className="text-sm font-bold text-gray-900 dark:text-white mb-1">Memory Foam Comfort</h5>
                   <p className="text-xs text-gray-500 mb-2 leading-relaxed">Cloud-soft protein leather cushions that adapt to your unique ear shape for superior noise isolation.</p>
                 </div>
               </div>
               {/* Hotspot: Drivers (Center Earcup) */}
               <div className="hotspot" style={{ top: '62%', left: '65%' }}>
-                <div className="hotspot-card !w-64">
+                <div className="hotspot-card w-64!">
                   <h5 className="text-sm font-bold text-gray-900 dark:text-white mb-1">High-Fidelity Drivers</h5>
                   <p className="text-xs text-gray-500 mb-2 leading-relaxed">Custom 40mm drivers delivering rich bass and crystal-clear highs across the entire frequency spectrum.</p>
                   <div className="flex gap-2 mt-2">

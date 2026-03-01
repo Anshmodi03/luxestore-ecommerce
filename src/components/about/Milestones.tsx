@@ -9,10 +9,10 @@ export default function Milestones() {
         
         <div className="relative pl-8 md:pl-0">
           {/* Timeline Center Line */}
-          <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-slate-200 to-transparent md:-ml-px h-full"></div>
+          <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-px bg-linear-to-b from-transparent via-slate-200 to-transparent md:-ml-px h-full"></div>
           
           {/* Active Glowing Line (simulated as static for now based on purely CSS gradient, but in real app would animate with frame loops if wanted) */}
-          <div className="absolute left-8 md:left-1/2 top-0 w-0.5 md:-ml-[1px] h-32 bg-gradient-to-b from-primary to-blue-400 shadow-[0_0_15px_rgba(17,82,212,0.3)] animate-glow"></div>
+          <div className="absolute left-8 md:left-1/2 top-0 w-0.5 md:-ml-px h-32 bg-linear-to-b from-primary to-blue-400 shadow-[0_0_15px_rgba(17,82,212,0.3)] animate-glow"></div>
           
           {/* Milestone 1 */}
           <div className="relative flex flex-col md:flex-row items-center gap-8 md:gap-16 mb-20 group">

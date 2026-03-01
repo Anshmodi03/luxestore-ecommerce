@@ -63,7 +63,7 @@ export default function ServicesCarousel() {
           />
           
           {/* Cinematic Dark Gradient Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-black/20" />
+          <div className="absolute inset-0 bg-linear-to-t from-black via-black/50 to-black/20" />
           
           {/* Content */}
           <div className="absolute inset-0 flex flex-col justify-end p-6 md:p-12 lg:p-16 pt-24 max-w-[1600px] mx-auto w-full z-10">

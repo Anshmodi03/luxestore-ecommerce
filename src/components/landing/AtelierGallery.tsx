@@ -34,7 +34,7 @@ export default function AtelierGallery() {
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
               src="https://lh3.googleusercontent.com/aida-public/AB6AXuAb8z3oZ9Jw5txmgQQKnsRVIr274SriCA_I6FOgGPzovCHiDVFwhhFbC2FvTR6d9cR3Sv1TusHfNL5fA-I0mj8AVjxAwDsJIEHN7sIAKgVRE3R0On0pqIuL6tdvcvKcjaMhqd_aVSxhGp2rblGEU8hvTrwQBKmas4wme31qj1NhLn9MagQK37JHSZP0x-oWwtYAm4-ll4VCyRNADSTxWkAM8tUFawBt28yyV4pBM-i0NrPkr5Pq3vcOmgCdjE9rO209T5bfA4zXFzI"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-60"></div>
+            <div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent opacity-60"></div>
             <div className="absolute bottom-6 left-6 text-white">
               <h4 className="font-serif text-xl italic mb-1">Textural Depth</h4>
               <p className="text-sm font-light text-white/80">Sustainable fabrics &amp; weaves</p>
@@ -46,7 +46,7 @@ export default function AtelierGallery() {
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
               src="https://lh3.googleusercontent.com/aida-public/AB6AXuAFdH1pTN8IGGn7L2N8lub2v68G4T9o2YcO-727NFTBTe3gF_eWEWyjgspzGke20vSHTlTklCGowZdnCTtNgWMt4RiAUjDHdrD_fywwRCkSzv9KkJuccZQ846limJKNAEkzYySj_vQgHiCdDnKFrzEFKnI_czLsxXm2upg7_D6aXQ5Vp6R297dy0QeOFZKhS82DUl0SjPH1lnG6HBHlj7ThC_sQfnXSEtOW11v-KMRN4IzrwwRyjs5SJezo8O-xoG-nStSh44XEA6s"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-60"></div>
+            <div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent opacity-60"></div>
             <div className="absolute bottom-6 left-6 text-white">
               <h4 className="font-serif text-xl italic mb-1">Artisan Objects</h4>
               <p className="text-sm font-light text-white/80">Hand-crafted perfection</p>

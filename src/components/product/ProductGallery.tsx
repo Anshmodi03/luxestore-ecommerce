@@ -12,10 +12,10 @@ export default function ProductGallery({ images }: ProductGalleryProps) {
   return (
     <div className="space-y-8 order-2 lg:order-1">
       {/* Main Viewer */}
-      <div className="relative w-full aspect-[4/5] lg:aspect-square rounded-[2rem] bg-surface-light dark:bg-surface-dark shadow-deep overflow-hidden group">
+      <div className="relative w-full aspect-4/5 lg:aspect-square rounded-4xl bg-surface-light dark:bg-surface-dark shadow-deep overflow-hidden group">
         
         {/* Background Gradient */}
-        <div className="absolute inset-0 bg-gradient-to-br from-transparent to-gray-50 dark:to-gray-900/50 opacity-50 z-0"></div>
+        <div className="absolute inset-0 bg-linear-to-br from-transparent to-gray-50 dark:to-gray-900/50 opacity-50 z-0"></div>
         
         <AnimatePresence mode="wait">
           {!is360View ? (

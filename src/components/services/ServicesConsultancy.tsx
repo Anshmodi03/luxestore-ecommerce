@@ -54,7 +54,7 @@ export default function ServicesConsultancy() {
               <Armchair size={24} weight="regular" />
             </div>
             <h3 className="font-serif text-2xl text-gray-900 dark:text-white mb-4">Virtual Styling</h3>
-            <p className="text-sm text-gray-500 dark:text-gray-400 font-light leading-relaxed mb-8 flex-grow">
+            <p className="text-sm text-gray-500 dark:text-gray-400 font-light leading-relaxed mb-8 grow">
               Connect directly with our senior stylists via secure video link. We curate selections based on your visual preferences and existing luxury wardrobe.
             </p>
             <ul className="space-y-3">
@@ -78,7 +78,7 @@ export default function ServicesConsultancy() {
               <Leaf size={24} weight="regular" />
             </div>
             <h3 className="font-serif text-2xl text-gray-900 dark:text-white mb-4">Sizing Expertise</h3>
-            <p className="text-sm text-gray-500 dark:text-gray-400 font-light leading-relaxed mb-8 flex-grow">
+            <p className="text-sm text-gray-500 dark:text-gray-400 font-light leading-relaxed mb-8 grow">
               Skip the uncertainty of online sizing. Provide your measurements to our tailors, and we will cross-reference every garment to ensure a flawless bespoke fit before shipping.
             </p>
             <ul className="space-y-3">
@@ -102,7 +102,7 @@ export default function ServicesConsultancy() {
               <Diamond size={24} weight="regular" />
             </div>
             <h3 className="font-serif text-2xl text-gray-900 dark:text-white mb-4">Gift Concierge</h3>
-            <p className="text-sm text-gray-500 dark:text-gray-400 font-light leading-relaxed mb-8 flex-grow">
+            <p className="text-sm text-gray-500 dark:text-gray-400 font-light leading-relaxed mb-8 grow">
               Secure the perfect luxury gift instantly. We manage sourcing, high-end thematic wrapping, and timed international delivery for your most important recipients.
             </p>
             <ul className="space-y-3">

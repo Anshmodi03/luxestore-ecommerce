@@ -63,7 +63,7 @@ export default function ServicesLogistics() {
                 transition={{ duration: 0.5, delay: 0.3 }}
                 className="flex gap-6 items-start group"
               >
-                <div className="w-10 h-10 flex-shrink-0 border border-gray-200 dark:border-white/20 rounded-full flex items-center justify-center group-hover:bg-gray-900 group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-black transition-colors duration-500">
+                <div className="w-10 h-10 shrink-0 border border-gray-200 dark:border-white/20 rounded-full flex items-center justify-center group-hover:bg-gray-900 group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-black transition-colors duration-500">
                   <EyeSlash size={20} weight="regular" />
                 </div>
                 <div>
@@ -84,7 +84,7 @@ export default function ServicesLogistics() {
                 transition={{ duration: 0.5, delay: 0.4 }}
                 className="flex gap-6 items-start group"
               >
-                <div className="w-10 h-10 flex-shrink-0 border border-gray-200 dark:border-white/20 rounded-full flex items-center justify-center group-hover:bg-gray-900 group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-black transition-colors duration-500">
+                <div className="w-10 h-10 shrink-0 border border-gray-200 dark:border-white/20 rounded-full flex items-center justify-center group-hover:bg-gray-900 group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-black transition-colors duration-500">
                   <Package size={20} weight="regular" />
                 </div>
                 <div>
@@ -105,7 +105,7 @@ export default function ServicesLogistics() {
                  transition={{ duration: 0.5, delay: 0.5 }}
                 className="flex gap-6 items-start group"
               >
-                <div className="w-10 h-10 flex-shrink-0 border border-gray-200 dark:border-white/20 rounded-full flex items-center justify-center group-hover:bg-gray-900 group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-black transition-colors duration-500">
+                <div className="w-10 h-10 shrink-0 border border-gray-200 dark:border-white/20 rounded-full flex items-center justify-center group-hover:bg-gray-900 group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-black transition-colors duration-500">
                   <Globe size={20} weight="regular" />
                 </div>
                 <div>
@@ -138,7 +138,7 @@ export default function ServicesLogistics() {
                 style={{ backgroundImage: "url('https://images.unsplash.com/photo-1578575437130-527eed3abbec?q=80&w=2670&auto=format&fit=crop')" }}
               ></motion.div>
               
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none"></div>
+              <div className="absolute inset-0 bg-linear-to-t from-black/80 via-transparent to-transparent pointer-events-none"></div>
               
               <div className="absolute bottom-8 left-8 right-8 text-white z-10 pointer-events-none">
                 <div className="flex justify-between items-end">

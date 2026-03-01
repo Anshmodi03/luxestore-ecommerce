@@ -58,7 +58,7 @@ export default function Preloader({ onComplete }: PreloaderProps) {
   return (
     <AnimatePresence>
       {!isAnimatingOut && (
-        <div className="fixed inset-0 z-[9999] pointer-events-none flex items-center justify-center overflow-hidden">
+        <div className="fixed inset-0 z-9999 pointer-events-none flex items-center justify-center overflow-hidden">
           
           {/* Phase 3: The "Blinds" Shutter Exit (Background Columns) */}
           <div className="absolute inset-0 flex w-full h-full">
@@ -162,7 +162,7 @@ export default function Preloader({ onComplete }: PreloaderProps) {
               </div>
               
               {/* Ultra-thin elegant progress line at the bottom */}
-              <div className="w-48 h-[1px] bg-white/10 relative overflow-hidden">
+              <div className="w-48 h-px bg-white/10 relative overflow-hidden">
                 <motion.div
                   className="absolute top-0 left-0 h-full bg-white origin-left"
                   style={{ width: `${progress}%` }}

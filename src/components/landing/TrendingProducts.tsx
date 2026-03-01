@@ -23,7 +23,6 @@ export default function TrendingProducts() {
           <ProductCard 
             key={product.id} 
             product={product} 
-            onQuickView={() => {}} 
           />
         ))}
       </div>
