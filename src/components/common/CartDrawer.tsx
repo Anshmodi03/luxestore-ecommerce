@@ -100,7 +100,7 @@ export default function CartDrawer() {
                 <div className="flex space-x-4 overflow-x-auto pb-4 scrollbar-hide">
                   {upSells.map((upsell) => (
                     <div key={upsell.name} className="flex-shrink-0 w-28 group relative">
-                      <div className="aspect-[3/4] rounded-lg overflow-hidden bg-gray-50 dark:bg-white/5 mb-3 relative">
+                      <div className="aspect-3/4 rounded-lg overflow-hidden bg-gray-50 dark:bg-white/5 mb-3 relative">
                         <img alt={upsell.name} className="w-full h-full object-cover" src={upsell.image} />
                         <button className="absolute bottom-2 right-2 w-7 h-7 bg-primary text-white rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform">
                           <Plus size={12} weight="bold" />

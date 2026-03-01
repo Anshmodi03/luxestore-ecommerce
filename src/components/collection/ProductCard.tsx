@@ -1,12 +1,11 @@
 import { motion, Variants } from 'framer-motion'
 import { ShoppingBag } from '@phosphor-icons/react'
-import { Link } from 'react-router-dom'
 import { Product } from '../../data/products'
 import { useCart } from '../../context/CartContext'
+import { useProductModal } from '../../context/ProductModalContext'
 
 interface ProductCardProps {
   product: Product
-  onQuickView: (product: Product) => void
 }
 
 // Framer motion variants for the staggered grid animation
@@ -19,13 +18,13 @@ export const itemVariants: Variants = {
   }
 }
 
-export default function ProductCard({ product, onQuickView }: ProductCardProps) {
+export default function ProductCard({ product }: ProductCardProps) {
   const { openCart } = useCart()
+  const { openProductModal } = useProductModal()
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault()
     e.stopPropagation()
-    // Logic to add to cart would go here in a real app
     openCart()
   }
 
@@ -34,7 +33,10 @@ export default function ProductCard({ product, onQuickView }: ProductCardProps) 
       variants={itemVariants}
       className="group hover-lift"
     >
-      <Link to={`/product/${product.id}`} className="block relative">
+      <button 
+        onClick={() => openProductModal(product)} 
+        className="block relative w-full text-left"
+      >
         <div className="relative overflow-hidden aspect-4/5 rounded-2xl mb-6 bg-gray-50 dark:bg-white/5">
           <img
             alt={product.name}
@@ -51,6 +53,7 @@ export default function ProductCard({ product, onQuickView }: ProductCardProps) 
 
           {/* Quick Add Button */}
           <button 
+            title="Add to Cart"
             onClick={handleAddToCart}
             className="absolute z-20 bottom-4 right-4 w-12 h-12 bg-white/90 backdrop-blur-sm text-gray-900 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-300 shadow-xl hover:bg-primary hover:text-white"
           >
@@ -76,7 +79,7 @@ export default function ProductCard({ product, onQuickView }: ProductCardProps) 
             )}
           </div>
         </div>
-      </Link>
+      </button>
     </motion.div>
   )
 }

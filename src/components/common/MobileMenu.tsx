@@ -30,7 +30,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
             { name: 'Collections', path: '/collection' },
             { name: 'Editorial', path: '/editorial' },
             { name: 'Our Story', path: '/about' },
-            { name: 'Client Services', path: '/' }
+            { name: 'Client Services', path: '/services' }
           ].map((item) => (
             <Link
               key={item.name}

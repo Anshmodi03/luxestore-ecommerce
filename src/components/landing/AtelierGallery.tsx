@@ -1,3 +1,6 @@
+import { Link } from 'react-router-dom'
+import { ArrowRight } from '@phosphor-icons/react'
+
 export default function AtelierGallery() {
   return (
     <section className="py-24 px-4 sm:px-8 lg:px-16 max-w-8xl mx-auto">
@@ -17,9 +20,10 @@ export default function AtelierGallery() {
             <div className="bg-white/90 dark:bg-black/80 backdrop-blur-xl p-8 rounded-2xl max-w-md transform transition-all duration-500 translate-y-4 group-hover:translate-y-0 opacity-90 group-hover:opacity-100">
               <h3 className="font-serif text-2xl text-gray-900 dark:text-white mb-2 italic">Interior Collection</h3>
               <p className="text-gray-600 dark:text-gray-300 mb-4 font-light">Minimalist furniture designed for the modern sanctuary.</p>
-              <a className="inline-flex items-center text-sm font-bold text-gray-900 dark:text-white uppercase tracking-wider border-b border-gray-900 dark:border-white pb-1" href="#">
-                Explore Interiors
-              </a>
+              <Link to="/collection" className="group inline-flex items-center gap-2 text-sm font-bold text-gray-900 dark:text-white uppercase tracking-wider border-b border-gray-900 dark:border-white pb-1 hover:text-primary hover:border-primary transition-colors">
+                Discover Collection
+                <ArrowRight weight="bold" className="group-hover:translate-x-1 transition-transform" />
+              </Link>
             </div>
           </div>
         </div>

@@ -1,47 +1,13 @@
 import { motion } from 'framer-motion'
+import { Review } from '../../data/productDetails'
 
-const REVIEWS = [
-  {
-    id: 1,
-    name: "Sarah M.",
-    type: "Verified Buyer",
-    rating: 5,
-    text: `"Absolutely stunning sound quality. The noise cancellation is perfect for my daily commute on the train. It feels like I'm in my own private studio."`,
-    avatarUrl: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=150&auto=format&fit=crop",
-    delay: 0
-  },
-  {
-    id: 2,
-    name: "James D.",
-    type: "Verified Buyer",
-    rating: 4.5,
-    text: `"Comfortable for long sessions and the battery life is legit. The build quality feels incredibly premium."`,
-    initials: "JD",
-    delay: 0.1
-  },
-  {
-    id: 3,
-    name: "Elena R.",
-    type: "Verified Buyer",
-    rating: 5,
-    text: `"I was skeptical about the price, but the spatial audio feature completely changed how I watch movies."`,
-    avatarUrl: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=150&auto=format&fit=crop",
-    isHighlight: true,
-    delay: 0.2
-  },
-  {
-    id: 4,
-    name: "Mike K.",
-    type: "Verified Buyer",
-    rating: 5,
-    text: `"The connectivity is seamless across my devices. Highly recommend."`,
-    initials: "MK",
-    initialsColor: "bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400",
-    delay: 0.3
-  }
-]
+interface ProductReviewsProps {
+  reviews: Review[]
+  rating: number
+  reviewCount: number
+}
 
-export default function ProductReviews() {
+export default function ProductReviews({ reviews, rating, reviewCount }: ProductReviewsProps) {
   return (
     <div className="mt-32 lg:mt-48 pb-12">
       <div className="flex flex-col items-center text-center mb-16">
@@ -60,20 +26,18 @@ export default function ProductReviews() {
           transition={{ delay: 0.2 }}
           className="flex items-center gap-2"
         >
-          <span className="text-2xl font-bold text-gray-900 dark:text-white">4.8</span>
+          <span className="text-2xl font-bold text-gray-900 dark:text-white">{rating.toFixed(1)}</span>
           <div className="flex text-primary text-sm gap-0.5">
-            <i className="ph-fill ph-star"></i>
-            <i className="ph-fill ph-star"></i>
-            <i className="ph-fill ph-star"></i>
-            <i className="ph-fill ph-star"></i>
-            <i className="ph-fill ph-star-half"></i>
+            {[...Array(5)].map((_, i) => (
+              <i key={i} className={`ph-fill ${i < Math.floor(rating) ? 'ph-star' : i === 4 && rating % 1 !== 0 ? 'ph-star-half' : ''}`}></i>
+            ))}
           </div>
-          <span className="text-sm text-gray-500 ml-2">based on 128 reviews</span>
+          <span className="text-sm text-gray-500 ml-2">based on {reviewCount} reviews</span>
         </motion.div>
       </div>
 
       <div className="columns-1 md:columns-2 lg:columns-3 gap-8 space-y-8">
-        {REVIEWS.map((review) => (
+        {reviews.map((review) => (
           <motion.div
             key={review.id}
             initial={{ opacity: 0, y: 30 }}

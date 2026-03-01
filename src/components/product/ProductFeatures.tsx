@@ -1,40 +1,14 @@
 import { motion } from 'framer-motion'
+import { Feature } from '../../data/productDetails'
 
-const FEATURES = [
-  {
-    id: 1,
-    icon: 'ph-waves',
-    title: 'Active NC',
-    subtitle: 'Smart Adapt',
-    delay: 0,
-  },
-  {
-    id: 2,
-    icon: 'ph-battery-charging',
-    title: '30 Hours',
-    subtitle: 'Playtime',
-    delay: 0.1,
-  },
-  {
-    id: 3,
-    icon: 'ph-bluetooth',
-    title: 'BT 5.2',
-    subtitle: 'Seamless',
-    delay: 0.2,
-  },
-  {
-    id: 4,
-    icon: 'ph-speaker-high',
-    title: 'Spatial',
-    subtitle: '3D Audio',
-    delay: 0.3,
-  }
-]
+interface ProductFeaturesProps {
+  features: Feature[]
+}
 
-export default function ProductFeatures() {
+export default function ProductFeatures({ features }: ProductFeaturesProps) {
   return (
     <div className="mt-32 grid grid-cols-2 md:grid-cols-4 gap-6">
-      {FEATURES.map((feature) => (
+      {features.map((feature) => (
         <motion.div
           key={feature.id}
           initial={{ opacity: 0, y: 20 }}

@@ -1,21 +1,11 @@
 import { motion } from 'framer-motion'
+import { Spec } from '../../data/productDetails'
 
-interface SpecItem {
-  category: string
-  title: string
-  description: string
+interface ProductSpecsProps {
+  specs: Spec[]
 }
 
-const SPECS: SpecItem[] = [
-  { category: 'Audio', title: 'Driver Unit', description: '40mm Dynamic Drivers' },
-  { category: 'Audio', title: 'Frequency', description: '20Hz - 20,000Hz' },
-  { category: 'Audio', title: 'Sensitivity', description: '105 dB SPL/V' },
-  { category: 'Power', title: 'Battery Life', description: 'Up to 30 hours (ANC on)' },
-  { category: 'Power', title: 'Charging', description: 'USB-C Fast Charge' },
-  { category: 'Build', title: 'Weight', description: '250g Ultra-light' },
-]
-
-export default function ProductSpecs() {
+export default function ProductSpecs({ specs }: ProductSpecsProps) {
   return (
     <div className="mt-32 lg:mt-48">
       <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
@@ -34,7 +24,7 @@ export default function ProductSpecs() {
         transition={{ duration: 0.8, ease: "easeOut" }}
         className="grid md:grid-cols-2 lg:grid-cols-3 gap-px bg-gray-200 dark:bg-gray-800 border border-gray-200 dark:border-gray-800 rounded-3xl overflow-hidden shadow-sm"
       >
-        {SPECS.map((spec, idx) => (
+        {specs.map((spec, idx) => (
           <div key={idx} className="bg-surface-light dark:bg-surface-dark p-10 hover:bg-gray-50 dark:hover:bg-gray-900/50 transition-colors">
             <span className="block text-xs font-bold text-primary uppercase tracking-widest mb-4">{spec.category}</span>
             <h4 className="text-lg font-medium text-gray-900 dark:text-white mb-2">{spec.title}</h4>

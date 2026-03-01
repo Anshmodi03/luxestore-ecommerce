@@ -10,7 +10,8 @@ import EditorialPage from './pages/EditorialPage'
 import Preloader from './components/common/Preloader'
 import CartDrawer from './components/common/CartDrawer'
 import ClientServicesPage from './pages/ClientServicesPage'
-import ProductDetailsPage from './pages/ProductDetailsPage'
+import ProductDetailsModal from './components/product/ProductDetailsModal'
+import { ProductModalProvider } from './context/ProductModalContext'
 
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false)
@@ -28,26 +29,30 @@ export default function App() {
   }, [dark])
 
   return (
-    <div className="bg-background-light dark:bg-background-dark text-gray-900 dark:text-gray-100 transition-colors duration-500 font-body relative">
-      {/* Global Navigation */}
-      <Navbar onMenuOpen={() => setMenuOpen(true)} onToggleDark={() => setDark(prev => !prev)} isDark={dark} />
-      <MobileMenu isOpen={menuOpen} onClose={() => setMenuOpen(false)} />
-      <CartDrawer />
-      
-      {/* Dynamic Routes wrapped with AnimatePresence for transitions */}
-      <AnimatePresence mode="wait">
-        <Routes location={location} key={location.pathname}>
-          <Route path="/" element={<LandingPage />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/collection" element={<CollectionPage />} />
-          <Route path="/editorial" element={<EditorialPage />} />
-          <Route path="/services" element={<ClientServicesPage />} />
-          <Route path="/product/:id" element={<ProductDetailsPage />} />
-        </Routes>
-      </AnimatePresence>
-      
-      {/* Initial Page Loading Animation */}
-      {loading && <Preloader onComplete={() => setLoading(false)} />}
-    </div>
+    <ProductModalProvider>
+      <div className="bg-background-light dark:bg-background-dark text-gray-900 dark:text-gray-100 transition-colors duration-500 font-body relative">
+        {/* Global Navigation */}
+        <Navbar onMenuOpen={() => setMenuOpen(true)} onToggleDark={() => setDark(prev => !prev)} isDark={dark} />
+        <MobileMenu isOpen={menuOpen} onClose={() => setMenuOpen(false)} />
+        <CartDrawer />
+        
+        {/* Global Modals */}
+        <ProductDetailsModal />
+        
+        {/* Dynamic Routes wrapped with AnimatePresence for transitions */}
+        <AnimatePresence mode="wait">
+          <Routes location={location} key={location.pathname}>
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/collection" element={<CollectionPage />} />
+            <Route path="/editorial" element={<EditorialPage />} />
+            <Route path="/services" element={<ClientServicesPage />} />
+          </Routes>
+        </AnimatePresence>
+        
+        {/* Initial Page Loading Animation */}
+        {loading && <Preloader onComplete={() => setLoading(false)} />}
+      </div>
+    </ProductModalProvider>
   )
 }

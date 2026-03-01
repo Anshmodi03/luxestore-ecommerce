@@ -1,8 +1,7 @@
-import { useState, useMemo } from 'react'
+import { useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import ProductCard from './ProductCard'
-import QuickViewModal from './QuickViewModal'
-import { collectionProducts, Product } from '../../data/products'
+import { collectionProducts } from '../../data/products'
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -21,9 +20,6 @@ interface ProductGridProps {
 }
 
 export default function ProductGrid({ activeCategory = 'All', sortOption = 'featured' }: ProductGridProps) {
-  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null)
-  const isModalOpen = selectedProduct !== null
-
   const filteredAndSortedProducts = useMemo(() => {
     let result = [...collectionProducts]
 
@@ -46,39 +42,28 @@ export default function ProductGrid({ activeCategory = 'All', sortOption = 'feat
   }, [activeCategory, sortOption])
 
   return (
-    <>
-      <motion.div 
-        key={activeCategory}
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-        viewport={{ once: true, margin: "-100px" }}
-        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-16 md:gap-x-8 md:gap-y-20"
-      >
-        <AnimatePresence mode="popLayout">
-          {filteredAndSortedProducts.map((product) => (
-            <motion.div 
-              key={product.id}
-              layout
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.9 }}
-              transition={{ duration: 0.4, ease: "easeOut" }}
-            >
-              <ProductCard 
-                product={product} 
-                onQuickView={(p) => setSelectedProduct(p)} 
-              />
-            </motion.div>
-          ))}
-        </AnimatePresence>
-      </motion.div>
-
-      <QuickViewModal 
-        product={selectedProduct} 
-        isOpen={isModalOpen} 
-        onClose={() => setSelectedProduct(null)} 
-      />
-    </>
+    <motion.div 
+      key={activeCategory}
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+      viewport={{ once: true, margin: "-100px" }}
+      className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-16 md:gap-x-8 md:gap-y-20"
+    >
+      <AnimatePresence mode="popLayout">
+        {filteredAndSortedProducts.map((product) => (
+          <motion.div 
+            key={product.id}
+            layout
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.9 }}
+            transition={{ duration: 0.4, ease: "easeOut" }}
+          >
+            <ProductCard product={product} />
+          </motion.div>
+        ))}
+      </AnimatePresence>
+    </motion.div>
   )
 }

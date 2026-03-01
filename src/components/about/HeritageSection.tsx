@@ -3,7 +3,7 @@ export default function HeritageSection() {
     <section className="py-24 px-6 md:px-20 lg:px-40 bg-white dark:bg-background-dark relative z-20 transition-colors duration-500">
       <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
         <div className="relative order-2 md:order-1">
-          <div className="aspect-[4/5] w-full rounded-lg overflow-hidden relative shadow-[0_20px_50px_rgba(0,0,0,0.1)]">
+          <div className="aspect-4/5 w-full rounded-lg overflow-hidden relative shadow-[0_20px_50px_rgba(0,0,0,0.1)]">
             <div className="absolute inset-0 bg-primary/5 mix-blend-overlay z-10"></div>
             <img 
               alt="Close up of hands working on leather stitching" 
