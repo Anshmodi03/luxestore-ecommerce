@@ -11,6 +11,7 @@ import Preloader from './components/common/Preloader'
 import CartDrawer from './components/common/CartDrawer'
 import ClientServicesPage from './pages/ClientServicesPage'
 import ProductDetailsModal from './components/product/ProductDetailsModal'
+import CheckoutPage from './pages/CheckoutPage'
 import { ProductModalProvider } from './context/ProductModalContext'
 
 export default function App() {
@@ -18,6 +19,7 @@ export default function App() {
   const [dark, setDark] = useState(false)
   const [loading, setLoading] = useState(true)
   const location = useLocation()
+  const isCheckout = location.pathname === '/checkout'
 
   // Scroll to top on route change
   useEffect(() => {
@@ -32,8 +34,8 @@ export default function App() {
     <ProductModalProvider>
       <div className="bg-background-light dark:bg-background-dark text-gray-900 dark:text-gray-100 transition-colors duration-500 font-body relative">
         {/* Global Navigation */}
-        <Navbar onMenuOpen={() => setMenuOpen(true)} onToggleDark={() => setDark(prev => !prev)} isDark={dark} />
-        <MobileMenu isOpen={menuOpen} onClose={() => setMenuOpen(false)} />
+        {!isCheckout && <Navbar onMenuOpen={() => setMenuOpen(true)} onToggleDark={() => setDark(prev => !prev)} isDark={dark} />}
+        {!isCheckout && <MobileMenu isOpen={menuOpen} onClose={() => setMenuOpen(false)} />}
         <CartDrawer />
         
         {/* Global Modals */}
@@ -47,6 +49,7 @@ export default function App() {
             <Route path="/collection" element={<CollectionPage />} />
             <Route path="/editorial" element={<EditorialPage />} />
             <Route path="/services" element={<ClientServicesPage />} />
+            <Route path="/checkout" element={<CheckoutPage />} />
           </Routes>
         </AnimatePresence>
         

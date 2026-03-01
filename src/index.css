@@ -43,6 +43,20 @@
   }
 }
 
+@layer components {
+  .hover-scale-image {
+    @apply transition-transform duration-700 hover:scale-105;
+  }
+
+  .ultra-thin-input {
+    @apply border-0 border-b border-slate-200 dark:border-white/20 bg-transparent px-0 py-3 text-sm focus:ring-0 focus:border-primary dark:focus:border-white transition-colors duration-300 placeholder:text-slate-400 dark:placeholder:text-slate-500 placeholder:uppercase placeholder:tracking-[0.15em] placeholder:text-[10px] text-slate-900 dark:text-white outline-none;
+  }
+
+  .step-label {
+    @apply text-[10px] uppercase tracking-[0.3em] text-slate-400 dark:text-slate-500 mb-2 block font-medium;
+  }
+}
+
 /* Base */
 body {
   font-family: 'Plus Jakarta Sans', sans-serif;
