@@ -27,12 +27,12 @@ const CheckoutSummary = () => {
   const total = subtotal + tax
 
   return (
-    <aside className="hidden lg:block bg-white dark:bg-background-dark border-l border-slate-200/50 dark:border-white/5 relative transition-colors duration-300 z-10 w-full h-full">
-      <div className="sticky top-28 h-[calc(100vh-160px)] flex flex-col pt-0 pb-12 px-8 xl:px-12">
-        <div className="grow bg-transparent border border-slate-200/50 dark:border-white/10 p-8 flex flex-col rounded-sm min-h-0">
-          <h2 className="text-2xl font-serif italic mb-10 text-slate-900 dark:text-white shrink-0">Order Summary</h2>
+    <aside className="bg-white dark:bg-background-dark border-t lg:border-t-0 lg:border-l border-slate-200/50 dark:border-white/5 relative transition-colors duration-300 z-10 w-full lg:h-full">
+      <div className="relative lg:sticky lg:top-28 lg:h-[calc(100vh-160px)] flex flex-col pt-8 lg:pt-0 pb-12 px-4 sm:px-8 xl:px-12">
+        <div className="grow bg-transparent lg:border border-slate-200/50 dark:border-white/10 lg:p-8 flex flex-col rounded-sm min-h-0">
+          <h2 className="text-2xl font-serif italic mb-6 lg:mb-10 text-slate-900 dark:text-white shrink-0">Order Summary</h2>
           
-          <div className="grow overflow-y-auto pr-4 -mr-4 flex flex-col gap-6 custom-scrollbar min-h-0">
+          <div className="grow lg:overflow-y-auto pr-2 lg:pr-4 lg:-mr-4 flex flex-col gap-6 custom-scrollbar min-h-0">
             {mockCartItems.map((item) => (
               <div key={`${item.id}-${item.color || 'default'}`} className="flex gap-6 pb-6 border-b border-slate-200/50 dark:border-white/10 last:border-b-0 last:pb-0 shrink-0">
                 <div className="w-20 h-20 bg-white dark:bg-[#111] p-2 border border-slate-100 dark:border-white/10 shrink-0 rounded-sm">

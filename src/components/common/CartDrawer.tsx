@@ -214,9 +214,9 @@ export default function CartDrawer() {
               </div>
 
               {/* RIGHT COLUMN: Checkout Footer (Desktop side, Mobile bottom) */}
-              <div className="w-full lg:w-[320px] xl:w-[380px] shrink-0 bg-white/95 dark:bg-[#111]/95 md:bg-white md:dark:bg-[#111] backdrop-blur-md border-t lg:border-t-0 lg:border-l border-gray-100 dark:border-white/10 p-6 md:p-8 flex flex-col justify-between">
-                <div className="flex flex-col gap-4 mb-6">
-                  <h3 className="text-xl font-serif italic text-gray-900 dark:text-white border-b border-gray-100 dark:border-white/10 pb-4 mb-2">Order Summary</h3>
+              <div className="w-full lg:w-[320px] xl:w-[380px] shrink-0 bg-white/95 dark:bg-[#111]/95 md:bg-white md:dark:bg-[#111] backdrop-blur-md border-t lg:border-t-0 lg:border-l border-gray-100 dark:border-white/10 p-4 sm:p-6 lg:p-8 flex flex-col justify-between shadow-[0_-10px_40px_-15px_rgba(0,0,0,0.1)] lg:shadow-none z-10">
+                <div className="flex flex-col gap-2 lg:gap-4 mb-3 lg:mb-6">
+                  <h3 className="hidden lg:block text-xl font-serif italic text-gray-900 dark:text-white border-b border-gray-100 dark:border-white/10 pb-4 mb-2">Order Summary</h3>
                   
                   <div className="flex justify-between items-center text-sm font-light">
                     <span className="text-gray-500 dark:text-gray-400">Subtotal</span>
@@ -232,7 +232,7 @@ export default function CartDrawer() {
                   </div>
                   
                   {/* Promo Code nested in summary on desktop */}
-                  <div className="mt-4 pt-4 border-t border-gray-100 dark:border-white/5">
+                  <div className="hidden lg:block mt-4 pt-4 border-t border-gray-100 dark:border-white/5">
                     <div className="flex gap-2 mb-1">
                       <input 
                         className="flex-1 bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-sm text-sm px-3 py-2 text-gray-900 dark:text-white placeholder-gray-400 focus:ring-1 focus:ring-primary focus:border-primary font-light outline-none transition-all" 
@@ -267,7 +267,7 @@ export default function CartDrawer() {
                     </button>
                   </div>
 
-                  <div className="flex items-center justify-center gap-2 mt-6 text-[10px] uppercase tracking-widest text-gray-400 dark:text-gray-500">
+                  <div className="hidden lg:flex items-center justify-center gap-2 mt-6 text-[10px] uppercase tracking-widest text-gray-400 dark:text-gray-500">
                     <Lock size={12} weight="fill" className="text-emerald-500" />
                     <span>256-bit Encrypted Transaction</span>
                   </div>
