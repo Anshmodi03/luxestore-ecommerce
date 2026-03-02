@@ -12,6 +12,7 @@
     "@google/model-viewer": "^4.1.0",
     "@phosphor-icons/react": "^2.1.7",
     "framer-motion": "^12.34.3",
+    "gsap": "^3.14.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-router-dom": "^7.13.1"

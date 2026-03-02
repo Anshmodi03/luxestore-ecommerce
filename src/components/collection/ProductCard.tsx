@@ -33,9 +33,12 @@ export default function ProductCard({ product }: ProductCardProps) {
       variants={itemVariants}
       className="group hover-lift"
     >
-      <button 
+      <div 
         onClick={() => openProductModal(product)} 
-        className="block relative w-full text-left"
+        role="button"
+        tabIndex={0}
+        onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') openProductModal(product) }}
+        className="block relative w-full text-left cursor-pointer"
       >
         <div className="relative overflow-hidden aspect-4/5 rounded-2xl mb-6 bg-gray-50 dark:bg-white/5">
           <img
@@ -79,7 +82,7 @@ export default function ProductCard({ product }: ProductCardProps) {
             )}
           </div>
         </div>
-      </button>
+      </div>
     </motion.div>
   )
 }

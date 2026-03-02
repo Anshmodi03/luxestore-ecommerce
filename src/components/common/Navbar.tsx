@@ -1,5 +1,5 @@
-import { Moon, Sun, ShoppingBag, Diamond } from '@phosphor-icons/react'
-import { Link } from 'react-router-dom'
+import { Moon, Sun, ShoppingBag, Diamond, User } from '@phosphor-icons/react'
+import { Link, useNavigate } from 'react-router-dom'
 import { useCart } from '../../context/CartContext'
 
 interface NavbarProps {
@@ -10,6 +10,7 @@ interface NavbarProps {
 
 export default function Navbar({ onMenuOpen, onToggleDark, isDark }: NavbarProps) {
   const { openCart } = useCart()
+  const navigate = useNavigate()
 
   return (
     <nav className="absolute top-0 w-full z-50 py-6 px-4 sm:px-8 lg:px-16 border-b border-white/10 bg-linear-to-b from-black/50 to-transparent">
@@ -34,6 +35,13 @@ export default function Navbar({ onMenuOpen, onToggleDark, isDark }: NavbarProps
             onClick={onToggleDark}
           >
             {isDark ? <Sun size={20} /> : <Moon size={20} />}
+          </button>
+          <button 
+            className="p-2 text-white hover:text-primary transition rounded-full hover:bg-white/10"
+            onClick={() => navigate('/auth')}
+            title="Account"
+          >
+            <User size={20} weight="bold" />
           </button>
           <button 
             className="relative p-2 text-white hover:text-primary transition rounded-full hover:bg-white/10 cursor-pointer"

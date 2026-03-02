@@ -12,6 +12,7 @@ import CartDrawer from './components/common/CartDrawer'
 import ClientServicesPage from './pages/ClientServicesPage'
 import ProductDetailsModal from './components/product/ProductDetailsModal'
 import CheckoutPage from './pages/CheckoutPage'
+import AuthPage from './pages/AuthPage'
 import { ProductModalProvider } from './context/ProductModalContext'
 
 export default function App() {
@@ -20,6 +21,8 @@ export default function App() {
   const [loading, setLoading] = useState(true)
   const location = useLocation()
   const isCheckout = location.pathname === '/checkout'
+  const isAuth = location.pathname === '/auth'
+  const hideNav = isCheckout || isAuth
 
   // Scroll to top on route change
   useEffect(() => {
@@ -34,8 +37,8 @@ export default function App() {
     <ProductModalProvider>
       <div className="bg-background-light dark:bg-background-dark text-gray-900 dark:text-gray-100 transition-colors duration-500 font-body relative">
         {/* Global Navigation */}
-        {!isCheckout && <Navbar onMenuOpen={() => setMenuOpen(true)} onToggleDark={() => setDark(prev => !prev)} isDark={dark} />}
-        {!isCheckout && <MobileMenu isOpen={menuOpen} onClose={() => setMenuOpen(false)} />}
+        {!hideNav && <Navbar onMenuOpen={() => setMenuOpen(true)} onToggleDark={() => setDark(prev => !prev)} isDark={dark} />}
+        {!hideNav && <MobileMenu isOpen={menuOpen} onClose={() => setMenuOpen(false)} />}
         <CartDrawer />
         
         {/* Global Modals */}
@@ -50,6 +53,7 @@ export default function App() {
             <Route path="/editorial" element={<EditorialPage />} />
             <Route path="/services" element={<ClientServicesPage />} />
             <Route path="/checkout" element={<CheckoutPage />} />
+            <Route path="/auth" element={<AuthPage />} />
           </Routes>
         </AnimatePresence>
         

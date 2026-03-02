@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { ReactNode } from 'react'
+import { useLocation } from 'react-router-dom'
 
 interface PageTransitionProps {
   children: ReactNode
@@ -9,6 +10,14 @@ interface PageTransitionProps {
 const transitionCurve = { duration: 0.8, ease: [0.76, 0, 0.24, 1] as const }
 
 export default function PageTransition({ children }: PageTransitionProps) {
+  const location = useLocation()
+  const skipTransition = (location.state as { skipTransition?: boolean })?.skipTransition === true
+
+  // If skipTransition is set (e.g. coming from auth success overlay), render instantly
+  if (skipTransition) {
+    return <>{children}</>
+  }
+
   return (
     <>
       {/* Page Content Animation (Slight scale/fade) */}
@@ -16,7 +25,7 @@ export default function PageTransition({ children }: PageTransitionProps) {
         initial={{ opacity: 0, scale: 0.98, filter: 'blur(4px)' }}
         animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
         exit={{ opacity: 0, scale: 0.98, filter: 'blur(4px)' }}
-        transition={{ duration: 0.6, ease: [0.76, 0, 0.24, 1], delay: 0.2 }} // Wait slightly for curtain to rise
+        transition={{ duration: 0.6, ease: [0.76, 0, 0.24, 1] as const, delay: 0.2 }}
       >
         {children}
       </motion.div>
