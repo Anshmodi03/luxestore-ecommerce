@@ -1,4 +1,5 @@
 import { Eye, Plus } from '@phosphor-icons/react'
+import ScrollReveal from '../common/ScrollReveal'
 
 const hotspots = [
   {
@@ -22,7 +23,7 @@ export default function ShopTheLook() {
   return (
     <section className="py-24 px-4 sm:px-8 lg:px-16 max-w-8xl mx-auto bg-gray-50 dark:bg-surface-dark border-b border-border-light dark:border-border-dark">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-        <div className="lg:col-span-4 space-y-8 order-2 lg:order-1">
+        <ScrollReveal variant="fade-left" className="lg:col-span-4 space-y-8 order-2 lg:order-1">
           <div className="inline-flex items-center gap-2 text-primary font-bold tracking-widest text-xs uppercase">
             <Eye weight="fill" />
             <span>Interactive Experience</span>
@@ -50,9 +51,9 @@ export default function ShopTheLook() {
               </div>
             </div>
           </div>
-        </div>
+        </ScrollReveal>
 
-        <div className="lg:col-span-8 relative order-1 lg:order-2 group">
+        <ScrollReveal variant="fade-right" delay={0.2} className="lg:col-span-8 relative order-1 lg:order-2 group">
           <div className="relative rounded-3xl overflow-hidden shadow-2xl">
             <img
               alt="Modern living room interior"
@@ -76,7 +77,7 @@ export default function ShopTheLook() {
               </div>
             ))}
           </div>
-        </div>
+        </ScrollReveal>
       </div>
     </section>
   )

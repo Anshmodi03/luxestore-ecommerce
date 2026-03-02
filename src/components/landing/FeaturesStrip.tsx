@@ -1,4 +1,5 @@
 import { AirplaneTilt, ShieldCheck, ArrowUUpLeft } from '@phosphor-icons/react'
+import ScrollReveal from '../common/ScrollReveal'
 
 const features = [
   {
@@ -22,7 +23,7 @@ export default function FeaturesStrip() {
   return (
     <section className="bg-white dark:bg-surface-dark py-24 border-y border-border-light dark:border-border-dark">
       <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-16">
-        <div className="grid lg:grid-cols-3 gap-12 text-center divide-y lg:divide-y-0 lg:divide-x divide-gray-100 dark:divide-gray-800">
+        <ScrollReveal variant="fade-up" staggerChildren className="grid lg:grid-cols-3 gap-12 text-center divide-y lg:divide-y-0 lg:divide-x divide-gray-100 dark:divide-gray-800">
           {features.map((f) => (
             <div key={f.title} className="px-4 py-8 lg:py-0 group">
               <div className="mb-6 inline-flex items-center justify-center w-16 h-16 rounded-full bg-gray-50 dark:bg-gray-800 text-primary group-hover:scale-110 transition-transform duration-300">
@@ -32,7 +33,7 @@ export default function FeaturesStrip() {
               <p className="text-gray-500 dark:text-gray-400 font-light leading-relaxed px-8">{f.desc}</p>
             </div>
           ))}
-        </div>
+        </ScrollReveal>
       </div>
     </section>
   )

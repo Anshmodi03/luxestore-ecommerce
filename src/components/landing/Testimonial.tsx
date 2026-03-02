@@ -1,9 +1,10 @@
 import { Quotes } from '@phosphor-icons/react'
+import ScrollReveal from '../common/ScrollReveal'
 
 export default function Testimonial() {
   return (
     <section className="py-24 px-4 sm:px-8 lg:px-16">
-      <div className="max-w-4xl mx-auto text-center">
+      <ScrollReveal variant="fade-up" className="max-w-4xl mx-auto text-center">
         <Quotes weight="fill" size={48} className="text-primary/30 mb-8 inline-block" />
         <h2 className="text-3xl md:text-5xl font-serif font-medium text-gray-900 dark:text-white mb-12 leading-tight">
           "LuxeStore has completely transformed how I shop for home essentials. The quality is unmatched and the aesthetic is exactly what I was looking for."
@@ -19,7 +20,7 @@ export default function Testimonial() {
             <p className="text-xs text-gray-500 uppercase tracking-widest">Interior Designer</p>
           </div>
         </div>
-      </div>
+      </ScrollReveal>
     </section>
   )
 }

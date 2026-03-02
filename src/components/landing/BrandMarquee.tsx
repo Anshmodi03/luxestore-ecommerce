@@ -13,10 +13,10 @@ export default function BrandMarquee() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8 text-center">
         <p className="text-sm font-bold uppercase tracking-[0.2em] text-gray-400 dark:text-gray-500">Featured In</p>
       </div>
-      <div className="relative w-full overflow-hidden">
-        <div className="absolute inset-y-0 left-0 w-24 z-10 bg-gradient-to-r from-gray-50/50 dark:from-surface-dark to-transparent"></div>
-        <div className="absolute inset-y-0 right-0 w-24 z-10 bg-gradient-to-l from-gray-50/50 dark:from-surface-dark to-transparent"></div>
-        <div className="flex w-[200%] animate-scroll-loop">
+      <div className="relative w-full overflow-hidden group">
+        <div className="absolute inset-y-0 left-0 w-24 z-10 bg-linear-to-r from-gray-50/50 dark:from-surface-dark to-transparent"></div>
+        <div className="absolute inset-y-0 right-0 w-24 z-10 bg-linear-to-l from-gray-50/50 dark:from-surface-dark to-transparent"></div>
+        <div className="flex w-[200%] animate-scroll-loop group-hover:[animation-play-state:paused]">
           {[0, 1].map((set) => (
             <div key={set} className="flex items-center justify-around w-1/2 shrink-0 px-8 gap-16 md:gap-24 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
               {logos.map((logo) => (

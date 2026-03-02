@@ -1,11 +1,6 @@
 # Luxury Store Frontend Roadmap
 This document tracks the remaining features necessary to complete the e-commerce frontend.
 
-## User Authentication Flow
-- [x] Create `SignInPage.tsx` with a split-screen or elegant modal design.
-- [x] Create `RegisterPage.tsx` or handle within the sign-in modal/split.
-- [x] Create `ForgotPassword.tsx` recovery screen.
-
 ## Client Account Dashboard
 - [ ] Create `AccountLayout.tsx` dashboard wrapper with navigation sidebar.
 - [ ] Implement `ProfileOverview.tsx` (details and tier status).

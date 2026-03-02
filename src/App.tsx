@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
 import { AnimatePresence } from 'framer-motion'
 import Navbar from './components/common/Navbar'
@@ -14,6 +14,11 @@ import ProductDetailsModal from './components/product/ProductDetailsModal'
 import CheckoutPage from './pages/CheckoutPage'
 import AuthPage from './pages/AuthPage'
 import { ProductModalProvider } from './context/ProductModalContext'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import Lenis from 'lenis'
+
+gsap.registerPlugin(ScrollTrigger)
 
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false)
@@ -24,9 +29,35 @@ export default function App() {
   const isAuth = location.pathname === '/auth'
   const hideNav = isCheckout || isAuth
 
+  const lenisRef = useRef<Lenis | null>(null)
+
+  // Lenis smooth scroll setup
+  useEffect(() => {
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      touchMultiplier: 2,
+    })
+    lenisRef.current = lenis
+
+    // Sync Lenis with GSAP ScrollTrigger
+    lenis.on('scroll', ScrollTrigger.update)
+    gsap.ticker.add((time) => lenis.raf(time * 1000))
+    gsap.ticker.lagSmoothing(0)
+
+    return () => {
+      lenis.destroy()
+      lenisRef.current = null
+    }
+  }, [])
+
   // Scroll to top on route change
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'instant' })
+    if (lenisRef.current) {
+      lenisRef.current.scrollTo(0, { immediate: true })
+    } else {
+      window.scrollTo({ top: 0, behavior: 'instant' })
+    }
   }, [location.pathname])
 
   useEffect(() => {

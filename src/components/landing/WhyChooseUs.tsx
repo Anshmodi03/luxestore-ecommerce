@@ -1,4 +1,5 @@
 import { Plant, Medal, Heart } from '@phosphor-icons/react'
+import ScrollReveal from '../common/ScrollReveal'
 
 const values = [
   { icon: <Plant weight="fill" size={20} />, title: 'Consciously Crafted', desc: 'We prioritize partners who use sustainable materials and ethical practices.' },
@@ -10,7 +11,7 @@ export default function WhyChooseUs() {
   return (
     <section className="py-24 px-4 sm:px-8 lg:px-16 bg-gray-50 dark:bg-surface-dark/50">
       <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
-        <div className="w-full lg:w-1/2 relative">
+        <ScrollReveal variant="scale" className="w-full lg:w-1/2 relative">
           <div className="relative z-10 rounded-2xl overflow-hidden shadow-2xl">
             <img
               alt="Portrait of two founders in a studio setting"
@@ -20,8 +21,8 @@ export default function WhyChooseUs() {
             <div className="absolute inset-0 bg-primary/10 mix-blend-overlay"></div>
           </div>
           <div className="absolute -bottom-8 -left-8 w-64 h-64 bg-primary/20 rounded-full blur-3xl opacity-40"></div>
-        </div>
-        <div className="w-full lg:w-1/2 space-y-10">
+        </ScrollReveal>
+        <ScrollReveal variant="fade-up" delay={0.2} className="w-full lg:w-1/2 space-y-10">
           <div>
             <h2 className="text-4xl font-serif font-medium text-gray-900 dark:text-white mb-6">Why discerning clients choose LuxeStore.</h2>
             <p className="text-gray-600 dark:text-gray-300 text-lg font-light leading-relaxed">
@@ -41,7 +42,7 @@ export default function WhyChooseUs() {
               </div>
             ))}
           </div>
-        </div>
+        </ScrollReveal>
       </div>
     </section>
   )

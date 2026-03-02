@@ -1,15 +1,16 @@
 import { Link } from 'react-router-dom'
 import { ArrowRight } from '@phosphor-icons/react'
+import ScrollReveal from '../common/ScrollReveal'
 
 export default function AtelierGallery() {
   return (
     <section className="py-24 px-4 sm:px-8 lg:px-16 max-w-8xl mx-auto">
-      <div className="text-center mb-16 space-y-4">
+      <ScrollReveal variant="fade-up" className="text-center mb-16 space-y-4">
         <span className="text-primary font-bold tracking-[0.2em] text-xs uppercase font-body">The Atelier</span>
         <h2 className="text-4xl md:text-6xl font-serif font-medium text-gray-900 dark:text-white">Elevate Your Surroundings</h2>
-      </div>
+      </ScrollReveal>
       <div className="grid grid-cols-1 md:grid-cols-12 gap-6 h-auto md:h-[800px]">
-        <div className="md:col-span-7 h-[500px] md:h-full relative group overflow-hidden rounded-3xl">
+        <ScrollReveal variant="scale" className="md:col-span-7 h-[500px] md:h-full relative group overflow-hidden rounded-3xl">
           <img
             alt="Modern living room furniture"
             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
@@ -26,9 +27,9 @@ export default function AtelierGallery() {
               </Link>
             </div>
           </div>
-        </div>
+        </ScrollReveal>
         <div className="md:col-span-5 flex flex-col gap-6 h-full">
-          <div className="flex-1 relative group overflow-hidden rounded-3xl min-h-[300px]">
+          <ScrollReveal variant="fade-right" delay={0.2} className="flex-1 relative group overflow-hidden rounded-3xl min-h-[300px]">
             <img
               alt="Detail shot of texture"
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
@@ -39,8 +40,8 @@ export default function AtelierGallery() {
               <h4 className="font-serif text-xl italic mb-1">Textural Depth</h4>
               <p className="text-sm font-light text-white/80">Sustainable fabrics &amp; weaves</p>
             </div>
-          </div>
-          <div className="flex-1 relative group overflow-hidden rounded-3xl min-h-[300px]">
+          </ScrollReveal>
+          <ScrollReveal variant="fade-right" delay={0.4} className="flex-1 relative group overflow-hidden rounded-3xl min-h-[300px]">
             <img
               alt="Minimalist decor object"
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
@@ -51,7 +52,7 @@ export default function AtelierGallery() {
               <h4 className="font-serif text-xl italic mb-1">Artisan Objects</h4>
               <p className="text-sm font-light text-white/80">Hand-crafted perfection</p>
             </div>
-          </div>
+          </ScrollReveal>
         </div>
       </div>
     </section>

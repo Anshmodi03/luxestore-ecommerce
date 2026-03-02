@@ -1,29 +1,59 @@
-import { useState, useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import AnnouncementBar from './AnnouncementBar'
 
+gsap.registerPlugin(ScrollTrigger)
+
 export default function HeroSection() {
-  const [scrollY, setScrollY] = useState(0)
+  const sectionRef = useRef<HTMLElement>(null)
+  const videoWrapperRef = useRef<HTMLDivElement>(null)
+  const textRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY)
-    }
-    
-    // Add passive listener for better scroll performance
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => window.removeEventListener('scroll', handleScroll)
+    const section = sectionRef.current
+    const videoWrapper = videoWrapperRef.current
+    const textBlock = textRef.current
+    if (!section || !videoWrapper || !textBlock) return
+
+    const ctx = gsap.context(() => {
+      // Video parallax — moves down as you scroll, with slight zoom
+      gsap.to(videoWrapper, {
+        y: '40%',
+        scale: 1.15,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: section,
+          start: 'top top',
+          end: 'bottom top',
+          scrub: true,
+        },
+      })
+
+      // Text parallax — moves up faster than scroll
+      gsap.to(textBlock, {
+        y: '-15%',
+        ease: 'none',
+        scrollTrigger: {
+          trigger: section,
+          start: 'top top',
+          end: 'bottom top',
+          scrub: true,
+        },
+      })
+    }, section)
+
+    return () => ctx.revert()
   }, [])
 
   return (
-    <header className="relative h-screen w-full flex items-center justify-center overflow-hidden">
+    <header ref={sectionRef} className="relative h-screen w-full flex items-center justify-center overflow-hidden">
       <AnnouncementBar />
       <div 
+        ref={videoWrapperRef}
         className="hero-video-wrapper absolute inset-0 w-full h-[120%] -top-[10%] origin-bottom"
-        style={{ 
-          transform: `translateY(${scrollY * 0.4}px) scale(${1 + scrollY * 0.0005})`,
-          willChange: 'transform'
-        }}
+        style={{ willChange: 'transform' }}
       >
         <video autoPlay loop muted playsInline preload="auto" onLoadedData={(e) => { (e.target as HTMLVideoElement).playbackRate = 0.7 }} style={{ background: '#0a0a0a' }} className="w-full h-full object-cover">
           <source src="/assets/videos/hero-bg.webm" type="video/webm" />
@@ -33,11 +63,9 @@ export default function HeroSection() {
         <div className="absolute inset-0 bg-black/40 z-0"></div>
       </div>
       <div 
+        ref={textRef}
         className="relative z-10 w-full max-w-4xl px-4 text-center mt-16 space-y-8"
-        style={{
-          transform: `translateY(${scrollY * -0.15}px)`,
-          willChange: 'transform'
-        }}
+        style={{ willChange: 'transform' }}
       >
         <div className="inline-flex items-center gap-3 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 backdrop-blur-md mx-auto">
           <span className="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
