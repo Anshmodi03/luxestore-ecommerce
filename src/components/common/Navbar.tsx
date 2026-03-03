@@ -45,7 +45,7 @@ export default function Navbar({ onMenuOpen, onToggleDark, isDark }: NavbarProps
           </button>
           <button 
             className="p-2 text-white hover:text-primary transition rounded-full hover:bg-white/10"
-            onClick={() => navigate('/dashboard')}
+            onClick={() => navigate('/auth')}
             title="Account"
           >
             <User size={20} weight="bold" />

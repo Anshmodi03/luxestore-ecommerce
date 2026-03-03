@@ -8,7 +8,7 @@ interface DashboardSidebarProps {
 }
 
 const navItems = [
-  { id: 'profile', label: 'Profile Overview', icon: User },
+  { id: 'profile', label: 'Profile', icon: User },
   { id: 'orders', label: 'Orders', icon: Package },
   { id: 'addresses', label: 'Addresses', icon: MapPin },
   { id: 'wishlist', label: 'Wishlist', icon: Heart, badge: 8 },
@@ -30,10 +30,10 @@ export default function DashboardSidebar({ activeTab, onTabChange }: DashboardSi
 
   return (
     <>
-      {/* Desktop sidebar */}
+      {/* Desktop sidebar - fixed position */}
       <aside
         ref={sidebarRef}
-        className="hidden lg:flex w-[280px] shrink-0 h-[calc(100vh-80px)] sticky top-[80px] overflow-y-auto border-r border-gray-200 dark:border-white/5 bg-white/80 dark:bg-[#080808]/80 backdrop-blur-xl flex-col justify-between p-6 z-20"
+        className="hidden lg:flex w-[280px] fixed left-0 top-[72px] bottom-0 overflow-y-auto border-r border-gray-200 dark:border-white/5 bg-white/80 dark:bg-[#080808]/80 backdrop-blur-xl flex-col justify-between p-6 z-20"
       >
         <div className="flex flex-col gap-10">
           {/* User profile */}
@@ -93,9 +93,9 @@ export default function DashboardSidebar({ activeTab, onTabChange }: DashboardSi
         </button>
       </aside>
 
-      {/* Mobile tab bar */}
-      <div className="lg:hidden sticky top-[72px] z-30 bg-white/95 dark:bg-[#080808]/95 backdrop-blur-xl border-b border-gray-200 dark:border-white/5">
-        <div className="flex overflow-x-auto scrollbar-hide gap-1 px-4 py-3">
+      {/* Mobile tab grid - shows all tabs without scrolling */}
+      <div className="lg:hidden pt-[72px] bg-white/95 dark:bg-[#080808]/95 backdrop-blur-xl border-b border-gray-200 dark:border-white/5">
+        <div className="grid grid-cols-5 gap-0">
           {navItems.map((item) => {
             const Icon = item.icon
             const isActive = activeTab === item.id
@@ -103,18 +103,23 @@ export default function DashboardSidebar({ activeTab, onTabChange }: DashboardSi
               <button
                 key={item.id}
                 onClick={() => onTabChange(item.id)}
-                className={`flex items-center gap-2 whitespace-nowrap rounded-full px-4 py-2.5 text-xs font-medium transition-all duration-300 shrink-0 ${
+                className={`flex flex-col items-center gap-1 py-3 text-[10px] font-medium transition-all duration-300 relative ${
                   isActive
-                    ? 'bg-primary/15 text-primary border border-primary/30'
-                    : 'text-gray-500 dark:text-slate-400 hover:bg-gray-100 dark:hover:bg-white/5 hover:text-gray-900 dark:hover:text-white border border-transparent'
+                    ? 'text-primary'
+                    : 'text-gray-400 dark:text-slate-500'
                 }`}
               >
-                <Icon size={16} weight={isActive ? 'fill' : 'regular'} />
+                <div className="relative">
+                  <Icon size={20} weight={isActive ? 'fill' : 'regular'} />
+                  {item.badge && (
+                    <span className="absolute -top-1.5 -right-2.5 flex h-3.5 min-w-[14px] items-center justify-center rounded-full bg-primary px-1 text-[7px] font-bold text-white">
+                      {item.badge}
+                    </span>
+                  )}
+                </div>
                 <span>{item.label}</span>
-                {item.badge && (
-                  <span className="flex h-4 min-w-[16px] items-center justify-center rounded-full bg-gray-200 dark:bg-white/10 px-1 text-[8px] font-bold text-gray-700 dark:text-white">
-                    {item.badge}
-                  </span>
+                {isActive && (
+                  <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-8 h-0.5 bg-primary rounded-full" />
                 )}
               </button>
             )

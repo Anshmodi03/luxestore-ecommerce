@@ -13,7 +13,7 @@ import PageTransition from '../components/common/PageTransition'
 export default function LandingPage() {
   return (
     <PageTransition>
-      <main className="min-h-screen bg-background-light dark:bg-background-dark">
+      <main className="min-h-screen bg-background-light dark:bg-background-dark overflow-x-hidden">
         <HeroSection />
         <ShopTheLook />
         <Product360 />
