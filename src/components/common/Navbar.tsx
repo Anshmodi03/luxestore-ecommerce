@@ -37,18 +37,18 @@ export default function Navbar({ onMenuOpen, onToggleDark, isDark }: NavbarProps
             {isDark ? <Sun size={20} /> : <Moon size={20} />}
           </button>
           <button 
-            className="p-2 text-white hover:text-primary transition rounded-full hover:bg-white/10"
-            onClick={() => navigate('/auth')}
-            title="Account"
-          >
-            <User size={20} weight="bold" />
-          </button>
-          <button 
             className="relative p-2 text-white hover:text-primary transition rounded-full hover:bg-white/10 cursor-pointer"
             onClick={openCart}
           >
             <ShoppingBag weight="fill" size={20} />
             <span className="absolute top-0 right-0 h-4 w-4 bg-primary text-[10px] font-bold flex items-center justify-center rounded-full text-white">2</span>
+          </button>
+          <button 
+            className="p-2 text-white hover:text-primary transition rounded-full hover:bg-white/10"
+            onClick={() => navigate('/dashboard')}
+            title="Account"
+          >
+            <User size={20} weight="bold" />
           </button>
         </div>
       </div>

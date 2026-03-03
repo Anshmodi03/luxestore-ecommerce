@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LuxeStore Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#f68055",
+                        "background-light": "#f8f6f5",
+                        "background-dark": "#050505", 
+                        "surface-dark": "#121212",
+                    },
+                    fontFamily: {
+                        sans: ["Inter", "sans-serif"],
+                        serif: ["Playfair Display", "serif"],
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.25rem",
+                        lg: "0.5rem",
+                        xl: "0.75rem",
+                        "2xl": "1rem",
+                        "3xl": "1.5rem",
+                    },
+                    animation: {
+                        'slow-orb': 'orb-float 15s ease-in-out infinite',
+                        'pulse-glow': 'pulse-glow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        'orb-float': {
+                            '0%, 100%': { transform: 'translate(0, 0) scale(1)' },
+                            '50%': { transform: 'translate(30px, -30px) scale(1.1)' },
+                        },
+                        'pulse-glow': {
+                            '0%, 100%': { opacity: '1', boxShadow: '0 0 0 0px rgba(246, 128, 85, 0.4)' },
+                            '50%': { opacity: '.9', boxShadow: '0 0 0 6px rgba(246, 128, 85, 0)' },
+                        }
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .glass-card {
+            background: rgba(20, 20, 20, 0.4);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            background-image: linear-gradient(145deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+        }
+        .glass-card-hover:hover {
+            border-color: rgba(246, 128, 85, 0.3);
+            box-shadow: 0 0 20px rgba(246, 128, 85, 0.1);
+        }
+        .ambient-orb {
+            position: fixed;
+            top: 10%;
+            right: 15%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(246, 128, 85, 0.15) 0%, rgba(246, 128, 85, 0) 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+            filter: blur(60px);
+        }
+        .micro-type {
+            font-size: 0.65rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            font-weight: 600;
+        }.nav-link {
+            position: relative;
+        }
+        .nav-link.active::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 10%;
+            bottom: 10%;
+            width: 3px;
+            background: #f68055;
+            border-radius: 0 4px 4px 0;
+            box-shadow: 0 0 10px rgba(246, 128, 85, 0.5);
+        }::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-sans text-slate-900 dark:text-slate-100 min-h-screen flex overflow-hidden relative">
+<div class="ambient-orb animate-slow-orb"></div>
+<aside class="w-[280px] shrink-0 h-screen overflow-y-auto border-r border-white/5 bg-[#080808]/95 backdrop-blur-xl flex flex-col justify-between p-6 z-20 relative">
+<div class="flex flex-col gap-10">
+<div class="px-2 pt-2">
+<h1 class="font-serif text-3xl font-bold tracking-widest text-white">Luxe<span class="text-primary italic font-light">Store</span>.</h1>
+</div>
+<div class="flex items-center gap-4 px-2 pb-2 border-b border-white/5">
+<div class="relative group cursor-pointer">
+<div class="h-14 w-14 rounded-full bg-cover bg-center ring-2 ring-primary/20 transition-all duration-300 group-hover:ring-primary/50" data-alt="Portrait of Isabella user avatar" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDMOz8iU8snW1Hg0bX-AaPjdWb1-2dL2x5lIP-4xcUr4mEmzrENmEAfviLRe3pfGp0PUW9YmhPU86C6GKaUCNYGA5N3vvKUif1ulAndQFURmHC1ApVo-jfuXgoDh6IEXJKl652WAVwyD0moch-m5HFANCTB7zvFDFoaiq1cvBlOBKyUTh1PvXefz9jH7Xwfn3f7H1KqpzFg40lueQL7uVpYL0N1KaX0I2P-Xno9WIINGDwr6pssoSZ2lVadJCA_c11DLNEbMplH9s8");'></div>
+<div class="absolute -bottom-1 -right-1 flex h-6 w-6 items-center justify-center rounded-full bg-primary text-black animate-pulse-glow shadow-[0_0_15px_rgba(246,128,85,0.4)]">
+<span class="material-symbols-outlined text-[14px]">diamond</span>
+</div>
+</div>
+<div>
+<h2 class="text-lg font-serif italic text-white tracking-wide">Isabella M.</h2>
+<p class="micro-type text-primary mt-1">Gold Member</p>
+</div>
+</div>
+<nav class="flex flex-col gap-1">
+<a class="nav-link active flex items-center gap-4 rounded-lg bg-white/5 px-4 py-3.5 text-sm font-medium text-white transition-all duration-300" href="#">
+<span class="material-symbols-outlined text-primary text-[20px]">person</span>
+<span class="tracking-wide">Profile Overview</span>
+</a>
+<a class="nav-link group flex items-center gap-4 rounded-lg px-4 py-3.5 text-sm font-medium text-slate-400 hover:bg-white/5 hover:text-white transition-all duration-300" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors text-[20px]">package_2</span>
+<span class="tracking-wide">Orders</span>
+</a>
+<a class="nav-link group flex items-center gap-4 rounded-lg px-4 py-3.5 text-sm font-medium text-slate-400 hover:bg-white/5 hover:text-white transition-all duration-300" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors text-[20px]">location_on</span>
+<span class="tracking-wide">Addresses</span>
+</a>
+<a class="nav-link group flex items-center gap-4 rounded-lg px-4 py-3.5 text-sm font-medium text-slate-400 hover:bg-white/5 hover:text-white transition-all duration-300" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors text-[20px]">favorite</span>
+<span class="tracking-wide">Wishlist</span>
+<span class="ml-auto flex h-5 min-w-[20px] items-center justify-center rounded-full bg-white/10 px-1.5 text-[9px] font-bold text-white">8</span>
+</a>
+<a class="nav-link group flex items-center gap-4 rounded-lg px-4 py-3.5 text-sm font-medium text-slate-400 hover:bg-white/5 hover:text-white transition-all duration-300" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors text-[20px]">settings</span>
+<span class="tracking-wide">Settings</span>
+</a>
+</nav>
+</div>
+<button class="flex w-full items-center justify-center gap-3 rounded-lg border border-white/5 p-3.5 text-xs font-medium uppercase tracking-widest text-slate-400 hover:bg-white/5 hover:border-white/10 hover:text-white transition-all duration-300 group">
+<span class="material-symbols-outlined text-[18px] group-hover:-translate-x-1 transition-transform">logout</span>
+            Log Out
+        </button>
+</aside>
+<main class="flex-1 h-screen overflow-y-auto relative z-10">
+<div class="max-w-6xl mx-auto px-10 py-12 flex flex-col gap-12">
+<div class="flex flex-col gap-3 animate-fade-in-up pt-4">
+<h1 class="font-serif italic text-5xl md:text-6xl text-white leading-tight tracking-wide drop-shadow-2xl">
+                    Welcome back, <span class="bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-slate-400">Isabella</span>
+</h1>
+<p class="text-slate-400 max-w-lg text-sm tracking-wide font-light leading-relaxed">
+                    Manage your account ecosystem, view your recent activity, and explore exclusive elite member benefits crafted just for you.
+                </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="glass-card glass-card-hover rounded-2xl p-8 flex flex-col gap-6 group transition-all duration-500 hover:-translate-y-1">
+<div class="flex items-center justify-between">
+<div class="p-2.5 rounded-full bg-primary/5 text-primary border border-primary/10 group-hover:scale-110 transition-transform duration-500">
+<span class="material-symbols-outlined text-[20px]">shopping_bag</span>
+</div>
+<span class="micro-type text-slate-500">Lifetime</span>
+</div>
+<div>
+<p class="micro-type text-slate-400 mb-2">Total Orders</p>
+<p class="font-serif italic text-4xl text-white">24</p>
+</div>
+</div>
+<div class="glass-card glass-card-hover rounded-2xl p-8 flex flex-col gap-6 group transition-all duration-500 hover:-translate-y-1">
+<div class="flex items-center justify-between">
+<div class="p-2.5 rounded-full bg-primary/5 text-primary border border-primary/10 group-hover:scale-110 transition-transform duration-500">
+<span class="material-symbols-outlined text-[20px]">favorite</span>
+</div>
+<span class="micro-type text-slate-500">Saved Items</span>
+</div>
+<div>
+<p class="micro-type text-slate-400 mb-2">Wishlist</p>
+<p class="font-serif italic text-4xl text-white">8</p>
+</div>
+</div>
+<div class="glass-card glass-card-hover rounded-2xl p-8 flex flex-col gap-6 relative overflow-hidden group transition-all duration-500 hover:-translate-y-1 border-primary/20">
+<div class="absolute top-0 right-0 p-20 bg-primary/10 rounded-full blur-3xl -mr-10 -mt-10 pointer-events-none opacity-50 group-hover:opacity-80 transition-opacity duration-700"></div>
+<div class="flex items-center justify-between relative z-10">
+<div class="p-2.5 rounded-full bg-primary/20 text-primary border border-primary/30 group-hover:scale-110 transition-transform duration-500 animate-pulse-glow">
+<span class="material-symbols-outlined text-[20px]">diamond</span>
+</div>
+<span class="micro-type text-primary">Gold Tier</span>
+</div>
+<div class="relative z-10">
+<p class="micro-type text-slate-400 mb-2">Loyalty Points</p>
+<p class="font-serif italic text-4xl text-white">3,250</p>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<div class="lg:col-span-2 flex flex-col gap-8">
+<div class="flex items-end justify-between border-b border-white/5 pb-4">
+<h2 class="text-2xl font-serif italic text-white">Recent Orders</h2>
+<a class="micro-type text-primary hover:text-white transition-colors flex items-center gap-1 group" href="#">
+                            View All <span class="material-symbols-outlined text-[14px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</a>
+</div>
+<div class="flex flex-col gap-4">
+<div class="glass-card p-5 rounded-xl flex flex-col sm:flex-row items-center gap-6 hover:bg-white/10 transition-all duration-300 cursor-pointer group">
+<div class="h-20 w-20 shrink-0 rounded-lg overflow-hidden relative border border-white/10">
+<div class="w-full h-full bg-cover bg-center transition-transform duration-700 group-hover:scale-110" data-alt="Red Nike sneaker product thumbnail" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBJGB7gdxOsGXaIXTBOWoTxGdXm2HYK5ODCDUN0jq-qJo2iqlKzjUebks4HgXUPAA2MW8ZSZEbgOcwehOS-WSgA3o8B037ZsuuOAWDRyzDhNY0VXYE995QU3v6EgEsqFBexRwLylFhhPcihOTouiDLnXjmkXeUn5-RCibj3p0Y_ckgI2TFST3K0KqZRgWc8Pv9vSStsrJFLlPnW3XbhCbHHEatlIoHHUSggGJ1-hcawRnGba5u9HpT2W1BGRhjxubExEplWbR-uQzA");'></div>
+</div>
+<div class="flex-1 w-full sm:w-auto text-center sm:text-left">
+<div class="flex items-center justify-center sm:justify-start gap-3 mb-1">
+<p class="text-white font-medium font-serif italic text-lg">Order #84920</p>
+<span class="h-1.5 w-1.5 rounded-full bg-green-500 animate-pulse"></span>
+</div>
+<p class="text-sm text-slate-400">Limited Edition Sneaker • $245.00</p>
+</div>
+<div class="flex flex-col items-center sm:items-end gap-2">
+<span class="px-3 py-1 rounded-full bg-green-900/20 text-green-400 micro-type border border-green-500/20 shadow-[0_0_10px_rgba(74,222,128,0.1)]">Delivered</span>
+<span class="text-xs text-slate-500 font-mono">Oct 24, 2023</span>
+</div>
+<div class="hidden sm:block text-slate-600 group-hover:text-primary transition-colors pl-2">
+<span class="material-symbols-outlined">chevron_right</span>
+</div>
+</div>
+<div class="glass-card p-5 rounded-xl flex flex-col sm:flex-row items-center gap-6 hover:bg-white/10 transition-all duration-300 cursor-pointer group">
+<div class="h-20 w-20 shrink-0 rounded-lg overflow-hidden relative border border-white/10">
+<div class="w-full h-full bg-cover bg-center transition-transform duration-700 group-hover:scale-110" data-alt="White simplistic watch product thumbnail" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCC7-YRnKeuO6k-i3jqFOa6N79YnFnT7nkQx4Y_VA1hWrgIB6i5az7QECwwFJuyKR4GeB0MFjv-ETgMc8if-TiIm8-dAM8vjTvxHv5ytGiKuWeam4RFqf65DMNXpIA2PuoPw04H5a9Lc_aBMqUJ7U2EabXjk9lIUDJVSoxGHklRb4pqBKHMXU1ZDbqNo4uKOZJ2usCM4s0UteyZz0uiktpRPqx-zmd0t3yKiSbN49q2jhs5d-BsD4yL0qWTWfjZHyyurodR1KwAMZE");'></div>
+</div>
+<div class="flex-1 w-full sm:w-auto text-center sm:text-left">
+<div class="flex items-center justify-center sm:justify-start gap-3 mb-1">
+<p class="text-white font-medium font-serif italic text-lg">Order #84815</p>
+<span class="h-1.5 w-1.5 rounded-full bg-blue-500"></span>
+</div>
+<p class="text-sm text-slate-400">Minimalist Watch • $180.00</p>
+</div>
+<div class="flex flex-col items-center sm:items-end gap-2">
+<span class="px-3 py-1 rounded-full bg-blue-900/20 text-blue-400 micro-type border border-blue-500/20">Shipped</span>
+<span class="text-xs text-slate-500 font-mono">Oct 20, 2023</span>
+</div>
+<div class="hidden sm:block text-slate-600 group-hover:text-primary transition-colors pl-2">
+<span class="material-symbols-outlined">chevron_right</span>
+</div>
+</div>
+<div class="glass-card p-5 rounded-xl flex flex-col sm:flex-row items-center gap-6 hover:bg-white/10 transition-all duration-300 cursor-pointer group">
+<div class="h-20 w-20 shrink-0 rounded-lg overflow-hidden relative border border-white/10">
+<div class="w-full h-full bg-cover bg-center transition-transform duration-700 group-hover:scale-110" data-alt="Leather handbag product thumbnail" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAJQ7eaMhCD7DKx4xyVlRN6DiI6gc90fUzcAxUlkPteLWdmhP2XkexMIcDu6K-N7EgqUWx3HF-K81QbRhmN-2Cevfx_q4xWwJQeZzL-LWNJzH8zMhRfvb7ksYKad4aP_HgNqFh78mAXxkaAFRtfYFQ4Wt2AbQEqjWBE9eZ1q0HsURTAawH2_03YjHMJmAHIqOXAuNn0hBJoVmgNhp1DvHIpzlbjyxev2K3OIiwt0O6F0RDH9rXXvocoRzo_K7Z6hXDXNLrkYLcEyJM");'></div>
+</div>
+<div class="flex-1 w-full sm:w-auto text-center sm:text-left">
+<div class="flex items-center justify-center sm:justify-start gap-3 mb-1">
+<p class="text-white font-medium font-serif italic text-lg">Order #83201</p>
+<span class="h-1.5 w-1.5 rounded-full bg-green-500 animate-pulse"></span>
+</div>
+<p class="text-sm text-slate-400">Leather Tote Bag • $850.00</p>
+</div>
+<div class="flex flex-col items-center sm:items-end gap-2">
+<span class="px-3 py-1 rounded-full bg-green-900/20 text-green-400 micro-type border border-green-500/20 shadow-[0_0_10px_rgba(74,222,128,0.1)]">Delivered</span>
+<span class="text-xs text-slate-500 font-mono">Sep 15, 2023</span>
+</div>
+<div class="hidden sm:block text-slate-600 group-hover:text-primary transition-colors pl-2">
+<span class="material-symbols-outlined">chevron_right</span>
+</div>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-8">
+<div class="flex flex-col gap-4">
+<h2 class="text-xl font-serif italic text-white pb-2 border-b border-white/5">Primary Method</h2>
+<div class="glass-card glass-card-hover p-6 rounded-2xl bg-gradient-to-br from-[#1a1a1a] to-[#0f0f0f] border border-white/5 relative overflow-hidden group">
+<div class="absolute -right-8 -top-8 h-32 w-32 rounded-full bg-primary/10 blur-2xl group-hover:bg-primary/20 transition-colors duration-500"></div>
+<div class="relative z-10 flex justify-between items-start mb-10">
+<img alt="Visa Logo" class="h-6 opacity-90 brightness-0 invert" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCs8H5cSF85KFfNV8zdB5CnukH8YWtLaKK11cZnH86N7SGmnZl1ry7PITUvDrEEkDetY3jPg0xAsxL5_MNy1I61JUIqiOS_VHhQCNND_HwPXq_Dnbzq84JaifdFhNrRS3Q4lC5WEuW8XqdNv9lg7ileDKZCb7W1gGztyXTGe0bzZQz2qEp33evAAKULepBbs_-Wv700cwlfqdTcZfs2Fg0msss3YN8amKL-DR0wnMY6I1fsl_l8kT20h63WkV1wjrgQIbFMffCO5lI"/>
+<span class="material-symbols-outlined text-slate-500 cursor-pointer hover:text-white transition-colors">more_horiz</span>
+</div>
+<div class="relative z-10 mb-6">
+<p class="micro-type text-slate-500 mb-2">Card Number</p>
+<div class="flex items-center gap-3 text-white text-lg tracking-widest font-mono">
+<span class="opacity-50">••••</span><span class="opacity-50">••••</span><span class="opacity-50">••••</span><span>4242</span>
+</div>
+</div>
+<div class="relative z-10 flex justify-between items-end">
+<div>
+<p class="micro-type text-slate-500 mb-1">Holder</p>
+<p class="text-white text-sm font-medium tracking-wide">ISABELLA M.</p>
+</div>
+<div class="text-right">
+<p class="micro-type text-slate-500 mb-1">Exp.</p>
+<p class="text-white text-sm font-medium tracking-wide">12/25</p>
+</div>
+</div>
+</div>
+</div>
+<div class="relative overflow-hidden rounded-2xl border border-primary/20 group cursor-pointer">
+<div class="absolute inset-0 bg-gradient-to-br from-primary/10 to-primary/5 transition-all duration-500 group-hover:from-primary/20 group-hover:to-primary/10"></div>
+<div class="absolute top-0 right-0 p-24 bg-primary/20 rounded-full blur-3xl -mr-16 -mt-16 pointer-events-none group-hover:bg-primary/30 transition-colors duration-500"></div>
+<div class="relative z-10 p-8 flex flex-col items-start text-left">
+<span class="micro-type text-primary mb-3 px-2 py-1 bg-primary/10 rounded">Just In</span>
+<h3 class="text-white font-serif italic text-3xl mb-3">Fall Collection</h3>
+<p class="text-slate-300 text-sm mb-6 font-light leading-relaxed">
+                                Exclusive early access for Gold Members. Discover the new era of luxury.
+                            </p>
+<button class="bg-primary hover:bg-[#ff956b] text-background-dark font-bold py-3.5 px-8 rounded-lg text-xs uppercase tracking-widest transition-all w-full flex items-center justify-center gap-3 shadow-[0_0_20px_rgba(246,128,85,0.3)] hover:shadow-[0_0_30px_rgba(246,128,85,0.5)]">
+                                Browse Now
+                                <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+
+</body></html>

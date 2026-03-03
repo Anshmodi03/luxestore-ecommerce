@@ -13,6 +13,7 @@ import ClientServicesPage from './pages/ClientServicesPage'
 import ProductDetailsModal from './components/product/ProductDetailsModal'
 import CheckoutPage from './pages/CheckoutPage'
 import AuthPage from './pages/AuthPage'
+import DashboardPage from './pages/DashboardPage'
 import { ProductModalProvider } from './context/ProductModalContext'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -85,6 +86,7 @@ export default function App() {
             <Route path="/services" element={<ClientServicesPage />} />
             <Route path="/checkout" element={<CheckoutPage />} />
             <Route path="/auth" element={<AuthPage />} />
+            <Route path="/dashboard" element={<DashboardPage />} />
           </Routes>
         </AnimatePresence>
         

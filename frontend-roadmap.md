@@ -2,11 +2,11 @@
 This document tracks the remaining features necessary to complete the e-commerce frontend.
 
 ## Client Account Dashboard
-- [ ] Create `AccountLayout.tsx` dashboard wrapper with navigation sidebar.
-- [ ] Implement `ProfileOverview.tsx` (details and tier status).
-- [ ] Implement `OrderHistory.tsx` (past purchases and tracking timelines).
-- [ ] Implement `SavedAddresses.tsx` (manage shipping and payment methods).
-- [ ] Implement `Wishlist.tsx` (grid of favorited products).
+- [x] Create `AccountLayout.tsx` dashboard wrapper with navigation sidebar.
+- [x] Implement `ProfileOverview.tsx` (details and tier status).
+- [x] Implement `OrderHistory.tsx` (past purchases and tracking timelines).
+- [x] Implement `SavedAddresses.tsx` (manage shipping and payment methods).
+- [x] Implement `Wishlist.tsx` (grid of favorited products).
 
 ## Essential Utility Pages
 - [ ] Create `NotFoundPage.tsx` (Custom elegant 404 error page).
