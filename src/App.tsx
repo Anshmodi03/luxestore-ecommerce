@@ -12,8 +12,12 @@ import CartDrawer from './components/common/CartDrawer'
 import ClientServicesPage from './pages/ClientServicesPage'
 import ProductDetailsModal from './components/product/ProductDetailsModal'
 import CheckoutPage from './pages/CheckoutPage'
+import PrivacyPolicyPage from './pages/PrivacyPolicyPage'
+import TermsOfServicePage from './pages/TermsOfServicePage'
+import ReturnPolicyPage from './pages/ReturnPolicyPage'
 import AuthPage from './pages/AuthPage'
 import DashboardPage from './pages/DashboardPage'
+import NotFoundPage from './pages/NotFoundPage'
 import { ProductModalProvider } from './context/ProductModalContext'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -85,8 +89,12 @@ export default function App() {
             <Route path="/editorial" element={<EditorialPage />} />
             <Route path="/services" element={<ClientServicesPage />} />
             <Route path="/checkout" element={<CheckoutPage />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+            <Route path="/terms" element={<TermsOfServicePage />} />
+            <Route path="/returns" element={<ReturnPolicyPage />} />
             <Route path="/auth" element={<AuthPage />} />
             <Route path="/dashboard" element={<DashboardPage />} />
+            <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </AnimatePresence>
         

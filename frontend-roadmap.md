@@ -2,7 +2,6 @@
 This document tracks the remaining features necessary to complete the e-commerce frontend.
 
 ## Essential Utility Pages
-- [ ] Create `NotFoundPage.tsx` (Custom elegant 404 error page).
 - [ ] Create `TypographyPage.tsx` layout for text-heavy documents.
 - [ ] Implement Privacy Policy content using the typography layout.
 - [ ] Implement Terms of Service content using the typography layout.
