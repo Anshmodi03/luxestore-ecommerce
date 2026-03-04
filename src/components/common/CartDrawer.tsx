@@ -1,7 +1,7 @@
 import { motion, AnimatePresence } from 'framer-motion'
-import { X, Minus, Plus, ArrowRight, ArrowLeft, Check, Lock, CheckCircle } from '@phosphor-icons/react'
+import { X, Minus, Plus, ArrowRight, Lock } from '@phosphor-icons/react'
 import { useCart } from '../../context/CartContext'
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 const mockCartItems = [
@@ -23,23 +23,9 @@ const mockCartItems = [
   }
 ]
 
-const upSells = [
-  { id: 'u1', name: "Monitor Stand", price: 89.00, image: "https://lh3.googleusercontent.com/aida-public/AB6AXuB_o88K3S-MS-adUkvhunqkW_RvxK6OdiJBImk7xQ8_Gb65GzhmWmIG3YoBOGPqRwK4gXcEQGy_G2PFVVRuaClvI7n1ArsgelRDdX64Gy0qgSrZ6ye1PJKQw8eIvAbPk8KEIisp-w9HL3IoYuFTExrkrYkmaA13JVACroasDi6kuHVh2FT5RekzZB2DNuGaf7jlMmThuvfgol5i1mhoNAqRRxi_1TiRZWeFq7CVvRH90FXQlOiO8VNn9uMYa8hHZQqmcKibXjzlIyE" },
-  { id: 'u2', name: "7-in-1 Hub", price: 45.00, image: "https://lh3.googleusercontent.com/aida-public/AB6AXuCz2SMoeNisDJDB4OPnqXQ_-spzwqmZX-_4s0L-NyLz7BifsnjkQHQ4zItwa0jGg0Cv2bDUrMATlO4i5HBjXSp5Tvn38IWOjcvWfVRiU0jjpSC-jOJP55TFQQpLlUUsd5mUOhhtlhJHVmooLVRmezVbfT_Z_M2_t9f11i_i2kYGM3pR29LpiKrsuyijZ9FwCAZ-77XNzuWJnoXYhdt439KejwceL5EpNZRuC4qE3NlIWGiVlwRK3fvGQ7stnbDhPFP4Kqzmh7PaQWI" },
-  { id: 'u3', name: "Cleaning Kit", price: 19.99, image: "https://lh3.googleusercontent.com/aida-public/AB6AXuAYB059_IJlFfsrlKZxKGW5lB_RV6hwNmQv9SmFLfD-3pP3_nc8Ec242umSoTDVowwLhZSoxMUpaTBXm2bxOzONy_Qk2lijYnsz3ihiKRyvom3cA8D5Jip6sDfrlraiJQo8IuFFWyIpoygQKyo_66tp4Bx9EvIepnhEudl3_lDtyhlUnZ-e8XVaInEAafmsbntTwa4zUlKf7UcUi1cQJL-J0zAjpguRuCNGCUnwiKdajEDF9oRA_OX1y9JlFOtSXTNXB1i7HbqnVBg" }
-]
-
 export default function CartDrawer() {
   const { isCartOpen, closeCart } = useCart()
   const navigate = useNavigate()
-  const [addedUpsells, setAddedUpsells] = useState<Record<string, boolean>>({})
-
-  const handleAddUpsell = (id: string) => {
-    setAddedUpsells(prev => ({ ...prev, [id]: true }))
-    setTimeout(() => {
-      setAddedUpsells(prev => ({ ...prev, [id]: false }))
-    }, 2000)
-  }
   
   const subtotal = mockCartItems.reduce((acc, item) => acc + (item.price * item.quantity), 0)
   const tax = subtotal * 0.08
@@ -121,7 +107,7 @@ export default function CartDrawer() {
             <div className="flex flex-1 overflow-hidden flex-col lg:flex-row">
                 
               {/* LEFT COLUMN: Cart Items List & Upsells */}
-              <div className="flex-1 overflow-y-auto p-6 md:p-8 space-y-8 bg-surface-light dark:bg-[#0a0a0a]">
+              <div className="flex-1 overflow-y-hidden p-6 md:p-8 space-y-8 bg-surface-light dark:bg-[#0a0a0a]">
                 
                 {/* Items */}
                 <div className="flex flex-col gap-4">
@@ -163,53 +149,6 @@ export default function CartDrawer() {
                       </div>
                     </div>
                   ))}
-                </div>
-
-                {/* Upsells */}
-                <div className="pt-6 border-t border-gray-100 dark:border-white/10">
-                  <div className="flex items-center justify-between mb-4">
-                    <h2 className="text-lg font-serif text-gray-900 dark:text-white italic">Completing the Look</h2>
-                    <div className="flex gap-2">
-                      <button className="w-6 h-6 flex items-center justify-center text-gray-400 hover:text-gray-900 dark:text-gray-500 dark:hover:text-white transition-colors border border-gray-200 dark:border-white/10 rounded-full">
-                        <ArrowLeft size={12} />
-                      </button>
-                      <button className="w-6 h-6 flex items-center justify-center text-gray-400 hover:text-gray-900 dark:text-gray-500 dark:hover:text-white transition-colors border border-gray-200 dark:border-white/10 rounded-full">
-                        <ArrowRight size={12} />
-                      </button>
-                    </div>
-                  </div>
-                  
-                  <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
-                    {upSells.map((upsell) => {
-                      const isAdded = addedUpsells[upsell.id]
-                      return (
-                          <div key={upsell.id} className="flex flex-col gap-2 group cursor-pointer bg-white dark:bg-[#111] p-2 border border-transparent hover:border-gray-200 dark:hover:border-white/10 transition-colors" onClick={() => handleAddUpsell(upsell.id)}>
-                              <div className="w-full aspect-square bg-gray-50 dark:bg-[#151515] overflow-hidden relative">
-                                  <img alt={upsell.name} className="w-full h-full object-cover mix-blend-multiply dark:mix-blend-normal opacity-90 group-hover:scale-105 transition-transform duration-700" src={upsell.image} />
-                                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 dark:group-hover:bg-white/5 transition-colors duration-500"></div>
-                                  {isAdded && (
-                                      <div className="absolute inset-0 bg-white/60 dark:bg-black/60 backdrop-blur-sm flex items-center justify-center">
-                                          <CheckCircle size={24} weight="fill" className="text-primary animate-bounce-pop" />
-                                      </div>
-                                  )}
-                              </div>
-                              <div className="px-1 pb-1">
-                                  <h4 className="text-[10px] md:text-[11px] font-medium text-gray-900 dark:text-white uppercase tracking-wide truncate">{upsell.name}</h4>
-                                  <div className="flex justify-between items-center mt-1">
-                                      <p className="text-[11px] text-gray-500 font-light">${upsell.price.toFixed(2)}</p>
-                                      <button className="flex items-center justify-center text-primary hover:text-orange-600 dark:hover:text-orange-400 transition-colors">
-                                          {isAdded ? (
-                                              <Check size={14} weight="bold" />
-                                          ) : (
-                                              <Plus size={14} weight="bold" />
-                                          )}
-                                      </button>
-                                  </div>
-                              </div>
-                          </div>
-                      )
-                    })}
-                  </div>
                 </div>
               </div>
 

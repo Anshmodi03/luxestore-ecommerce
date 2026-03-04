@@ -10,7 +10,7 @@ import EditorialPage from './pages/EditorialPage'
 import Preloader from './components/common/Preloader'
 import CartDrawer from './components/common/CartDrawer'
 import ClientServicesPage from './pages/ClientServicesPage'
-import ProductDetailsModal from './components/product/ProductDetailsModal'
+import ProductDetailsPage from './pages/ProductDetailsPage'
 import CheckoutPage from './pages/CheckoutPage'
 import AuthPage from './pages/AuthPage'
 import DashboardPage from './pages/DashboardPage'
@@ -74,9 +74,6 @@ export default function App() {
         {!hideNav && <MobileMenu isOpen={menuOpen} onClose={() => setMenuOpen(false)} />}
         <CartDrawer />
         
-        {/* Global Modals */}
-        <ProductDetailsModal />
-        
         {/* Dynamic Routes wrapped with AnimatePresence for transitions */}
         <AnimatePresence mode="wait">
           <Routes location={location} key={location.pathname}>
@@ -88,6 +85,7 @@ export default function App() {
             <Route path="/checkout" element={<CheckoutPage />} />
             <Route path="/auth" element={<AuthPage />} />
             <Route path="/dashboard" element={<DashboardPage />} />
+            <Route path="/product/:id" element={<ProductDetailsPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </AnimatePresence>

@@ -2,7 +2,7 @@ import { motion, Variants } from 'framer-motion'
 import { ShoppingBag } from '@phosphor-icons/react'
 import { Product } from '../../data/products'
 import { useCart } from '../../context/CartContext'
-import { useProductModal } from '../../context/ProductModalContext'
+import { useNavigate } from 'react-router-dom'
 
 interface ProductCardProps {
   product: Product
@@ -20,7 +20,7 @@ export const itemVariants: Variants = {
 
 export default function ProductCard({ product }: ProductCardProps) {
   const { openCart } = useCart()
-  const { openProductModal } = useProductModal()
+  const navigate = useNavigate()
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault()
@@ -34,10 +34,10 @@ export default function ProductCard({ product }: ProductCardProps) {
       className="group hover-lift"
     >
       <div 
-        onClick={() => openProductModal(product)} 
+        onClick={() => navigate(`/product/${product.id}`)} 
         role="button"
         tabIndex={0}
-        onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') openProductModal(product) }}
+        onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') navigate(`/product/${product.id}`) }}
         className="block relative w-full text-left cursor-pointer"
       >
         <div className="relative overflow-hidden aspect-4/5 rounded-2xl mb-6 bg-gray-50 dark:bg-white/5">
