@@ -115,7 +115,7 @@ export default function CartDrawer() {
                     <div key={item.id} className="group relative flex gap-5 p-4 bg-white dark:bg-[#111] border border-gray-200 dark:border-white/10 hover:border-gray-300 dark:hover:border-white/20 transition-all duration-300">
                       <div className="shrink-0">
                         <div className="h-24 w-24 md:h-28 md:w-28 bg-gray-50 dark:bg-white/5 flex items-center justify-center overflow-hidden">
-                          <img alt={item.name} className="w-full h-full object-cover mix-blend-multiply dark:mix-blend-normal opacity-90 transition-transform duration-700 group-hover:scale-105" src={item.image} />
+                          <img alt={item.name} loading="lazy" decoding="async" className="w-full h-full object-cover mix-blend-multiply dark:mix-blend-normal opacity-90 transition-transform duration-700 group-hover:scale-105" src={item.image} />
                         </div>
                       </div>
                       <div className="flex flex-1 flex-col justify-between py-1">

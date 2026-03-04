@@ -135,7 +135,7 @@ export default function ServicesLogistics() {
                 whileHover={{ scale: 1.05 }}
                 transition={{ duration: 0.8, ease: "easeOut" }}
                 className="absolute inset-0 bg-cover bg-center grayscale contrast-125" 
-                style={{ backgroundImage: "url('https://images.unsplash.com/photo-1578575437130-527eed3abbec?q=80&w=2670&auto=format&fit=crop')" }}
+                style={{ backgroundImage: "url('https://images.unsplash.com/photo-1578575437130-527eed3abbec?q=80&w=1200&auto=format&fit=crop')" }}
               ></motion.div>
               
               <div className="absolute inset-0 bg-linear-to-t from-black/80 via-transparent to-transparent pointer-events-none"></div>

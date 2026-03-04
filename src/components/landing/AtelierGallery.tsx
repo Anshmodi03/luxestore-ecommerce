@@ -13,6 +13,8 @@ export default function AtelierGallery() {
         <ScrollReveal variant="scale" className="md:col-span-7 h-[500px] md:h-full relative group overflow-hidden rounded-3xl">
           <img
             alt="Modern living room furniture"
+            loading="lazy"
+            decoding="async"
             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
             src="https://lh3.googleusercontent.com/aida-public/AB6AXuCYgqkTQqli4JK8nNm_A9wdyvrqSyTZOYSpox3ACyNhBteoRd7ac3DRyzg-ZSqjdNKMpAufagLRJ36QsQrHDvaeXYymoJ1EBBWScfUMESwWwc9m8VY8quUiiE5-jSE5QWoGeXFT2vpvLUn24JPIrf-Zhdb_0oI6VfbQtMIVdRjFjBLdslf9XAwnRca_VrJZ29fS43YeD2j6D3626Ha62e8t6oM8fHpbp_F9QLyLBzr5jJPsF5kacdRT1m3K95SQO0tEzsYKYyMGpH8"
           />
@@ -32,6 +34,8 @@ export default function AtelierGallery() {
           <ScrollReveal variant="fade-right" delay={0.2} className="flex-1 relative group overflow-hidden rounded-3xl min-h-[300px]">
             <img
               alt="Detail shot of texture"
+              loading="lazy"
+              decoding="async"
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
               src="https://lh3.googleusercontent.com/aida-public/AB6AXuAb8z3oZ9Jw5txmgQQKnsRVIr274SriCA_I6FOgGPzovCHiDVFwhhFbC2FvTR6d9cR3Sv1TusHfNL5fA-I0mj8AVjxAwDsJIEHN7sIAKgVRE3R0On0pqIuL6tdvcvKcjaMhqd_aVSxhGp2rblGEU8hvTrwQBKmas4wme31qj1NhLn9MagQK37JHSZP0x-oWwtYAm4-ll4VCyRNADSTxWkAM8tUFawBt28yyV4pBM-i0NrPkr5Pq3vcOmgCdjE9rO209T5bfA4zXFzI"
             />
@@ -44,6 +48,8 @@ export default function AtelierGallery() {
           <ScrollReveal variant="fade-right" delay={0.4} className="flex-1 relative group overflow-hidden rounded-3xl min-h-[300px]">
             <img
               alt="Minimalist decor object"
+              loading="lazy"
+              decoding="async"
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
               src="https://lh3.googleusercontent.com/aida-public/AB6AXuAFdH1pTN8IGGn7L2N8lub2v68G4T9o2YcO-727NFTBTe3gF_eWEWyjgspzGke20vSHTlTklCGowZdnCTtNgWMt4RiAUjDHdrD_fywwRCkSzv9KkJuccZQ846limJKNAEkzYySj_vQgHiCdDnKFrzEFKnI_czLsxXm2upg7_D6aXQ5Vp6R297dy0QeOFZKhS82DUl0SjPH1lnG6HBHlj7ThC_sQfnXSEtOW11v-KMRN4IzrwwRyjs5SJezo8O-xoG-nStSh44XEA6s"
             />

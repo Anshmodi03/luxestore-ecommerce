@@ -84,6 +84,8 @@ export default function EditorialImageGallery() {
             <div className="aspect-3/4 overflow-hidden">
               <img 
                 alt="Tool detail" 
+                loading="lazy"
+                decoding="async"
                 className="w-full h-full object-cover grayscale contrast-[1.1] transition-transform duration-[1.5s] group-hover:scale-105" 
                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuBoyxe1Tx-Tuy_kr_6q-D9dT84o92FhD-d7a49vUppKVRwPOtOVV-Q8l140twTEugUr1fLDzgQ49Aj2XoSO5xTa1L9GSpj2yrTnV_m3TP7JYnbW4mzbV7OVCEoXKHs-TuJP1uaHk0WLtAkSGVcQ7OuENods50WXjewb0kU_1MMuVoa47v2DJI2oixucGP7EcDuglkUQfGah_IOPtpE3OuZie6t4HI2elA38t-mDxjOiCkzI_gUr6rgNL8R6gIdxFCTHTch3GqBNv6w"
               />
@@ -105,6 +107,8 @@ export default function EditorialImageGallery() {
             <div className="aspect-4/5 overflow-hidden">
               <img 
                 alt="Studio atmosphere" 
+                loading="lazy"
+                decoding="async"
                 className="w-full h-full object-cover grayscale contrast-[1.1] transition-transform duration-[1.5s] group-hover:scale-105" 
                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuBmogbDKWCZBwfn_vA-g23FMk7paOLMer0_L7wyFC8QGFYEV_Dj5RMjWV2RRBuVe7qAmqQy5aFqp0A6hdpa6Wdzgo6Tv1GwtWM4kfFWroO1Af1Jp4Kno1Y1nT3fGhJdRorkvnIs81U9LHs2azW6pyC565WCDwhU1O7wXDz75spGlu1U4SMkhXZ3La-onWVR77aniTzvVZFstwolj5UWg4PO7LtOeFxdgJ7VUGuYyPjFRvey81iZboCviZEsgDkrVVjrsDY9F2gqpBA"
               />

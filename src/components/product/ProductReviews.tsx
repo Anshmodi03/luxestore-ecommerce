@@ -53,7 +53,7 @@ export default function ProductReviews({ reviews, rating, reviewCount }: Product
           >
             <div className="flex items-center gap-4 mb-6">
               {review.avatarUrl ? (
-                <img alt={review.name} className="w-12 h-12 rounded-full object-cover ring-2 ring-white dark:ring-gray-800 shadow-md" src={review.avatarUrl} />
+                <img alt={review.name} loading="lazy" decoding="async" className="w-12 h-12 rounded-full object-cover ring-2 ring-white dark:ring-gray-800 shadow-md" src={review.avatarUrl} />
               ) : (
                 <div className={`w-12 h-12 rounded-full flex items-center justify-center font-bold text-sm shadow-inner ${review.initialsColor || 'bg-primary/10 text-primary'}`}>
                   {review.initials}

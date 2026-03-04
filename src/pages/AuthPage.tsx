@@ -127,8 +127,9 @@ const AuthPage = () => {
           {/* GSAP parallax image */}
           <div ref={imageRef} className="absolute inset-0 opacity-0">
             <img
-              src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=1920"
+              src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=1600"
               alt="Luxury fashion"
+              decoding="async"
               className="w-full h-full object-cover"
             />
           </div>

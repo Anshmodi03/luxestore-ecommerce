@@ -57,6 +57,8 @@ export default function ShopTheLook() {
           <div className="relative rounded-3xl overflow-hidden shadow-2xl">
             <img
               alt="Modern living room interior"
+              loading="lazy"
+              decoding="async"
               className="w-full h-auto object-cover transform transition-transform duration-[2s] group-hover:scale-105"
               src="https://lh3.googleusercontent.com/aida-public/AB6AXuBSIuR5b5ya3hQTrmIcjL054y-_wnjZmnyakH7WQ1zaDJ9cbQfu2frZrJJ6heoU5ky-lBbJhmRwXdkSFEL0WW4u9_ucyBYUPlmNTE7iqaZLPnbxEjMABeAwGZ2SshDSC4OJvSt4uA-LEY7i_CNeEfkAt_yUGMu0kEsq_4HD67Q1P5MWXirkuj9w7XFVvX5UZqt4xwf_ah0CgPGWFp4OfrjmIR06Qktc3zFlXsDx7sLENmopya2VgjDf_b5ma_eQUsdSEN0vwpiu8ww"
             />
@@ -64,7 +66,7 @@ export default function ShopTheLook() {
               <div key={i} className="hotspot" style={{ top: spot.top, left: spot.left }}>
                 <div className="hotspot-card">
                   <div className="flex gap-3 mb-3">
-                    <img alt={spot.name} className="w-16 h-16 object-cover rounded-lg bg-gray-100" src={spot.image} />
+                    <img alt={spot.name} loading="lazy" decoding="async" className="w-16 h-16 object-cover rounded-lg bg-gray-100" src={spot.image} />
                     <div>
                       <h5 className="text-sm font-bold text-gray-900 dark:text-white">{spot.name}</h5>
                       <p className="text-primary font-medium text-sm">{spot.price}</p>

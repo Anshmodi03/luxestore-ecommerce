@@ -16,7 +16,7 @@ export default function FoundersQuote() {
           <div className="w-full md:w-1/2 flex justify-center md:justify-end">
             <div className="relative w-72 h-96">
               <div className="absolute top-4 -right-4 w-full h-full border-2 border-primary rounded-lg z-0"></div>
-              <img alt="Portrait of two founders in a studio setting" className="w-full h-full object-cover rounded-lg relative z-10 shadow-xl grayscale hover:grayscale-0 transition-all duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDTGm6JVzb6xR9PeHOdGJcOxNcq5qbZDlZuBoFFuHgbSJhPCC_QMAYSfnRdmDLUbaScgeN7Ez8BBujI5nomlCrd4k3oaXaQy77rdY-1Hm2SJlwRqMhdFwX05eMKWjfl6WyLmSmDPVm3yUd7J3XU41smE11HQ3KKjACokIKc2MG9h5dn-sddA4fVIDjwZF-WFLII0n9Wur6uz2eoMS52WwpLOtMCvBSwH6r12MsUA0owtN6_DD4L0LHxALrolCAgqiqe57aRB6Nduoc"/>
+              <img alt="Portrait of two founders in a studio setting" loading="lazy" decoding="async" className="w-full h-full object-cover rounded-lg relative z-10 shadow-xl grayscale hover:grayscale-0 transition-all duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDTGm6JVzb6xR9PeHOdGJcOxNcq5qbZDlZuBoFFuHgbSJhPCC_QMAYSfnRdmDLUbaScgeN7Ez8BBujI5nomlCrd4k3oaXaQy77rdY-1Hm2SJlwRqMhdFwX05eMKWjfl6WyLmSmDPVm3yUd7J3XU41smE11HQ3KKjACokIKc2MG9h5dn-sddA4fVIDjwZF-WFLII0n9Wur6uz2eoMS52WwpLOtMCvBSwH6r12MsUA0owtN6_DD4L0LHxALrolCAgqiqe57aRB6Nduoc"/>
             </div>
           </div>
         </div>

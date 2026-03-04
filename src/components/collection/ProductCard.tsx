@@ -43,6 +43,8 @@ export default function ProductCard({ product }: ProductCardProps) {
         <div className="relative overflow-hidden aspect-4/5 rounded-2xl mb-6 bg-gray-50 dark:bg-white/5">
           <img
             alt={product.name}
+            loading="lazy"
+            decoding="async"
             className="w-full h-full object-cover transition-transform duration-[1.2s] ease-[cubic-bezier(0.165,0.84,0.44,1)] group-hover:scale-105"
             src={product.image}
           />

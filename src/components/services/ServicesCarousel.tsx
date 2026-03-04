@@ -5,19 +5,19 @@ import { ArrowLeft, ArrowRight } from '@phosphor-icons/react'
 const CAROUSEL_DATA = [
   {
     id: 1,
-    image: 'https://images.unsplash.com/photo-1537832816519-689ad163238b?q=80&w=2670&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1537832816519-689ad163238b?q=80&w=1200&auto=format&fit=crop',
     title: 'Bespoke Sourcing',
     description: 'Our global network of curators can locate rare, archive, or sold-out pieces exclusively for our premier clientele.',
   },
   {
     id: 2,
-    image: 'https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?q=80&w=2670&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?q=80&w=1200&auto=format&fit=crop',
     title: 'Virtual Styling',
     description: 'Book a private digital session with our in-house stylists to curate a wardrobe perfectly tailored to your next season or event.',
   },
   {
     id: 3,
-    image: 'https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=2670&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=1200&auto=format&fit=crop',
     title: 'Authenticity Guarantee',
     description: 'Every artifact is rigorously inspected by our master authenticators. Shop with absolute confidence and peace of mind.',
   }

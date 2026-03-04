@@ -38,6 +38,8 @@ const CheckoutSummary = () => {
                 <div className="w-20 h-20 bg-white dark:bg-[#111] p-2 border border-slate-100 dark:border-white/10 shrink-0 rounded-sm">
                   <img 
                     alt={item.name} 
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-contain mix-blend-multiply dark:mix-blend-normal opacity-80" 
                     src={item.image}
                   />

@@ -123,7 +123,7 @@ export default function ProductGallery({ images }: ProductGalleryProps) {
             }}
             className={`w-16 h-16 rounded-2xl p-2 transition-all duration-300 ${activeImage === img ? 'border-primary border-2 opacity-100 scale-105' : 'border-transparent border opacity-50 hover:opacity-100 hover:border-gray-300 dark:hover:border-gray-700'}`}
           >
-            <img alt={`Thumbnail ${idx + 1}`} className="w-full h-full object-contain" src={img} />
+            <img alt={`Thumbnail ${idx + 1}`} loading="lazy" decoding="async" className="w-full h-full object-contain" src={img} />
           </button>
         ))}
       </div>

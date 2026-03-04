@@ -9,7 +9,7 @@ export default function PersonalCommitment() {
         <div className="flex flex-col md:flex-row items-center gap-12 lg:gap-20">
           <div className="w-full md:w-1/2">
             <div className="relative aspect-4/5 overflow-hidden rounded-sm shadow-xl grayscale rotate-1 transition-transform hover:rotate-0 duration-700">
-              <img alt="Elena and Marco candid in workshop" className="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCfcyZporXozOUFWzqy-R0eU69jhG6bMp9mQfcX4CX5tne5NO9LzCKcITggIuNtTIkCz3T3a2Yjzes89w6Q3ifUc7492SBxZGDQ8FldeDoaG1DAA0MTGCdagAMRXv0_xMcaNON2OmzHjU5peOkq4fhuB7HSGeaYGM1F4oD7PTM2nM3gImnf7DDjPgQCrBoa8IzAGTewwoSsr6gATlZt2KRpnfUxkSv9yKWxBFUuVeGkZwx2QhxiBs4kvAbJ9458ZGPSZcTi5DJ4dH0"/>
+              <img alt="Elena and Marco candid in workshop" loading="lazy" decoding="async" className="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCfcyZporXozOUFWzqy-R0eU69jhG6bMp9mQfcX4CX5tne5NO9LzCKcITggIuNtTIkCz3T3a2Yjzes89w6Q3ifUc7492SBxZGDQ8FldeDoaG1DAA0MTGCdagAMRXv0_xMcaNON2OmzHjU5peOkq4fhuB7HSGeaYGM1F4oD7PTM2nM3gImnf7DDjPgQCrBoa8IzAGTewwoSsr6gATlZt2KRpnfUxkSv9yKWxBFUuVeGkZwx2QhxiBs4kvAbJ9458ZGPSZcTi5DJ4dH0"/>
               <div className="absolute inset-0 bg-linear-to-t from-black/40 to-transparent"></div>
             </div>
           </div>

@@ -23,6 +23,8 @@ export default function BrandMarquee() {
                 <img
                   key={`${set}-${logo.alt}`}
                   alt={logo.alt}
+                  loading="lazy"
+                  decoding="async"
                   className="h-8 md:h-10 w-auto object-contain dark:invert"
                   src={logo.src}
                 />

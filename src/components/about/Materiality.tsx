@@ -15,7 +15,7 @@ export default function Materiality() {
           <div className="group cursor-pointer">
             <div className="overflow-hidden rounded-xl aspect-square relative mb-4 shadow-sm">
               <div className="absolute inset-0 bg-black/5 group-hover:bg-black/0 transition-colors z-10"></div>
-              <img alt="Macro texture of premium full grain leather" className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-in-out" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBN_arGX_O2fO_meMs8RdVpNfRfpId6Z8Xm8ACnt3irXsCuvjiouN2lNqs2BV1NA95tp1ox6I6sRTW58u7LGOzEtnqPHNf1c7Ie6hgB_kCU4rz4408i0AxxASICDUrwJWcamHBoVzBJQYo-A-aKEaE2T1pp_35ojFeTUb1Z7s8VoYOXjR2Wd267fFWIaguR8_PUwH4_u54GBT1icfJmQkdycxe5jOrASO4rm6ZXL3vragYJLmnIILDorVKr93oo0pfL4RSNTQMzjgk"/>
+              <img alt="Macro texture of premium full grain leather" loading="lazy" decoding="async" className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-in-out" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBN_arGX_O2fO_meMs8RdVpNfRfpId6Z8Xm8ACnt3irXsCuvjiouN2lNqs2BV1NA95tp1ox6I6sRTW58u7LGOzEtnqPHNf1c7Ie6hgB_kCU4rz4408i0AxxASICDUrwJWcamHBoVzBJQYo-A-aKEaE2T1pp_35ojFeTUb1Z7s8VoYOXjR2Wd267fFWIaguR8_PUwH4_u54GBT1icfJmQkdycxe5jOrASO4rm6ZXL3vragYJLmnIILDorVKr93oo0pfL4RSNTQMzjgk"/>
               <div className="absolute bottom-4 left-4 z-20 bg-white/80 dark:bg-black/60 backdrop-blur-md px-3 py-1 rounded-full border border-white/50 dark:border-white/10 transition-colors duration-500">
                 <span className="text-gray-900 dark:text-white text-xs font-bold tracking-wider">01. LEATHER</span>
               </div>
@@ -28,7 +28,7 @@ export default function Materiality() {
           <div className="group cursor-pointer">
             <div className="overflow-hidden rounded-xl aspect-square relative mb-4 shadow-sm">
               <div className="absolute inset-0 bg-black/5 group-hover:bg-black/0 transition-colors z-10"></div>
-              <img alt="Macro shot of brushed gold metal hardware" className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-in-out" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCFcgUxdndqSWOIAu9tkoo2qlnjtkp4qoHrKJZNPbQj8Xj_YUt9SGQkOU5-kUTfsev-UWAlLSDxVFD5nOE1CLxqR8645qjwgMV19gDmN7UkPPgetNe9yM8NGMN6MapiKOQ1D_LLUFgL6TN8YKHlbx5-3aClPO6UC8QAwyKnR9R10Bz6CxFuCg0gososnV3GoLngYFOH_eHd1I1SU6bk0gjny9mgAlzzyKbCrrjm7KpxLosL_8h_8FJkLhoUkfqBW1KhX_c95sYfsPI"/>
+              <img alt="Macro shot of brushed gold metal hardware" loading="lazy" decoding="async" className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-in-out" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCFcgUxdndqSWOIAu9tkoo2qlnjtkp4qoHrKJZNPbQj8Xj_YUt9SGQkOU5-kUTfsev-UWAlLSDxVFD5nOE1CLxqR8645qjwgMV19gDmN7UkPPgetNe9yM8NGMN6MapiKOQ1D_LLUFgL6TN8YKHlbx5-3aClPO6UC8QAwyKnR9R10Bz6CxFuCg0gososnV3GoLngYFOH_eHd1I1SU6bk0gjny9mgAlzzyKbCrrjm7KpxLosL_8h_8FJkLhoUkfqBW1KhX_c95sYfsPI"/>
               <div className="absolute bottom-4 left-4 z-20 bg-white/80 dark:bg-black/60 backdrop-blur-md px-3 py-1 rounded-full border border-white/50 dark:border-white/10 transition-colors duration-500">
                 <span className="text-gray-900 dark:text-white text-xs font-bold tracking-wider">02. METAL</span>
               </div>
@@ -41,7 +41,7 @@ export default function Materiality() {
           <div className="group cursor-pointer">
             <div className="overflow-hidden rounded-xl aspect-square relative mb-4 shadow-sm">
               <div className="absolute inset-0 bg-black/5 group-hover:bg-black/0 transition-colors z-10"></div>
-              <img alt="Macro shot of organic silk fabric weave" className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-in-out" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAtyyxkjjnMvu7HunMwMZ6EH_0RcUpEzzzOcT1RwTCznlg1oDN79FduVcDfcqqZ6N59ZANudXV-UfDLFeFxMTF6YO18hAalh7S_cswPwEJq_qj__mluz7-ItrJmYPRMtUxXZLFS1ge-0BdH2FLGZ0k7ueDAt52JJTQt2fdNJ_8iAKzdHNTNi2JKT1QY0YU1pc0Dz5uTpTccBSfkxHZKSQPmJMbP5bWYLCJ4M5g9LAOfGIpO6AkY97N9EUJoT8RrtPfC62bDUdKSpO0"/>
+              <img alt="Macro shot of organic silk fabric weave" loading="lazy" decoding="async" className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-in-out" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAtyyxkjjnMvu7HunMwMZ6EH_0RcUpEzzzOcT1RwTCznlg1oDN79FduVcDfcqqZ6N59ZANudXV-UfDLFeFxMTF6YO18hAalh7S_cswPwEJq_qj__mluz7-ItrJmYPRMtUxXZLFS1ge-0BdH2FLGZ0k7ueDAt52JJTQt2fdNJ_8iAKzdHNTNi2JKT1QY0YU1pc0Dz5uTpTccBSfkxHZKSQPmJMbP5bWYLCJ4M5g9LAOfGIpO6AkY97N9EUJoT8RrtPfC62bDUdKSpO0"/>
               <div className="absolute bottom-4 left-4 z-20 bg-white/80 dark:bg-black/60 backdrop-blur-md px-3 py-1 rounded-full border border-white/50 dark:border-white/10 transition-colors duration-500">
                 <span className="text-gray-900 dark:text-white text-xs font-bold tracking-wider">03. TEXTILE</span>
               </div>

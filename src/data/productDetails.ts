@@ -43,12 +43,12 @@ export function getExpandedProductDetails(product: Product): ExpandedProductDeta
   const images = [
     product.image,
     // Add some generic luxury lifestyle mock angles
-    product.category === 'Tech' ? 'https://images.unsplash.com/photo-1550009158-9efff6c97348?q=80&w=800&auto=format&fit=crop' :
-    product.category === 'Beauty' ? 'https://images.unsplash.com/photo-1596462502278-27bfdc403348?q=80&w=800&auto=format&fit=crop' :
-    product.category === 'Furniture' ? 'https://images.unsplash.com/photo-1540574163026-643ea20ade25?q=80&w=800&auto=format&fit=crop' :
-    product.category === 'Footwear' ? 'https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?q=80&w=800&auto=format&fit=crop' :
-    product.category === 'Accessories' ? 'https://images.unsplash.com/photo-1611591437281-460bfbe1220a?q=80&w=800&auto=format&fit=crop' :
-    'https://images.unsplash.com/photo-1600857062241-98e5dba7f214?q=80&w=800&auto=format&fit=crop',
+    product.category === 'Tech' ? 'https://images.unsplash.com/photo-1550009158-9efff6c97348?q=80&w=500&auto=format&fit=crop' :
+    product.category === 'Beauty' ? 'https://images.unsplash.com/photo-1596462502278-27bfdc403348?q=80&w=500&auto=format&fit=crop' :
+    product.category === 'Furniture' ? 'https://images.unsplash.com/photo-1540574163026-643ea20ade25?q=80&w=500&auto=format&fit=crop' :
+    product.category === 'Footwear' ? 'https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?q=80&w=500&auto=format&fit=crop' :
+    product.category === 'Accessories' ? 'https://images.unsplash.com/photo-1611591437281-460bfbe1220a?q=80&w=500&auto=format&fit=crop' :
+    'https://images.unsplash.com/photo-1600857062241-98e5dba7f214?q=80&w=500&auto=format&fit=crop',
     product.image // back to main for the 3rd angled shot
   ]
 

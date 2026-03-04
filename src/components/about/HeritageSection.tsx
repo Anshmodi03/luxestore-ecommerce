@@ -7,6 +7,8 @@ export default function HeritageSection() {
             <div className="absolute inset-0 bg-primary/5 mix-blend-overlay z-10"></div>
             <img 
               alt="Close up of hands working on leather stitching" 
+              loading="lazy"
+              decoding="async"
               className="w-full h-full object-cover" 
               src="https://lh3.googleusercontent.com/aida-public/AB6AXuCfcyZporXozOUFWzqy-R0eU69jhG6bMp9mQfcX4CX5tne5NO9LzCKcITggIuNtTIkCz3T3a2Yjzes89w6Q3ifUc7492SBxZGDQ8FldeDoaG1DAA0MTGCdagAMRXv0_xMcaNON2OmzHjU5peOkq4fhuB7HSGeaYGM1F4oD7PTM2nM3gImnf7DDjPgQCrBoa8IzAGTewwoSsr6gATlZt2KRpnfUxkSv9yKWxBFUuVeGkZwx2QhxiBs4kvAbJ9458ZGPSZcTi5DJ4dH0"
             />

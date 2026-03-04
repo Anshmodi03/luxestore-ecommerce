@@ -12,6 +12,8 @@ export default function Testimonial() {
         <div className="flex items-center justify-center gap-4">
           <img
             alt="Sam Lee"
+            loading="lazy"
+            decoding="async"
             className="w-14 h-14 rounded-full object-cover border-2 border-primary p-0.5"
             src="https://lh3.googleusercontent.com/aida-public/AB6AXuAMIMKl93shz5XTJC2_H1-5zJaVgvj-fqq4q69MDyQApI5Kj4hRE5t-070FFvNRfoVrJt1J8OojGCxzvUXoVyKWcNC7x5o_2P0q5ChpWMBQyH34S3HWe_QvsAFvR9grjyY7Viu54RJtDPEyjstPWrx_B9S8DOgUSN-HNJc4H1ja-cpiQvleg30PfKVP2FcVYPMyevllnlYTVA7dZibooVY7yU4gW_8nzxsH-bsy53UvTzhgSOCAkE6gRDbfS2BmywJonXuqVnDzU-M"
           />

@@ -78,7 +78,7 @@ export default function DashboardPage() {
             ].map((item) => (
               <div key={item.name} className="glass-card glass-card-hover rounded-xl overflow-hidden group cursor-pointer">
                 <div className="aspect-square overflow-hidden">
-                  <img src={item.img} alt={item.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                  <img src={item.img} alt={item.name} loading="lazy" decoding="async" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                 </div>
                 <div className="p-3 sm:p-4">
                   <p className="text-gray-900 dark:text-white text-sm font-medium truncate">{item.name}</p>

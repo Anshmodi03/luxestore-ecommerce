@@ -11,7 +11,7 @@ export default function Sustainability() {
           {/* Card 1 */}
           <div className="group relative overflow-hidden rounded-lg bg-slate-50 dark:bg-surface-dark border border-slate-100 dark:border-border-dark shadow-md h-[400px] transition-colors duration-500">
             <div className="absolute inset-0">
-              <img alt="Close-up of ethically sourced raw materials" className="w-full h-full object-cover opacity-80 group-hover:opacity-60 transition-opacity duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAtyyxkjjnMvu7HunMwMZ6EH_0RcUpEzzzOcT1RwTCznlg1oDN79FduVcDfcqqZ6N59ZANudXV-UfDLFeFxMTF6YO18hAalh7S_cswPwEJq_qj__mluz7-ItrJmYPRMtUxXZLFS1ge-0BdH2FLGZ0k7ueDAt52JJTQt2fdNJ_8iAKzdHNTNi2JKT1QY0YU1pc0Dz5uTpTccBSfkxHZKSQPmJMbP5bWYLCJ4M5g9LAOfGIpO6AkY97N9EUJoT8RrtPfC62bDUdKSpO0"/>
+              <img alt="Close-up of ethically sourced raw materials" loading="lazy" decoding="async" className="w-full h-full object-cover opacity-80 group-hover:opacity-60 transition-opacity duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAtyyxkjjnMvu7HunMwMZ6EH_0RcUpEzzzOcT1RwTCznlg1oDN79FduVcDfcqqZ6N59ZANudXV-UfDLFeFxMTF6YO18hAalh7S_cswPwEJq_qj__mluz7-ItrJmYPRMtUxXZLFS1ge-0BdH2FLGZ0k7ueDAt52JJTQt2fdNJ_8iAKzdHNTNi2JKT1QY0YU1pc0Dz5uTpTccBSfkxHZKSQPmJMbP5bWYLCJ4M5g9LAOfGIpO6AkY97N9EUJoT8RrtPfC62bDUdKSpO0"/>
               <div className="absolute inset-0 bg-linear-to-t from-white dark:from-surface-dark via-white/40 dark:via-surface-dark/40 to-transparent opacity-90 transition-colors duration-500"></div>
             </div>
             <div className="absolute top-6 left-6 z-20">
@@ -31,7 +31,7 @@ export default function Sustainability() {
           {/* Card 2 */}
           <div className="group relative overflow-hidden rounded-lg bg-slate-50 dark:bg-surface-dark border border-slate-100 dark:border-border-dark shadow-md h-[400px] transition-colors duration-500">
             <div className="absolute inset-0">
-              <img alt="Minimalist landscape representing carbon neutrality" className="w-full h-full object-cover opacity-80 group-hover:opacity-60 transition-opacity duration-500 grayscale" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAtyyxkjjnMvu7HunMwMZ6EH_0RcUpEzzzOcT1RwTCznlg1oDN79FduVcDfcqqZ6N59ZANudXV-UfDLFeFxMTF6YO18hAalh7S_cswPwEJq_qj__mluz7-ItrJmYPRMtUxXZLFS1ge-0BdH2FLGZ0k7ueDAt52JJTQt2fdNJ_8iAKzdHNTNi2JKT1QY0YU1pc0Dz5uTpTccBSfkxHZKSQPmJMbP5bWYLCJ4M5g9LAOfGIpO6AkY97N9EUJoT8RrtPfC62bDUdKSpO0"/>
+              <img alt="Minimalist landscape representing carbon neutrality" loading="lazy" decoding="async" className="w-full h-full object-cover opacity-80 group-hover:opacity-60 transition-opacity duration-500 grayscale" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAtyyxkjjnMvu7HunMwMZ6EH_0RcUpEzzzOcT1RwTCznlg1oDN79FduVcDfcqqZ6N59ZANudXV-UfDLFeFxMTF6YO18hAalh7S_cswPwEJq_qj__mluz7-ItrJmYPRMtUxXZLFS1ge-0BdH2FLGZ0k7ueDAt52JJTQt2fdNJ_8iAKzdHNTNi2JKT1QY0YU1pc0Dz5uTpTccBSfkxHZKSQPmJMbP5bWYLCJ4M5g9LAOfGIpO6AkY97N9EUJoT8RrtPfC62bDUdKSpO0"/>
               <div className="absolute inset-0 bg-linear-to-t from-white dark:from-surface-dark via-white/40 dark:via-surface-dark/40 to-transparent opacity-90 transition-colors duration-500"></div>
             </div>
             <div className="absolute top-6 right-6 z-20 text-right">

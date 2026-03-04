@@ -4,19 +4,19 @@ import { motion, AnimatePresence } from 'framer-motion'
 const slides = [
   {
     id: 1,
-    image: 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=2940&auto=format&fit=crop', // Fashion/Apparel aesthetic
+    image: 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=1600&auto=format&fit=crop', // Fashion/Apparel aesthetic
     title: 'The Collection',
     subtitle: 'Autumn / Winter 2024',
   },
   {
     id: 2,
-    image: 'https://images.unsplash.com/photo-1618220179428-22790b461013?q=80&w=2727&auto=format&fit=crop', // Interior/Furniture aesthetic
+    image: 'https://images.unsplash.com/photo-1618220179428-22790b461013?q=80&w=1600&auto=format&fit=crop', // Interior/Furniture aesthetic
     title: 'Modern Living',
     subtitle: 'Curated Spaces',
   },
   {
     id: 3,
-    image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=2940&auto=format&fit=crop', // Sleek product aesthetic
+    image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=1600&auto=format&fit=crop', // Sleek product aesthetic
     title: 'Elevated Essentials',
     subtitle: 'Everyday Luxury',
   }
