@@ -2,8 +2,23 @@ import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Eye, EyeSlash, ArrowRight, ArrowLeft, GoogleLogo, AppleLogo } from '@phosphor-icons/react'
 import { gsap } from 'gsap'
+import { useAuth0 } from '@auth0/auth0-react'
+import { useNavigate } from 'react-router-dom'
 import PageTransition from '../components/common/PageTransition'
 import AuthSuccessOverlay from '../components/auth/AuthSuccessOverlay'
+
+// Safe Auth0 hook — returns mock when Auth0 is not configured
+function useAuth0Safe() {
+  const auth0Configured = !!import.meta.env.VITE_AUTH0_DOMAIN
+  if (auth0Configured) {
+    return useAuth0()
+  }
+  return {
+    loginWithRedirect: (() => {}) as any,
+    isAuthenticated: false,
+    isLoading: false,
+  }
+}
 
 type AuthView = 'signin' | 'register' | 'recover'
 
@@ -17,6 +32,9 @@ const AuthPage = () => {
   const [recoverSent, setRecoverSent] = useState(false)
   const [showSuccess, setShowSuccess] = useState(false)
   const [successType, setSuccessType] = useState<'signin' | 'register'>('signin')
+  const navigate = useNavigate()
+
+  const { loginWithRedirect, isAuthenticated } = useAuth0Safe()
 
   // GSAP refs
   const leftPanelRef = useRef<HTMLDivElement>(null)
@@ -88,14 +106,60 @@ const AuthPage = () => {
     return () => ctx.revert()
   }, [])
 
+  // Redirect authenticated users away from auth page
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate('/dashboard', { replace: true })
+    }
+  }, [isAuthenticated, navigate])
+
+  const auth0Configured = !!import.meta.env.VITE_AUTH0_DOMAIN
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    if (activeView === 'recover') {
-      setRecoverSent(true)
-    } else {
-      setSuccessType(activeView as 'signin' | 'register')
-      setShowSuccess(true)
+
+    if (!auth0Configured) {
+      // Dev mode — show mock success overlay
+      if (activeView === 'recover') {
+        setRecoverSent(true)
+      } else {
+        setSuccessType(activeView as 'signin' | 'register')
+        setShowSuccess(true)
+      }
+      return
     }
+
+    // Auth0 mode — redirect to Auth0 Universal Login
+    if (activeView === 'recover') {
+      loginWithRedirect({
+        authorizationParams: {
+          screen_hint: 'login',
+          login_hint: email,
+        },
+      })
+      setRecoverSent(true)
+    } else if (activeView === 'register') {
+      loginWithRedirect({
+        authorizationParams: {
+          screen_hint: 'signup',
+          login_hint: email,
+        },
+      })
+    } else {
+      loginWithRedirect({
+        authorizationParams: {
+          login_hint: email,
+        },
+      })
+    }
+  }
+
+  const handleGoogleLogin = () => {
+    loginWithRedirect({
+      authorizationParams: {
+        connection: 'google-oauth2',
+      },
+    })
   }
 
   const switchView = (view: AuthView) => {
@@ -427,6 +491,7 @@ const AuthPage = () => {
                       <div className="grid grid-cols-2 gap-3">
                         <motion.button
                           type="button"
+                          onClick={handleGoogleLogin}
                           whileHover={{ borderColor: "rgba(255,255,255,0.3)", y: -1 }}
                           className="flex items-center justify-center gap-2 py-2.5 border border-white/10 text-white/60 hover:text-white transition-all duration-300 text-[10px] uppercase tracking-[0.2em] font-medium"
                         >
@@ -435,6 +500,7 @@ const AuthPage = () => {
                         </motion.button>
                         <motion.button
                           type="button"
+                          onClick={() => loginWithRedirect()}
                           whileHover={{ borderColor: "rgba(255,255,255,0.3)", y: -1 }}
                           className="flex items-center justify-center gap-2 py-2.5 border border-white/10 text-white/60 hover:text-white transition-all duration-300 text-[10px] uppercase tracking-[0.2em] font-medium"
                         >

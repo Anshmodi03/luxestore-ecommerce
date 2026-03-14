@@ -7,6 +7,7 @@ import LandingPage from './pages/LandingPage'
 import Preloader from './components/common/Preloader'
 import CartDrawer from './components/common/CartDrawer'
 import ErrorBoundary from './components/common/ErrorBoundary'
+import ProtectedRoute from './components/common/ProtectedRoute'
 import { ProductModalProvider } from './context/ProductModalContext'
 
 // Lazy-loaded pages (code splitting)
@@ -92,9 +93,10 @@ export default function App() {
                 <Route path="/collection" element={<CollectionPage />} />
                 <Route path="/editorial" element={<EditorialPage />} />
                 <Route path="/services" element={<ClientServicesPage />} />
-                <Route path="/checkout" element={<CheckoutPage />} />
+                <Route path="/checkout" element={<ProtectedRoute><CheckoutPage /></ProtectedRoute>} />
                 <Route path="/auth" element={<AuthPage />} />
-                <Route path="/dashboard" element={<DashboardPage />} />
+                <Route path="/auth/callback" element={<AuthPage />} />
+                <Route path="/dashboard" element={<ProtectedRoute><DashboardPage /></ProtectedRoute>} />
                 <Route path="/product/:id" element={<ProductDetailsPage />} />
                 <Route path="*" element={<NotFoundPage />} />
               </Routes>

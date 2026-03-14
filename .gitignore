@@ -4,6 +4,7 @@ dist/
 .env
 .env.local
 .env.*.local
+.env.example
 *.log
 npm-debug.log*
 .DS_Store
@@ -12,3 +13,5 @@ stitch_design.html
 stitch_screenshot.png
 Claude_code_mcp_skills_plugins.pdf
 .claude/settings.local.json
+.claude
+.vscode
