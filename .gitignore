@@ -12,6 +12,6 @@ Thumbs.db
 stitch_design.html
 stitch_screenshot.png
 Claude_code_mcp_skills_plugins.pdf
-.claude/settings.local.json
-.claude
-.vscode
+.claude/
+.vscode/
+BACKEND_PLAN.md
