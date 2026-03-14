@@ -10,11 +10,13 @@ import ProductSpecs from '../components/product/ProductSpecs'
 import ProductReviews from '../components/product/ProductReviews'
 import Footer from '../components/common/Footer'
 import { useCart } from '../context/CartContext'
+import { useToast } from '../context/ToastContext'
 
 export default function ProductDetailsPage() {
   const { id } = useParams<{ id: string }>()
   const navigate = useNavigate()
-  const { openCart } = useCart()
+  const { openCart, addItem } = useCart()
+  const { showToast } = useToast()
 
   const product = collectionProducts.find((p) => p.id === id)
 
@@ -87,7 +89,7 @@ export default function ProductDetailsPage() {
                 oldPrice={product.oldPrice}
                 rating={details.rating}
                 reviewsCount={details.reviewCount}
-                onAddToCart={() => openCart()}
+                onAddToCart={() => { addItem(product); showToast(`${product.name} added to bag`); openCart() }}
               />
             </div>
           </div>

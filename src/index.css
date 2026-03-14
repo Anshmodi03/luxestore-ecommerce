@@ -212,8 +212,8 @@ body {
 /* Glass drawer */
 .glass-drawer {
   background: rgba(250, 250, 250, 0.95);
-  backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
 }
 
 .dark .glass-drawer {
@@ -229,8 +229,8 @@ body {
 /* ── Dashboard ── */
 .glass-card {
   background: rgba(245, 245, 245, 0.6);
-  backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
+  backdrop-filter: blur(24px);
   border: 1px solid rgba(0, 0, 0, 0.06);
   background-image: linear-gradient(145deg, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.4) 100%);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);

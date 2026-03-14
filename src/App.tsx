@@ -1,21 +1,24 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, lazy, Suspense } from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
 import { AnimatePresence } from 'framer-motion'
 import Navbar from './components/common/Navbar'
 import MobileMenu from './components/common/MobileMenu'
 import LandingPage from './pages/LandingPage'
-import AboutPage from './pages/AboutPage'
-import CollectionPage from './pages/CollectionPage'
-import EditorialPage from './pages/EditorialPage'
 import Preloader from './components/common/Preloader'
 import CartDrawer from './components/common/CartDrawer'
-import ClientServicesPage from './pages/ClientServicesPage'
-import ProductDetailsPage from './pages/ProductDetailsPage'
-import CheckoutPage from './pages/CheckoutPage'
-import AuthPage from './pages/AuthPage'
-import DashboardPage from './pages/DashboardPage'
-import NotFoundPage from './pages/NotFoundPage'
+import ErrorBoundary from './components/common/ErrorBoundary'
 import { ProductModalProvider } from './context/ProductModalContext'
+
+// Lazy-loaded pages (code splitting)
+const AboutPage = lazy(() => import('./pages/AboutPage'))
+const CollectionPage = lazy(() => import('./pages/CollectionPage'))
+const EditorialPage = lazy(() => import('./pages/EditorialPage'))
+const ClientServicesPage = lazy(() => import('./pages/ClientServicesPage'))
+const ProductDetailsPage = lazy(() => import('./pages/ProductDetailsPage'))
+const CheckoutPage = lazy(() => import('./pages/CheckoutPage'))
+const AuthPage = lazy(() => import('./pages/AuthPage'))
+const DashboardPage = lazy(() => import('./pages/DashboardPage'))
+const NotFoundPage = lazy(() => import('./pages/NotFoundPage'))
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Lenis from 'lenis'
@@ -24,7 +27,11 @@ gsap.registerPlugin(ScrollTrigger)
 
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false)
-  const [dark, setDark] = useState(false)
+  const [dark, setDark] = useState(() => {
+    const stored = localStorage.getItem('luxestore_theme')
+    if (stored) return stored === 'dark'
+    return window.matchMedia('(prefers-color-scheme: dark)').matches
+  })
   const [loading, setLoading] = useState(true)
   const location = useLocation()
   const isCheckout = location.pathname === '/checkout'
@@ -64,6 +71,7 @@ export default function App() {
 
   useEffect(() => {
     document.documentElement.classList.toggle('dark', dark)
+    localStorage.setItem('luxestore_theme', dark ? 'dark' : 'light')
   }, [dark])
 
   return (
@@ -75,20 +83,24 @@ export default function App() {
         <CartDrawer />
         
         {/* Dynamic Routes wrapped with AnimatePresence for transitions */}
-        <AnimatePresence mode="wait">
-          <Routes location={location} key={location.pathname}>
-            <Route path="/" element={<LandingPage />} />
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/collection" element={<CollectionPage />} />
-            <Route path="/editorial" element={<EditorialPage />} />
-            <Route path="/services" element={<ClientServicesPage />} />
-            <Route path="/checkout" element={<CheckoutPage />} />
-            <Route path="/auth" element={<AuthPage />} />
-            <Route path="/dashboard" element={<DashboardPage />} />
-            <Route path="/product/:id" element={<ProductDetailsPage />} />
-            <Route path="*" element={<NotFoundPage />} />
-          </Routes>
-        </AnimatePresence>
+        <ErrorBoundary>
+          <Suspense fallback={null}>
+            <AnimatePresence mode="wait">
+              <Routes location={location} key={location.pathname}>
+                <Route path="/" element={<LandingPage />} />
+                <Route path="/about" element={<AboutPage />} />
+                <Route path="/collection" element={<CollectionPage />} />
+                <Route path="/editorial" element={<EditorialPage />} />
+                <Route path="/services" element={<ClientServicesPage />} />
+                <Route path="/checkout" element={<CheckoutPage />} />
+                <Route path="/auth" element={<AuthPage />} />
+                <Route path="/dashboard" element={<DashboardPage />} />
+                <Route path="/product/:id" element={<ProductDetailsPage />} />
+                <Route path="*" element={<NotFoundPage />} />
+              </Routes>
+            </AnimatePresence>
+          </Suspense>
+        </ErrorBoundary>
         
         {/* Initial Page Loading Animation */}
         {loading && <Preloader onComplete={() => setLoading(false)} />}

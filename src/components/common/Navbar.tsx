@@ -9,7 +9,7 @@ interface NavbarProps {
 }
 
 export default function Navbar({ onMenuOpen, onToggleDark, isDark }: NavbarProps) {
-  const { openCart } = useCart()
+  const { openCart, totalItems } = useCart()
   const navigate = useNavigate()
 
   return (
@@ -19,6 +19,7 @@ export default function Navbar({ onMenuOpen, onToggleDark, isDark }: NavbarProps
           <button
             className="group flex items-center gap-2 text-white hover:text-primary transition-colors focus:outline-none"
             onClick={onMenuOpen}
+            aria-label="Open menu"
           >
             <span className="material-symbols-outlined text-3xl">menu</span>
           </button>
@@ -30,23 +31,27 @@ export default function Navbar({ onMenuOpen, onToggleDark, isDark }: NavbarProps
           </Link>
         </div>
         <div className="flex items-center gap-6">
-          <button 
+          <button
             className="p-2 text-white hover:text-primary transition rounded-full hover:bg-white/10"
             onClick={onToggleDark}
+            aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
           >
             {isDark ? <Sun size={20} /> : <Moon size={20} />}
           </button>
-          <button 
+          <button
             className="relative p-2 text-white hover:text-primary transition rounded-full hover:bg-white/10 cursor-pointer"
             onClick={openCart}
+            aria-label={`Shopping cart${totalItems > 0 ? `, ${totalItems} items` : ''}`}
           >
             <ShoppingBag weight="fill" size={20} />
-            <span className="absolute top-0 right-0 h-4 w-4 bg-primary text-[10px] font-bold flex items-center justify-center rounded-full text-white">2</span>
+            {totalItems > 0 && (
+              <span className="absolute top-0 right-0 h-4 w-4 bg-primary text-[10px] font-bold flex items-center justify-center rounded-full text-white">{totalItems > 9 ? '9+' : totalItems}</span>
+            )}
           </button>
-          <button 
+          <button
             className="p-2 text-white hover:text-primary transition rounded-full hover:bg-white/10"
             onClick={() => navigate('/auth')}
-            title="Account"
+            aria-label="Account"
           >
             <User size={20} weight="bold" />
           </button>

@@ -35,6 +35,13 @@ export default function ScrollReveal({
     const el = ref.current
     if (!el) return
 
+    // Skip animations for users who prefer reduced motion
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (prefersReducedMotion) {
+      gsap.set(staggerChildren ? el.children : [el], { opacity: 1 })
+      return
+    }
+
     const targets = staggerChildren ? el.children : [el]
 
     const fromVars: gsap.TweenVars = { opacity: 0 }

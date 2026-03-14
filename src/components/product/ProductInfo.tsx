@@ -73,7 +73,7 @@ export default function ProductInfo({
             <span>Add to Cart</span>
             <i className="ph-bold ph-arrow-right"></i>
           </button>
-          <button className="w-16 h-16 rounded-full border border-gray-200 dark:border-gray-800 flex items-center justify-center text-gray-400 hover:text-primary hover:border-primary transition-colors">
+          <button aria-label="Add to wishlist" className="w-16 h-16 rounded-full border border-gray-200 dark:border-gray-800 flex items-center justify-center text-gray-400 hover:text-primary hover:border-primary transition-colors">
             <i className="ph-bold ph-heart text-xl"></i>
           </button>
         </div>
