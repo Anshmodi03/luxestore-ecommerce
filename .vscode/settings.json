@@ -1,0 +1,5 @@
+{
+  "chat.disableAIFeatures": true,
+  "claudeCode.respectGitIgnore": false,
+  "git.ignoreLimitWarning": true
+}
