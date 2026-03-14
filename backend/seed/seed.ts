@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import { Product } from '../src/models/Product.model';
 import { User } from '../src/models/User.model';
 import { PromoCode } from '../src/models/PromoCode.model';
+import { Address } from '../src/models/Address.model';
 
 dotenv.config();
 
@@ -182,24 +183,52 @@ async function seed() {
   console.log('   ✅ FLAT500 (₹500 off, min ₹2000)');
 
   // Create default admin user (placeholder — real user created on Auth0 login)
-  console.log('\n👤 Creating admin user placeholder...');
-  const existingAdmin = await User.findOne({ email: 'admin@luxestore.com' });
-  if (!existingAdmin) {
-    await User.create({
-      auth0Id: 'auth0|admin-placeholder',
-      email: 'admin@luxestore.com',
-      firstName: 'Admin',
-      lastName: 'LuxeStore',
-      role: 'admin',
-      provider: 'auth0',
-      isVerified: true,
-    });
-    console.log('   ✅ admin@luxestore.com (role: admin)');
-  } else {
-    console.log('   ⏭️  Admin already exists');
-  }
+  console.log('\n👤 Creating users...');
+  await User.deleteMany({ email: { $in: ['admin@luxestore.com', 'customer@luxestore.com'] } });
 
-  console.log('\n🎉 Seed complete! 18 products, 3 promo codes, 1 admin user');
+  const admin = await User.create({
+    auth0Id: 'auth0|admin-placeholder',
+    email: 'admin@luxestore.com',
+    firstName: 'Admin',
+    lastName: 'LuxeStore',
+    role: 'admin',
+    provider: 'auth0',
+    isVerified: true,
+  });
+  console.log(`   ✅ admin@luxestore.com (role: admin)`);
+
+  const customer = await User.create({
+    auth0Id: 'dev|customer-placeholder',
+    email: 'customer@luxestore.com',
+    firstName: 'Test',
+    lastName: 'Customer',
+    role: 'customer',
+    provider: 'auth0',
+    isVerified: true,
+  });
+  console.log(`   ✅ customer@luxestore.com (role: customer)`);
+
+  // Create default address for customer
+  console.log('\n🏠 Creating test address...');
+  await Address.deleteMany({ user: customer._id });
+  await Address.create({
+    user: customer._id,
+    label: 'Home',
+    firstName: 'Test',
+    lastName: 'Customer',
+    street: '123 Dev Street, Andheri West',
+    city: 'Mumbai',
+    state: 'Maharashtra',
+    postalCode: '400001',
+    country: 'IN',
+    isDefault: true,
+  });
+  console.log('   ✅ Default address created');
+
+  console.log('\n🎉 Seed complete! 18 products, 3 promo codes, 2 users, 1 address');
+  console.log('\n📋 Use these IDs for Postman (X-Dev-User-Id header):');
+  console.log(`   Admin ID:    ${admin._id}`);
+  console.log(`   Customer ID: ${customer._id}`);
   await mongoose.disconnect();
   process.exit(0);
 }

@@ -1,7 +1,9 @@
 import Razorpay from 'razorpay';
-import { env } from './env';
+import { env, isRazorpayConfigured } from './env';
 
-export const razorpayInstance = new Razorpay({
-  key_id: env.RAZORPAY_KEY_ID,
-  key_secret: env.RAZORPAY_KEY_SECRET,
-});
+export const razorpayInstance: Razorpay | null = isRazorpayConfigured
+  ? new Razorpay({
+      key_id: env.RAZORPAY_KEY_ID!,
+      key_secret: env.RAZORPAY_KEY_SECRET!,
+    })
+  : null;

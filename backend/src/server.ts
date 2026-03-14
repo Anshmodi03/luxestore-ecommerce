@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
-import { env } from './config/env';
+import { env, isDevMode, isRazorpayConfigured } from './config/env';
 import { connectDatabase } from './config/database';
 import { generalLimiter } from './middleware/rateLimiter';
 import { errorHandler } from './middleware/errorHandler';
@@ -55,6 +55,8 @@ async function start() {
   app.listen(env.PORT, () => {
     console.log(`🚀 LuxeStore API running on http://localhost:${env.PORT}`);
     console.log(`   Environment: ${env.NODE_ENV}`);
+    console.log(`   Auth: ${isDevMode ? 'DEV MODE (X-Dev-User-Id header)' : 'Auth0 JWT'}`);
+    console.log(`   Payments: ${isRazorpayConfigured ? 'Razorpay' : 'DEV MODE (mock)'}`);
   });
 }
 

@@ -5,7 +5,7 @@ import { Address } from '../models/Address.model';
 import { Product } from '../models/Product.model';
 import { PromoCode } from '../models/PromoCode.model';
 import { razorpayInstance } from '../config/razorpay';
-import { env } from '../config/env';
+import { env, isRazorpayConfigured } from '../config/env';
 import { generateOrderNumber } from '../utils/orderNumber';
 import { AppError } from '../middleware/errorHandler';
 
@@ -66,16 +66,24 @@ export async function createOrder(userId: string, addressId: string, promoCode?:
   const tax = Math.round((subtotal - discount) * TAX_RATE);
   const total = subtotal - discount + tax + shippingCost;
 
-  // Create Razorpay order
-  const razorpayOrder = await razorpayInstance.orders.create({
-    amount: total * 100, // Razorpay expects paise
-    currency: 'INR',
-    receipt: generateOrderNumber(),
-  });
+  const orderNumber = generateOrderNumber();
+  let razorpayOrderId: string;
+
+  if (isRazorpayConfigured && razorpayInstance) {
+    const razorpayOrder = await razorpayInstance.orders.create({
+      amount: total * 100, // Razorpay expects paise
+      currency: 'INR',
+      receipt: orderNumber,
+    });
+    razorpayOrderId = razorpayOrder.id;
+  } else {
+    // Dev mode: mock Razorpay order
+    razorpayOrderId = `dev_order_${orderNumber}`;
+  }
 
   // Create order in database
   const order = await Order.create({
-    orderNumber: razorpayOrder.receipt,
+    orderNumber,
     user: userId,
     shippingAddress: {
       firstName: address.firstName,
@@ -93,15 +101,15 @@ export async function createOrder(userId: string, addressId: string, promoCode?:
     discount,
     total,
     promoCode: promoCode?.toUpperCase(),
-    razorpayOrderId: razorpayOrder.id,
+    razorpayOrderId,
   });
 
   return {
     order,
-    razorpayOrderId: razorpayOrder.id,
+    razorpayOrderId,
     amount: total,
     currency: 'INR',
-    keyId: env.RAZORPAY_KEY_ID,
+    keyId: env.RAZORPAY_KEY_ID || 'dev_key',
   };
 }
 
@@ -121,20 +129,23 @@ export async function verifyPayment(
     throw new AppError('Order is not in pending state', 400);
   }
 
-  // Verify Razorpay signature
-  const body = razorpayOrderId + '|' + razorpayPaymentId;
-  const expectedSignature = crypto
-    .createHmac('sha256', env.RAZORPAY_KEY_SECRET)
-    .update(body)
-    .digest('hex');
+  if (isRazorpayConfigured) {
+    // Verify Razorpay signature
+    const body = razorpayOrderId + '|' + razorpayPaymentId;
+    const expectedSignature = crypto
+      .createHmac('sha256', env.RAZORPAY_KEY_SECRET!)
+      .update(body)
+      .digest('hex');
 
-  if (expectedSignature !== razorpaySignature) {
-    throw new AppError('Payment verification failed', 400);
+    if (expectedSignature !== razorpaySignature) {
+      throw new AppError('Payment verification failed', 400);
+    }
   }
+  // Dev mode: skip signature verification, auto-confirm
 
   // Update order
-  order.razorpayPaymentId = razorpayPaymentId;
-  order.razorpaySignature = razorpaySignature;
+  order.razorpayPaymentId = razorpayPaymentId || `dev_pay_${Date.now()}`;
+  order.razorpaySignature = razorpaySignature || 'dev_signature';
   order.status = 'confirmed';
   order.paidAt = new Date();
   await order.save();

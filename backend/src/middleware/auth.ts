@@ -1,17 +1,24 @@
 import { auth } from 'express-oauth2-jwt-bearer';
 import { Request, Response, NextFunction } from 'express';
 import { User } from '../models/User.model';
-import { env } from '../config/env';
+import { env, isDevMode } from '../config/env';
 
-// Validates the JWT access token from Auth0
-export const checkJwt = auth({
-  audience: env.AUTH0_AUDIENCE,
-  issuerBaseURL: env.AUTH0_ISSUER_BASE_URL,
-  tokenSigningAlg: 'RS256',
-});
+// ── Production Auth0 middleware ──
 
-// After JWT check — sync Auth0 user to local MongoDB
-export const syncUser = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+function createCheckJwt() {
+  if (isDevMode) return (_req: Request, _res: Response, next: NextFunction) => next();
+  return auth({
+    audience: env.AUTH0_AUDIENCE!,
+    issuerBaseURL: env.AUTH0_ISSUER_BASE_URL!,
+    tokenSigningAlg: 'RS256',
+  });
+}
+
+export const checkJwt = createCheckJwt();
+
+// ── Sync user to MongoDB after auth ──
+
+async function productionSyncUser(req: Request, res: Response, next: NextFunction): Promise<void> {
   try {
     const auth0Id = (req as any).auth?.payload?.sub;
 
@@ -23,7 +30,6 @@ export const syncUser = async (req: Request, res: Response, next: NextFunction):
     let user = await User.findOne({ auth0Id });
 
     if (!user) {
-      // First-time login — create local user from token claims
       const payload = (req as any).auth.payload;
       user = await User.create({
         auth0Id,
@@ -41,10 +47,49 @@ export const syncUser = async (req: Request, res: Response, next: NextFunction):
   } catch (error) {
     next(error);
   }
-};
+}
+
+async function devSyncUser(req: Request, res: Response, next: NextFunction): Promise<void> {
+  try {
+    const devUserId = req.headers['x-dev-user-id'] as string;
+    let user;
+
+    if (devUserId) {
+      user = await User.findById(devUserId);
+    } else {
+      // Default to admin user for convenience
+      user = await User.findOne({ role: 'admin' });
+    }
+
+    if (!user) {
+      res.status(401).json({ error: 'No dev user found. Run: npm run seed' });
+      return;
+    }
+
+    (req as any).user = user;
+    next();
+  } catch (error) {
+    next(error);
+  }
+}
+
+export const syncUser = isDevMode ? devSyncUser : productionSyncUser;
 
 // Optional auth — doesn't fail if no token, just sets req.user if present
 export const optionalAuth = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  if (isDevMode) {
+    // In dev mode, try to load user from header but don't fail
+    const devUserId = req.headers['x-dev-user-id'] as string;
+    if (devUserId) {
+      try {
+        const user = await User.findById(devUserId);
+        if (user) (req as any).user = user;
+      } catch { /* ignore */ }
+    }
+    next();
+    return;
+  }
+
   const authHeader = req.headers.authorization;
   if (!authHeader?.startsWith('Bearer ')) {
     next();
@@ -61,7 +106,7 @@ export const optionalAuth = async (req: Request, res: Response, next: NextFuncti
         }
       });
     });
-    await syncUser(req, res, next);
+    await productionSyncUser(req, res, next);
   } catch {
     next();
   }
