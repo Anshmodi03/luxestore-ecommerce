@@ -191,6 +191,15 @@ components:
             type: object
         totalAmount:
           type: number
+        stripePaymentIntentId:
+          type: string
+          description: Stripe PaymentIntent ID (pi_xxxx)
+        stripeClientSecret:
+          type: string
+          description: Stripe client secret for frontend confirmation
+        paidAt:
+          type: string
+          format: date-time
         createdAt:
           type: string
           format: date-time
@@ -831,7 +840,7 @@ paths:
 
     post:
       tags: [Orders]
-      summary: Create order (initiates Razorpay payment)
+      summary: Create order (initiates Stripe PaymentIntent)
       operationId: createOrder
       security:
         - DevAuth: []
@@ -876,7 +885,7 @@ paths:
                 country: India
       responses:
         '201':
-          description: Order created with Razorpay order ID
+          description: Order created with Stripe PaymentIntent
           content:
             application/json:
               schema:
@@ -884,10 +893,21 @@ paths:
                 properties:
                   order:
                     $ref: '#/components/schemas/Order'
-                  razorpayOrderId:
+                  paymentIntentId:
                     type: string
+                    description: Stripe PaymentIntent ID (pi_xxxx)
+                    example: pi_3TBGlXA5Mw1faqjt11ih8fjK
+                  clientSecret:
+                    type: string
+                    description: Stripe client secret for frontend confirmation
+                  publishableKey:
+                    type: string
+                    description: Stripe publishable key for frontend Stripe.js
                   amount:
                     type: number
+                  currency:
+                    type: string
+                    example: inr
 
   /api/orders/{orderNumber}:
     get:
@@ -912,7 +932,7 @@ paths:
   /api/orders/{orderNumber}/verify-payment:
     post:
       tags: [Orders]
-      summary: Verify Razorpay payment signature
+      summary: Verify Stripe payment and confirm order
       operationId: verifyPayment
       security:
         - DevAuth: []
@@ -925,21 +945,23 @@ paths:
           application/json:
             schema:
               type: object
-              required: [razorpay_order_id, razorpay_payment_id, razorpay_signature]
+              required: [paymentIntentId]
               properties:
-                razorpay_order_id:
+                paymentIntentId:
                   type: string
-                razorpay_payment_id:
-                  type: string
-                razorpay_signature:
-                  type: string
+                  description: Stripe PaymentIntent ID (pi_xxxx)
             example:
-              razorpay_order_id: order_dev_mock
-              razorpay_payment_id: pay_dev_mock
-              razorpay_signature: dev_signature_bypass
+              paymentIntentId: pi_3TBGlXA5Mw1faqjt11ih8fjK
       responses:
         '200':
-          description: Payment confirmed, order status updated
+          description: Payment verified, order status set to confirmed
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/Order'
 
   /api/orders/{orderNumber}/cancel:
     post:
