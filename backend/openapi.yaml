@@ -1,0 +1,968 @@
+openapi: 3.0.3
+info:
+  title: LuxeStore API
+  description: |
+    Backend API for LuxeStore — a luxury e-commerce platform.
+
+    ## Authentication
+    **Production**: Bearer JWT token from Auth0 in the `Authorization` header.
+    **Development**: Pass MongoDB user `_id` in the `X-Dev-User-Id` header to bypass Auth0.
+
+    ### Seeded dev IDs
+    - Customer: `69b5266e2b70cfe2dfc64f88`
+    - Admin:    `69b5266e2b70cfe2dfc64f86`
+  version: 1.0.0
+  contact:
+    name: Ansh Modi
+servers:
+  - url: http://localhost:5000
+    description: Local dev (MongoDB Compass)
+
+tags:
+  - name: Health
+  - name: Products
+  - name: Auth
+  - name: Users
+  - name: Cart
+  - name: Wishlist
+  - name: Orders
+
+# ─── Reusable components ──────────────────────────────────────────────────────
+components:
+  securitySchemes:
+    DevAuth:
+      type: apiKey
+      in: header
+      name: X-Dev-User-Id
+      description: Pass MongoDB user _id to bypass Auth0 in dev mode
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  parameters:
+    slug:
+      name: slug
+      in: path
+      required: true
+      schema:
+        type: string
+      example: pro-audio-anc
+    orderNumber:
+      name: orderNumber
+      in: path
+      required: true
+      schema:
+        type: string
+      example: LX-43748
+    addressId:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+      example: 69b5266e2b70cfe2dfc64f90
+    productId:
+      name: productId
+      in: path
+      required: true
+      schema:
+        type: string
+      example: 69b5266e2b70cfe2dfc64f51
+    itemId:
+      name: itemId
+      in: path
+      required: true
+      schema:
+        type: string
+      example: 69b5266e2b70cfe2dfc64fa0
+
+  schemas:
+    Product:
+      type: object
+      properties:
+        _id:
+          type: string
+        slug:
+          type: string
+        name:
+          type: string
+        price:
+          type: number
+        originalPrice:
+          type: number
+        category:
+          type: string
+        brand:
+          type: string
+        description:
+          type: string
+        images:
+          type: array
+          items:
+            type: string
+        rating:
+          type: number
+        reviewCount:
+          type: integer
+        stock:
+          type: integer
+        badge:
+          type: string
+        isActive:
+          type: boolean
+
+    User:
+      type: object
+      properties:
+        _id:
+          type: string
+        auth0Id:
+          type: string
+        email:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        phone:
+          type: string
+        role:
+          type: string
+          enum: [customer, admin]
+        createdAt:
+          type: string
+          format: date-time
+
+    Address:
+      type: object
+      properties:
+        _id:
+          type: string
+        label:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        street:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        postalCode:
+          type: string
+        country:
+          type: string
+        isDefault:
+          type: boolean
+
+    CartItem:
+      type: object
+      properties:
+        _id:
+          type: string
+        product:
+          $ref: '#/components/schemas/Product'
+        quantity:
+          type: integer
+        size:
+          type: string
+        color:
+          type: string
+
+    Order:
+      type: object
+      properties:
+        _id:
+          type: string
+        orderNumber:
+          type: string
+        status:
+          type: string
+          enum: [pending, confirmed, shipped, delivered, cancelled]
+        paymentStatus:
+          type: string
+          enum: [pending, paid, failed, refunded]
+        items:
+          type: array
+          items:
+            type: object
+        totalAmount:
+          type: number
+        createdAt:
+          type: string
+          format: date-time
+
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+
+    PaginatedProducts:
+      type: object
+      properties:
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/Product'
+        total:
+          type: integer
+        page:
+          type: integer
+        totalPages:
+          type: integer
+
+# ─── Paths ────────────────────────────────────────────────────────────────────
+paths:
+
+  # ── Health ──────────────────────────────────────────────────────────────────
+  /api/health:
+    get:
+      tags: [Health]
+      summary: Health check
+      operationId: healthCheck
+      responses:
+        '200':
+          description: Server is healthy
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: ok
+                  environment:
+                    type: string
+                    example: development
+                  timestamp:
+                    type: string
+                    format: date-time
+
+  # ── Products ────────────────────────────────────────────────────────────────
+  /api/products:
+    get:
+      tags: [Products]
+      summary: List products (paginated + filterable)
+      operationId: listProducts
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 12
+        - name: category
+          in: query
+          schema:
+            type: string
+          example: audio
+        - name: brand
+          in: query
+          schema:
+            type: string
+        - name: minPrice
+          in: query
+          schema:
+            type: number
+        - name: maxPrice
+          in: query
+          schema:
+            type: number
+        - name: sort
+          in: query
+          schema:
+            type: string
+            enum: [price_asc, price_desc, newest, rating]
+        - name: search
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Paginated product list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedProducts'
+
+    post:
+      tags: [Products]
+      summary: Create product (admin only)
+      operationId: createProduct
+      security:
+        - DevAuth: []
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [name, slug, price, category, brand, description]
+              properties:
+                name:
+                  type: string
+                slug:
+                  type: string
+                price:
+                  type: number
+                originalPrice:
+                  type: number
+                category:
+                  type: string
+                brand:
+                  type: string
+                description:
+                  type: string
+                images:
+                  type: array
+                  items:
+                    type: string
+                stock:
+                  type: integer
+            example:
+              name: Test Product
+              slug: test-product
+              price: 4999
+              originalPrice: 5999
+              category: audio
+              brand: LuxeSound
+              description: A test product
+              stock: 10
+      responses:
+        '201':
+          description: Product created
+        '403':
+          description: Admin only
+
+  /api/products/featured:
+    get:
+      tags: [Products]
+      summary: Get featured product groups
+      operationId: getFeatured
+      responses:
+        '200':
+          description: Featured products grouped by type
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  trending:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Product'
+                  popular:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Product'
+                  featured:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Product'
+
+  /api/products/{slug}:
+    get:
+      tags: [Products]
+      summary: Get single product by slug
+      operationId: getProduct
+      parameters:
+        - $ref: '#/components/parameters/slug'
+      responses:
+        '200':
+          description: Product detail
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '404':
+          description: Product not found
+
+    put:
+      tags: [Products]
+      summary: Update product (admin only)
+      operationId: updateProduct
+      security:
+        - DevAuth: []
+        - BearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/slug'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+            example:
+              price: 29999
+              stock: 50
+      responses:
+        '200':
+          description: Product updated
+        '403':
+          description: Admin only
+
+    delete:
+      tags: [Products]
+      summary: Delete product (admin only)
+      operationId: deleteProduct
+      security:
+        - DevAuth: []
+        - BearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/slug'
+      responses:
+        '200':
+          description: Product deleted
+        '403':
+          description: Admin only
+
+  /api/products/{slug}/reviews:
+    get:
+      tags: [Products]
+      summary: Get reviews for a product
+      operationId: getProductReviews
+      parameters:
+        - $ref: '#/components/parameters/slug'
+      responses:
+        '200':
+          description: List of reviews
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reviews:
+                    type: array
+                  total:
+                    type: integer
+
+    post:
+      tags: [Products]
+      summary: Submit a review (authenticated)
+      operationId: createReview
+      security:
+        - DevAuth: []
+        - BearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/slug'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [rating, comment]
+              properties:
+                rating:
+                  type: integer
+                  minimum: 1
+                  maximum: 5
+                comment:
+                  type: string
+                title:
+                  type: string
+            example:
+              rating: 5
+              text: Excellent product! Worth every penny.
+              title: Amazing quality
+      responses:
+        '201':
+          description: Review created
+        '401':
+          description: Unauthorized
+
+  # ── Auth ────────────────────────────────────────────────────────────────────
+  /api/auth/me:
+    get:
+      tags: [Auth]
+      summary: Get current user profile
+      operationId: getMe
+      security:
+        - DevAuth: []
+        - BearerAuth: []
+      responses:
+        '200':
+          description: Current user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '401':
+          description: Unauthorized
+
+    put:
+      tags: [Auth]
+      summary: Update current user profile
+      operationId: updateMe
+      security:
+        - DevAuth: []
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                firstName:
+                  type: string
+                lastName:
+                  type: string
+                phone:
+                  type: string
+            example:
+              firstName: Ansh
+              lastName: Modi
+              phone: "9876543210"
+      responses:
+        '200':
+          description: Profile updated
+        '401':
+          description: Unauthorized
+
+    delete:
+      tags: [Auth]
+      summary: Delete account
+      operationId: deleteMe
+      security:
+        - DevAuth: []
+        - BearerAuth: []
+      responses:
+        '200':
+          description: Account deleted
+        '401':
+          description: Unauthorized
+
+  # ── Users / Addresses ───────────────────────────────────────────────────────
+  /api/users/me/addresses:
+    get:
+      tags: [Users]
+      summary: Get saved addresses
+      operationId: getAddresses
+      security:
+        - DevAuth: []
+        - BearerAuth: []
+      responses:
+        '200':
+          description: Address list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  addresses:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Address'
+
+    post:
+      tags: [Users]
+      summary: Add a new address
+      operationId: createAddress
+      security:
+        - DevAuth: []
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Address'
+            example:
+              label: Home
+              firstName: Ansh
+              lastName: Modi
+              street: 42 MG Road
+              city: Mumbai
+              state: Maharashtra
+              postalCode: "400001"
+              country: IN
+              isDefault: false
+      responses:
+        '201':
+          description: Address created
+
+  /api/users/me/addresses/{id}:
+    put:
+      tags: [Users]
+      summary: Update an address
+      operationId: updateAddress
+      security:
+        - DevAuth: []
+        - BearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/addressId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+            example:
+              line1: 99 New Road
+              city: Delhi
+      responses:
+        '200':
+          description: Address updated
+
+    delete:
+      tags: [Users]
+      summary: Delete an address
+      operationId: deleteAddress
+      security:
+        - DevAuth: []
+        - BearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/addressId'
+      responses:
+        '200':
+          description: Address deleted
+
+  /api/users/me/addresses/{id}/default:
+    put:
+      tags: [Users]
+      summary: Set address as default
+      operationId: setDefaultAddress
+      security:
+        - DevAuth: []
+        - BearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/addressId'
+      responses:
+        '200':
+          description: Default address updated
+
+  # ── Cart ────────────────────────────────────────────────────────────────────
+  /api/cart:
+    get:
+      tags: [Cart]
+      summary: Get cart
+      operationId: getCart
+      security:
+        - DevAuth: []
+        - BearerAuth: []
+      responses:
+        '200':
+          description: Current cart
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/CartItem'
+                  totalItems:
+                    type: integer
+                  totalAmount:
+                    type: number
+
+    delete:
+      tags: [Cart]
+      summary: Clear cart
+      operationId: clearCart
+      security:
+        - DevAuth: []
+        - BearerAuth: []
+      responses:
+        '200':
+          description: Cart cleared
+
+  /api/cart/items:
+    post:
+      tags: [Cart]
+      summary: Add item to cart
+      operationId: addCartItem
+      security:
+        - DevAuth: []
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [productId, quantity]
+              properties:
+                productId:
+                  type: string
+                quantity:
+                  type: integer
+                  minimum: 1
+                size:
+                  type: string
+                color:
+                  type: string
+            example:
+              productId: "69b5266e2b70cfe2dfc64f51"
+              quantity: 1
+      responses:
+        '200':
+          description: Item added to cart
+
+  /api/cart/items/{itemId}:
+    put:
+      tags: [Cart]
+      summary: Update cart item quantity
+      operationId: updateCartItem
+      security:
+        - DevAuth: []
+        - BearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/itemId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [quantity]
+              properties:
+                quantity:
+                  type: integer
+                  minimum: 1
+            example:
+              quantity: 3
+      responses:
+        '200':
+          description: Cart item updated
+
+    delete:
+      tags: [Cart]
+      summary: Remove item from cart
+      operationId: removeCartItem
+      security:
+        - DevAuth: []
+        - BearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/itemId'
+      responses:
+        '200':
+          description: Item removed
+
+  # ── Wishlist ────────────────────────────────────────────────────────────────
+  /api/wishlist:
+    get:
+      tags: [Wishlist]
+      summary: Get wishlist
+      operationId: getWishlist
+      security:
+        - DevAuth: []
+        - BearerAuth: []
+      responses:
+        '200':
+          description: Wishlist contents
+
+    post:
+      tags: [Wishlist]
+      summary: Add product to wishlist
+      operationId: addToWishlist
+      security:
+        - DevAuth: []
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [productId]
+              properties:
+                productId:
+                  type: string
+            example:
+              productId: "69b5266e2b70cfe2dfc64f59"
+      responses:
+        '200':
+          description: Added to wishlist
+
+  /api/wishlist/{productId}:
+    delete:
+      tags: [Wishlist]
+      summary: Remove product from wishlist
+      operationId: removeFromWishlist
+      security:
+        - DevAuth: []
+        - BearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/productId'
+      responses:
+        '200':
+          description: Removed from wishlist
+
+  # ── Orders ──────────────────────────────────────────────────────────────────
+  /api/orders:
+    get:
+      tags: [Orders]
+      summary: List orders for current user
+      operationId: listOrders
+      security:
+        - DevAuth: []
+        - BearerAuth: []
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 10
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum: [pending, confirmed, shipped, delivered, cancelled]
+      responses:
+        '200':
+          description: Paginated orders
+
+    post:
+      tags: [Orders]
+      summary: Create order (initiates Razorpay payment)
+      operationId: createOrder
+      security:
+        - DevAuth: []
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [items, shippingAddress]
+              properties:
+                items:
+                  type: array
+                  items:
+                    type: object
+                    required: [productId, quantity]
+                    properties:
+                      productId:
+                        type: string
+                      quantity:
+                        type: integer
+                      size:
+                        type: string
+                      color:
+                        type: string
+                shippingAddress:
+                  type: object
+                promoCode:
+                  type: string
+            example:
+              items:
+                - productId: "69b5266e2b70cfe2dfc64f51"
+                  quantity: 1
+              shippingAddress:
+                fullName: Ansh Modi
+                phone: "9876543210"
+                line1: 42 MG Road
+                city: Mumbai
+                state: Maharashtra
+                pincode: "400001"
+                country: India
+      responses:
+        '201':
+          description: Order created with Razorpay order ID
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  order:
+                    $ref: '#/components/schemas/Order'
+                  razorpayOrderId:
+                    type: string
+                  amount:
+                    type: number
+
+  /api/orders/{orderNumber}:
+    get:
+      tags: [Orders]
+      summary: Get order by order number
+      operationId: getOrder
+      security:
+        - DevAuth: []
+        - BearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/orderNumber'
+      responses:
+        '200':
+          description: Order detail
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+        '404':
+          description: Order not found
+
+  /api/orders/{orderNumber}/verify-payment:
+    post:
+      tags: [Orders]
+      summary: Verify Razorpay payment signature
+      operationId: verifyPayment
+      security:
+        - DevAuth: []
+        - BearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/orderNumber'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [razorpay_order_id, razorpay_payment_id, razorpay_signature]
+              properties:
+                razorpay_order_id:
+                  type: string
+                razorpay_payment_id:
+                  type: string
+                razorpay_signature:
+                  type: string
+            example:
+              razorpay_order_id: order_dev_mock
+              razorpay_payment_id: pay_dev_mock
+              razorpay_signature: dev_signature_bypass
+      responses:
+        '200':
+          description: Payment confirmed, order status updated
+
+  /api/orders/{orderNumber}/cancel:
+    post:
+      tags: [Orders]
+      summary: Cancel an order
+      operationId: cancelOrder
+      security:
+        - DevAuth: []
+        - BearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/orderNumber'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                reason:
+                  type: string
+            example:
+              reason: Changed my mind
+      responses:
+        '200':
+          description: Order cancelled
+        '400':
+          description: Cannot cancel (already shipped/delivered)
