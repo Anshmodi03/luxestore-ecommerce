@@ -31,12 +31,14 @@ async function productionSyncUser(req: Request, res: Response, next: NextFunctio
 
     if (!user) {
       const payload = (req as any).auth.payload;
+      // Custom claims are namespaced (set via Auth0 Post-Login Action)
+      const NS = 'https://luxestore.com';
       user = await User.create({
         auth0Id,
-        email: payload.email || `${auth0Id}@placeholder.com`,
-        firstName: payload.given_name || 'User',
-        lastName: payload.family_name || '',
-        avatarUrl: payload.picture,
+        email: payload[`${NS}/email`] || payload.email || `${auth0Id}@placeholder.com`,
+        firstName: payload[`${NS}/given_name`] || payload.given_name || 'User',
+        lastName: payload[`${NS}/family_name`] || payload.family_name || '',
+        avatarUrl: payload[`${NS}/picture`] || payload.picture,
         provider: auth0Id.startsWith('google') ? 'google' : 'auth0',
         isVerified: payload.email_verified || false,
       });
