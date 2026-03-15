@@ -28,9 +28,8 @@ export interface IOrder extends Document {
   discount: number;
   total: number;
   promoCode?: string;
-  razorpayOrderId?: string;
-  razorpayPaymentId?: string;
-  razorpaySignature?: string;
+  stripePaymentIntentId?: string;
+  stripeClientSecret?: string;
   paidAt?: Date;
   shippedAt?: Date;
   deliveredAt?: Date;
@@ -75,9 +74,8 @@ const orderSchema = new Schema<IOrder>(
     discount: { type: Number, default: 0 },
     total: { type: Number, required: true },
     promoCode: { type: String },
-    razorpayOrderId: { type: String },
-    razorpayPaymentId: { type: String },
-    razorpaySignature: { type: String },
+    stripePaymentIntentId: { type: String },
+    stripeClientSecret: { type: String },
     paidAt: { type: Date },
     shippedAt: { type: Date },
     deliveredAt: { type: Date },

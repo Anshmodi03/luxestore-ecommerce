@@ -15,13 +15,11 @@ export async function createOrder(req: Request, res: Response, next: NextFunctio
 // POST /api/orders/:orderNumber/verify-payment
 export async function verifyPayment(req: Request, res: Response, next: NextFunction): Promise<void> {
   try {
-    const { razorpay_payment_id, razorpay_order_id, razorpay_signature } = req.body;
+    const { paymentIntentId } = req.body;
     const orderNumber = req.params.orderNumber as string;
     const order = await orderService.verifyPayment(
       orderNumber,
-      razorpay_payment_id,
-      razorpay_order_id,
-      razorpay_signature,
+      paymentIntentId,
       req.user!._id.toString()
     );
     res.json({ data: order, message: 'Payment verified successfully' });

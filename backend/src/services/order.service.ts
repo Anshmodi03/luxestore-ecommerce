@@ -1,11 +1,9 @@
-import crypto from 'crypto';
 import { Order, IOrder } from '../models/Order.model';
 import { Cart } from '../models/Cart.model';
 import { Address } from '../models/Address.model';
-import { Product } from '../models/Product.model';
 import { PromoCode } from '../models/PromoCode.model';
-import { razorpayInstance } from '../config/razorpay';
-import { env, isRazorpayConfigured } from '../config/env';
+import { stripeInstance } from '../config/stripe';
+import { env, isStripeConfigured } from '../config/env';
 import { generateOrderNumber } from '../utils/orderNumber';
 import { AppError } from '../middleware/errorHandler';
 
@@ -67,18 +65,21 @@ export async function createOrder(userId: string, addressId: string, promoCode?:
   const total = subtotal - discount + tax + shippingCost;
 
   const orderNumber = generateOrderNumber();
-  let razorpayOrderId: string;
+  let stripePaymentIntentId: string;
+  let stripeClientSecret: string;
 
-  if (isRazorpayConfigured && razorpayInstance) {
-    const razorpayOrder = await razorpayInstance.orders.create({
-      amount: total * 100, // Razorpay expects paise
-      currency: 'INR',
-      receipt: orderNumber,
+  if (isStripeConfigured && stripeInstance) {
+    const paymentIntent = await stripeInstance.paymentIntents.create({
+      amount: total * 100, // Stripe expects paise (smallest currency unit)
+      currency: 'inr',
+      metadata: { orderNumber },
     });
-    razorpayOrderId = razorpayOrder.id;
+    stripePaymentIntentId = paymentIntent.id;
+    stripeClientSecret = paymentIntent.client_secret!;
   } else {
-    // Dev mode: mock Razorpay order
-    razorpayOrderId = `dev_order_${orderNumber}`;
+    // Dev mode: mock payment
+    stripePaymentIntentId = `dev_pi_${orderNumber}`;
+    stripeClientSecret = `dev_pi_${orderNumber}_secret_mock`;
   }
 
   // Create order in database
@@ -101,23 +102,23 @@ export async function createOrder(userId: string, addressId: string, promoCode?:
     discount,
     total,
     promoCode: promoCode?.toUpperCase(),
-    razorpayOrderId,
+    stripePaymentIntentId,
+    stripeClientSecret,
   });
 
   return {
     order,
-    razorpayOrderId,
+    clientSecret: stripeClientSecret,
+    paymentIntentId: stripePaymentIntentId,
     amount: total,
-    currency: 'INR',
-    keyId: env.RAZORPAY_KEY_ID || 'dev_key',
+    currency: 'inr',
+    publishableKey: env.STRIPE_PUBLISHABLE_KEY || 'dev_pk',
   };
 }
 
 export async function verifyPayment(
   orderNumber: string,
-  razorpayPaymentId: string,
-  razorpayOrderId: string,
-  razorpaySignature: string,
+  paymentIntentId: string,
   userId: string
 ): Promise<IOrder> {
   const order = await Order.findOne({ orderNumber, user: userId });
@@ -129,23 +130,16 @@ export async function verifyPayment(
     throw new AppError('Order is not in pending state', 400);
   }
 
-  if (isRazorpayConfigured) {
-    // Verify Razorpay signature
-    const body = razorpayOrderId + '|' + razorpayPaymentId;
-    const expectedSignature = crypto
-      .createHmac('sha256', env.RAZORPAY_KEY_SECRET!)
-      .update(body)
-      .digest('hex');
-
-    if (expectedSignature !== razorpaySignature) {
-      throw new AppError('Payment verification failed', 400);
+  if (isStripeConfigured && stripeInstance) {
+    // Verify payment status via Stripe API
+    const paymentIntent = await stripeInstance.paymentIntents.retrieve(paymentIntentId);
+    if (paymentIntent.status !== 'succeeded') {
+      throw new AppError('Payment not completed', 400);
     }
   }
-  // Dev mode: skip signature verification, auto-confirm
+  // Dev mode: skip verification, auto-confirm
 
-  // Update order
-  order.razorpayPaymentId = razorpayPaymentId || `dev_pay_${Date.now()}`;
-  order.razorpaySignature = razorpaySignature || 'dev_signature';
+  order.stripePaymentIntentId = paymentIntentId || `dev_pi_${Date.now()}`;
   order.status = 'confirmed';
   order.paidAt = new Date();
   await order.save();

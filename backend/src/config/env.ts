@@ -12,9 +12,9 @@ const envSchema = z.object({
   AUTH0_AUDIENCE: z.string().min(1).optional(),
   AUTH0_CLIENT_ID: z.string().min(1).optional(),
   AUTH0_CLIENT_SECRET: z.string().min(1).optional(),
-  RAZORPAY_KEY_ID: z.string().min(1).optional(),
-  RAZORPAY_KEY_SECRET: z.string().min(1).optional(),
-  RAZORPAY_WEBHOOK_SECRET: z.string().optional(),
+  STRIPE_SECRET_KEY: z.string().min(1).optional(),
+  STRIPE_PUBLISHABLE_KEY: z.string().min(1).optional(),
+  STRIPE_WEBHOOK_SECRET: z.string().optional(),
 });
 
 const parsed = envSchema.safeParse(process.env);
@@ -28,12 +28,12 @@ if (!parsed.success) {
 export const env = parsed.data;
 
 export const isDevMode = !env.AUTH0_ISSUER_BASE_URL;
-export const isRazorpayConfigured = !!(env.RAZORPAY_KEY_ID && env.RAZORPAY_KEY_SECRET);
+export const isStripeConfigured = !!(env.STRIPE_SECRET_KEY && env.STRIPE_PUBLISHABLE_KEY);
 
 if (isDevMode) {
   console.warn('⚠️  Running in DEV MODE — Auth0 disabled, using mock authentication');
   console.warn('   Use X-Dev-User-Id header to authenticate as any user');
 }
-if (!isRazorpayConfigured) {
-  console.warn('⚠️  Razorpay not configured — using mock payments');
+if (!isStripeConfigured) {
+  console.warn('⚠️  Stripe not configured — using mock payments');
 }
