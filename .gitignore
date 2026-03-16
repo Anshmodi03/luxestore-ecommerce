@@ -14,3 +14,4 @@ Claude_code_mcp_skills_plugins.pdf
 .claude/
 .vscode/
 BACKEND_PLAN.md
+.playwright-mcp/

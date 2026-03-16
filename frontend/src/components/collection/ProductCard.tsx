@@ -1,8 +1,10 @@
 import { motion, Variants } from 'framer-motion'
-import { ShoppingBag } from '@phosphor-icons/react'
-import { Product } from '../../data/products'
+import { ShoppingBag, Heart } from '@phosphor-icons/react'
+import { Product } from '../../services/product.service'
 import { useCart } from '../../context/CartContext'
 import { useToast } from '../../context/ToastContext'
+import { useWishlist } from '../../context/WishlistContext'
+import { useFirebaseAuth } from '../../context/FirebaseAuthContext'
 import { Link } from 'react-router-dom'
 
 interface ProductCardProps {
@@ -21,7 +23,16 @@ export const itemVariants: Variants = {
 
 export default function ProductCard({ product }: ProductCardProps) {
   const { openCart, addItem } = useCart()
-  const { showToast } = useToast()
+  const { isWishlisted, toggleWishlist } = useWishlist()
+  const { isAuthenticated, triggerLogin } = useFirebaseAuth()
+  const wishlisted = isWishlisted(product._id)
+
+  const handleWishlist = (e: React.MouseEvent) => {
+    e.preventDefault()
+    e.stopPropagation()
+    if (!isAuthenticated) { triggerLogin(); return }
+    toggleWishlist(product._id, product.name)
+  }
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault()
@@ -37,7 +48,7 @@ export default function ProductCard({ product }: ProductCardProps) {
       className="group hover-lift"
     >
       <Link
-        to={`/product/${product.id}`}
+        to={`/product/${product.slug}`}
         className="block relative w-full text-left cursor-pointer"
       >
         <div className="relative overflow-hidden aspect-4/5 rounded-2xl mb-6 bg-gray-50 dark:bg-white/5">
@@ -46,7 +57,7 @@ export default function ProductCard({ product }: ProductCardProps) {
             loading="lazy"
             decoding="async"
             className="w-full h-full object-cover transition-transform duration-[1.2s] ease-[cubic-bezier(0.165,0.84,0.44,1)] group-hover:scale-105"
-            src={product.image}
+            src={product.images?.[0]?.url || ''}
           />
 
           {/* Unified Badge */}
@@ -55,6 +66,20 @@ export default function ProductCard({ product }: ProductCardProps) {
               {product.badge}
             </div>
           )}
+
+          {/* Wishlist Button */}
+          <button
+            type="button"
+            title={wishlisted ? 'Remove from wishlist' : 'Add to wishlist'}
+            onClick={handleWishlist}
+            className={`absolute z-20 top-4 right-4 w-9 h-9 rounded-full flex items-center justify-center transition-all duration-300 shadow-md
+              ${wishlisted
+                ? 'bg-primary text-white opacity-100 scale-100'
+                : 'bg-white/90 backdrop-blur-sm text-gray-600 opacity-0 group-hover:opacity-100 -translate-y-1 group-hover:translate-y-0 hover:text-primary'
+              }`}
+          >
+            <Heart weight={wishlisted ? 'fill' : 'regular'} size={16} />
+          </button>
 
           {/* Quick Add Button */}
           <button

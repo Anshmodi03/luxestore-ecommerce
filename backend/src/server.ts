@@ -55,7 +55,7 @@ async function start() {
   app.listen(env.PORT, () => {
     console.log(`🚀 LuxeStore API running on http://localhost:${env.PORT}`);
     console.log(`   Environment: ${env.NODE_ENV}`);
-    console.log(`   Auth: ${isDevMode ? 'DEV MODE (X-Dev-User-Id header)' : 'Auth0 JWT'}`);
+    console.log(`   Auth: ${isDevMode ? 'DEV MODE (X-Dev-User-Id header)' : 'Firebase JWT'}`);
     console.log(`   Payments: ${isStripeConfigured ? 'Stripe' : 'DEV MODE (mock)'}`);
   });
 }

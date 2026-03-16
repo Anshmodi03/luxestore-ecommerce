@@ -2,7 +2,7 @@ import { useRef } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { CaretLeft, CaretRight } from '@phosphor-icons/react'
 import ProductCard from './ProductCard'
-import { Product } from '../../data/products'
+import { Product } from '../../services/product.service'
 
 interface ProductCarouselProps {
   products: Product[]
@@ -76,11 +76,10 @@ export default function ProductCarousel({ products, title, subtitle, onShopAll }
         <div 
           ref={scrollRef}
           className="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide gap-6 pb-8 pt-4"
-          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
         >
           {products.map((product, index) => (
             <motion.div 
-              key={product.id}
+              key={product._id}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
@@ -106,9 +105,8 @@ export default function ProductCarousel({ products, title, subtitle, onShopAll }
 
       {/* Global strict hide scrollbar style injections */}
       <style>{`
-        .scrollbar-hide::-webkit-scrollbar {
-            display: none;
-        }
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
+        .scrollbar-hide { scrollbar-width: none; -ms-overflow-style: none; }
       `}</style>
     </div>
   )

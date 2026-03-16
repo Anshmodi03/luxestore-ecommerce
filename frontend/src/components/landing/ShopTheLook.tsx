@@ -3,17 +3,17 @@ import ScrollReveal from '../common/ScrollReveal'
 
 const hotspots = [
   {
-    top: '35%', left: '25%',
+    positionClass: 'top-[35%] left-[25%]',
     name: 'Arc Floor Lamp', price: '$329.00',
     image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuD5kLHcqLz_lJ5IICU7pcgfgUl6dFr3OZigARypjwtzNZoBOt33ldc6SMqYmN84ZqNFJy89CmLchoUWxr74eTQs7brB_fJ0ULgI03T9yOu_GoTLctFCehT3HK4suwYkhmm6z45pe4HJAgu7UD2FEgIOVF-plNTWSzg541feNHRIxAuHDgjyO--UUFSq2BNN8dt9zqOrMyYCyk6Y3CKu7Ri1Ai8r9y8Y7xcWHnDknMHOQBg13mxL0iyhlfw9x_VMOdyAPZB9maHF_QQ',
   },
   {
-    top: '65%', left: '45%',
+    positionClass: 'top-[65%] left-[45%]',
     name: 'Velvet Lounge Chair', price: '$850.00',
     image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAqw8xzMl7mB8PaL9Zjc7P3YswgWlPh6TO6uN-wnPvR7NvNyTvuLOgo9U3oeNxo22SeCwl5dNjhj_J8iMbnj2anuvS4e5QNIdSv3-vJ0BqNuv_Rb5RAYDxOaNde84RQEt9Z4mVo48xmq9ml7a1ZCFRld4ag4R3bNh-5R5ZTRhNObz_b5gs2sW-G5PnBv3PulIX4dOxd1F7N0u2e61ud8sACfxkedvYklkZg0YXYKDZ-3kMNnradL13aJN9bTlJM2I5cban544dMPF0',
   },
   {
-    top: '58%', left: '72%',
+    positionClass: 'top-[58%] left-[72%]',
     name: 'Pro Audio ANC', price: '$254.99',
     image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCPo8P4cDxfdUKmudDqePbAHX7zlYOJs13ae7xww1fEo3xASV-mBZoG-dNjSY0FoyCbSku_LPnCIwtZoYSWAnxIFPqC8OSYUwty71F3V-wDzdGDNfjKXq3SzzauZG0N4r486WMbOupdxI5Fv59HZIBsWqb2OScbdVLNlj9yLvQUynGHODZW2SFUPkDdXR2oP62ypFaYQISJdhCPRtu_FDma_ScZdsYv_gZASC3gF4PSvF6VH94TEFKVcR8AQzVFDZ_Ui42kUka_TH8',
   },
@@ -63,7 +63,7 @@ export default function ShopTheLook() {
               src="https://lh3.googleusercontent.com/aida-public/AB6AXuBSIuR5b5ya3hQTrmIcjL054y-_wnjZmnyakH7WQ1zaDJ9cbQfu2frZrJJ6heoU5ky-lBbJhmRwXdkSFEL0WW4u9_ucyBYUPlmNTE7iqaZLPnbxEjMABeAwGZ2SshDSC4OJvSt4uA-LEY7i_CNeEfkAt_yUGMu0kEsq_4HD67Q1P5MWXirkuj9w7XFVvX5UZqt4xwf_ah0CgPGWFp4OfrjmIR06Qktc3zFlXsDx7sLENmopya2VgjDf_b5ma_eQUsdSEN0vwpiu8ww"
             />
             {hotspots.map((spot, i) => (
-              <div key={i} className="hotspot" style={{ top: spot.top, left: spot.left }}>
+              <div key={i} className={`hotspot ${spot.positionClass}`}>
                 <div className="hotspot-card">
                   <div className="flex gap-3 mb-3">
                     <img alt={spot.name} loading="lazy" decoding="async" className="w-16 h-16 object-cover rounded-lg bg-gray-100" src={spot.image} />

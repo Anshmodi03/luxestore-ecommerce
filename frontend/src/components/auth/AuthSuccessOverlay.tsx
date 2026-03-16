@@ -141,20 +141,14 @@ export default function AuthSuccessOverlay({ type, onComplete }: AuthSuccessOver
           <div className="success-glow-ring absolute w-16 h-16 rounded-full border border-primary/40" />
 
           {/* Particles */}
+          <style>{particles.map((p, i) =>
+            `.success-particle-${i}{width:${p.size}px;height:${p.size}px;background-color:${p.isGold ? '#c8956e' : '#ffffff'};transform:translate(${p.x}px,${p.y}px)}`
+          ).join('')}</style>
+
           {particles.map((p, i) => (
             <div
               key={i}
-              className="success-particle absolute"
-              style={{
-                width: p.size,
-                height: p.size,
-                borderRadius: '50%',
-                backgroundColor: p.isGold ? '#c8956e' : '#ffffff',
-                left: '50%',
-                top: '50%',
-                transform: `translate(${p.x}px, ${p.y}px)`,
-                opacity: 0.8
-              }}
+              className={`success-particle success-particle-${i} absolute rounded-full left-1/2 top-1/2 opacity-80`}
             />
           ))}
 

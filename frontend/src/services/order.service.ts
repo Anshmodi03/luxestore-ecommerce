@@ -7,10 +7,11 @@ export interface CreateOrderInput {
 
 export interface OrderResponse {
   order: any;
-  razorpayOrderId: string;
+  clientSecret: string;
+  paymentIntentId: string;
+  publishableKey: string;
   amount: number;
   currency: string;
-  keyId: string;
 }
 
 export async function createOrder(input: CreateOrderInput): Promise<OrderResponse> {
@@ -19,9 +20,7 @@ export async function createOrder(input: CreateOrderInput): Promise<OrderRespons
 }
 
 export async function verifyPayment(orderNumber: string, paymentData: {
-  razorpay_payment_id: string;
-  razorpay_order_id: string;
-  razorpay_signature: string;
+  paymentIntentId: string;
 }) {
   const { data } = await api.post(`/orders/${orderNumber}/verify-payment`, paymentData);
   return data.data;

@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react'
+import { useFirebaseAuth } from '../../context/FirebaseAuthContext'
 import { Diamond, SignOut, User, Package, MapPin, Heart, Gear } from '@phosphor-icons/react'
 import { gsap } from 'gsap'
 
@@ -16,6 +17,7 @@ const navItems = [
 ]
 
 export default function DashboardSidebar({ activeTab, onTabChange }: DashboardSidebarProps) {
+  const { user, signOut } = useFirebaseAuth()
   const sidebarRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -39,18 +41,15 @@ export default function DashboardSidebar({ activeTab, onTabChange }: DashboardSi
           {/* User profile */}
           <div className="sidebar-item flex items-center gap-4 px-2 pb-6 border-b border-gray-200 dark:border-white/5 pt-2">
             <div className="relative group cursor-pointer">
-              <div
-                className="h-14 w-14 rounded-full bg-cover bg-center ring-2 ring-primary/20 transition-all duration-300 group-hover:ring-primary/50"
-                style={{
-                  backgroundImage: `url("https://lh3.googleusercontent.com/aida-public/AB6AXuDMOz8iU8snW1Hg0bX-AaPjdWb1-2dL2x5lIP-4xcUr4mEmzrENmEAfviLRe3pfGp0PUW9YmhPU86C6GKaUCNYGA5N3vvKUif1ulAndQFURmHC1ApVo-jfuXgoDh6IEXJKl652WAVwyD0moch-m5HFANCTB7zvFDFoaiq1cvBlOBKyUTh1PvXefz9jH7Xwfn3f7H1KqpzFg40lueQL7uVpYL0N1KaX0I2P-Xno9WIINGDwr6pssoSZ2lVadJCA_c11DLNEbMplH9s8")`,
-                }}
-              />
+              <div className="h-14 w-14 rounded-full bg-primary/10 ring-2 ring-primary/20 flex items-center justify-center text-xl font-serif font-bold text-primary transition-all duration-300 group-hover:ring-primary/50">
+                {(user?.displayName || 'G')[0].toUpperCase()}
+              </div>
               <div className="absolute -bottom-1 -right-1 flex h-6 w-6 items-center justify-center rounded-full bg-primary text-white animate-pulse-glow shadow-[0_0_15px_rgba(255,92,53,0.4)]">
                 <Diamond weight="fill" size={12} />
               </div>
             </div>
             <div>
-              <h2 className="text-lg font-serif italic text-gray-900 dark:text-white tracking-wide">Isabella M.</h2>
+              <h2 className="text-lg font-serif italic text-gray-900 dark:text-white tracking-wide">{user?.displayName || 'Guest'}</h2>
               <p className="micro-type text-primary mt-1">Gold Member</p>
             </div>
           </div>
@@ -87,7 +86,11 @@ export default function DashboardSidebar({ activeTab, onTabChange }: DashboardSi
           </nav>
         </div>
 
-        <button className="sidebar-item flex w-full items-center justify-center gap-3 rounded-lg border border-gray-200 dark:border-white/5 p-3.5 text-xs font-medium uppercase tracking-widest text-gray-500 dark:text-slate-400 hover:bg-gray-100 dark:hover:bg-white/5 hover:border-gray-300 dark:hover:border-white/10 hover:text-gray-900 dark:hover:text-white transition-all duration-300 group">
+        <button
+          type="button"
+          onClick={signOut}
+          className="sidebar-item flex w-full items-center justify-center gap-3 rounded-lg border border-gray-200 dark:border-white/5 p-3.5 text-xs font-medium uppercase tracking-widest text-gray-500 dark:text-slate-400 hover:bg-gray-100 dark:hover:bg-white/5 hover:border-gray-300 dark:hover:border-white/10 hover:text-gray-900 dark:hover:text-white transition-all duration-300 group"
+        >
           <SignOut size={18} className="group-hover:-translate-x-1 transition-transform" />
           Log Out
         </button>

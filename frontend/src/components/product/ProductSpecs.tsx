@@ -1,5 +1,10 @@
 import { motion } from 'framer-motion'
-import { Spec } from '../../data/productDetails'
+
+interface Spec {
+  category: string
+  title: string
+  description: string
+}
 
 interface ProductSpecsProps {
   specs: Spec[]
@@ -17,7 +22,7 @@ export default function ProductSpecs({ specs }: ProductSpecsProps) {
         </p>
       </div>
 
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-100px" }}

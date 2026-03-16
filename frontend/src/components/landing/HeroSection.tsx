@@ -52,10 +52,9 @@ export default function HeroSection() {
       <AnnouncementBar />
       <div 
         ref={videoWrapperRef}
-        className="hero-video-wrapper absolute inset-0 w-full h-[120%] -top-[10%] origin-bottom"
-        style={{ willChange: 'transform' }}
+        className="hero-video-wrapper absolute inset-0 w-full h-[120%] -top-[10%] origin-bottom will-change-transform"
       >
-        <video autoPlay loop muted playsInline preload="auto" onLoadedData={(e) => { (e.target as HTMLVideoElement).playbackRate = 0.7 }} style={{ background: '#0a0a0a' }} className="w-full h-full object-cover">
+        <video autoPlay loop muted playsInline preload="auto" onLoadedData={(e) => { (e.target as HTMLVideoElement).playbackRate = 0.7 }} className="w-full h-full object-cover bg-[#0a0a0a]">
           <source src="/assets/videos/hero-bg.webm" type="video/webm" />
           <source src="/assets/videos/hero-bg.mp4" type="video/mp4" />
           <img alt="Fashion runway fallback" className="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDCL_nsaxB0Od7ioWQk9Zt9R_jWHEfjK2IAwJBQsi7EmgmjD0QJFDJFtGedRYTv316JW-m6B_oPsjgb1Tjf1mG4WsxFZmRN6sJF_TQr9Yo__y2Eq8MrQEabb44od2hKypsqhVyw8_tpx4ET8paYV5qj7tFui0SrARFdAJaqEgRtcdgT8XSpuxJEoQMpORhfdgxC4FvaqJLHY-P9gl5vcn5JIrk7kEJ5yYPB8rZta0fNtyykH81QAd7YBh9oU1dkAbgYaSnqjqcCZoE" />
@@ -64,8 +63,7 @@ export default function HeroSection() {
       </div>
       <div 
         ref={textRef}
-        className="relative z-10 w-full max-w-4xl px-4 text-center mt-16 space-y-8"
-        style={{ willChange: 'transform' }}
+        className="relative z-10 w-full max-w-4xl px-4 text-center mt-16 space-y-8 will-change-transform"
       >
         <div className="inline-flex items-center gap-3 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 backdrop-blur-md mx-auto">
           <span className="w-2 h-2 rounded-full bg-primary animate-pulse"></span>

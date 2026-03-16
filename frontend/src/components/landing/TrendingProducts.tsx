@@ -1,11 +1,20 @@
+import { useState, useEffect } from 'react'
 import { ArrowRight } from '@phosphor-icons/react'
 import { Link } from 'react-router-dom'
 import ProductCard from '../collection/ProductCard'
-import { collectionProducts } from '../../data/products'
+import { getProducts, Product } from '../../services/product.service'
 import ScrollReveal from '../common/ScrollReveal'
 
 export default function TrendingProducts() {
-  const trendingItems = collectionProducts.filter(p => p.isTrending).slice(0, 4)
+  const [trendingItems, setTrendingItems] = useState<Product[]>([])
+
+  useEffect(() => {
+    getProducts({ limit: 8 })
+      .then(res => setTrendingItems(res.data.filter(p => p.isTrending).slice(0, 4)))
+      .catch(() => setTrendingItems([]))
+  }, [])
+
+  if (trendingItems.length === 0) return null
 
   return (
     <section className="py-24 px-4 sm:px-8 lg:px-16 max-w-8xl mx-auto" id="trending">
@@ -24,9 +33,9 @@ export default function TrendingProducts() {
       <ScrollReveal variant="fade-up" delay={0.2} staggerChildren>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-16">
           {trendingItems.map((product) => (
-            <ProductCard 
-              key={product.id} 
-              product={product} 
+            <ProductCard
+              key={product._id}
+              product={product}
             />
           ))}
         </div>

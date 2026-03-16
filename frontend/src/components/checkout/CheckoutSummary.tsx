@@ -19,14 +19,14 @@ const CheckoutSummary = () => {
               <p className="text-sm text-slate-400 dark:text-slate-500 italic">Your cart is empty</p>
             ) : (
               items.map((item) => (
-                <div key={item.product.id} className="flex gap-6 pb-6 border-b border-slate-200/50 dark:border-white/10 last:border-b-0 last:pb-0 shrink-0">
+                <div key={item.product._id} className="flex gap-6 pb-6 border-b border-slate-200/50 dark:border-white/10 last:border-b-0 last:pb-0 shrink-0">
                   <div className="w-20 h-20 bg-white dark:bg-[#111] p-2 border border-slate-100 dark:border-white/10 shrink-0 rounded-sm">
                     <img
                       alt={item.product.name}
                       loading="lazy"
                       decoding="async"
                       className="w-full h-full object-contain mix-blend-multiply dark:mix-blend-normal opacity-80"
-                      src={item.product.image}
+                      src={item.product.images?.[0]?.url || ''}
                     />
                   </div>
                   <div className="flex flex-col justify-center gap-1">

@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import ProductCard from './ProductCard'
-import { collectionProducts } from '../../data/products'
+import { Product } from '../../services/product.service'
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -15,34 +15,34 @@ const containerVariants = {
 }
 
 interface ProductGridProps {
+  products: Product[];
   activeCategory?: string;
   sortOption?: 'featured' | 'price-asc' | 'price-desc';
 }
 
-export default function ProductGrid({ activeCategory = 'All', sortOption = 'featured' }: ProductGridProps) {
+export default function ProductGrid({ products, activeCategory = 'All', sortOption = 'featured' }: ProductGridProps) {
   const filteredAndSortedProducts = useMemo(() => {
-    let result = [...collectionProducts]
+    let result = [...products]
 
     if (activeCategory === 'New Arrivals') {
-      result = result.filter(p => p.isNew)
+      result = result.filter(p => p.isNewArrival)
     } else if (activeCategory === 'Trending') {
       result = result.filter(p => p.isTrending || p.isPopular)
     } else if (activeCategory !== 'All') {
       result = result.filter(p => p.category === activeCategory)
     }
-      
+
     if (sortOption === 'price-asc') {
       result.sort((a, b) => a.price - b.price)
     } else if (sortOption === 'price-desc') {
       result.sort((a, b) => b.price - a.price)
     }
-    // 'featured' maintains the default array order
-    
+
     return result
-  }, [activeCategory, sortOption])
+  }, [products, activeCategory, sortOption])
 
   return (
-    <motion.div 
+    <motion.div
       key={activeCategory}
       variants={containerVariants}
       initial="hidden"
@@ -52,8 +52,8 @@ export default function ProductGrid({ activeCategory = 'All', sortOption = 'feat
     >
       <AnimatePresence mode="popLayout">
         {filteredAndSortedProducts.map((product) => (
-          <motion.div 
-            key={product.id}
+          <motion.div
+            key={product._id}
             layout
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}

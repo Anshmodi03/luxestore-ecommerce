@@ -55,11 +55,10 @@ export default function ProductGallery({ images }: ProductGalleryProps) {
                 <div className="absolute inset-0 rounded-full border border-gray-100 dark:border-gray-800 scale-110 animate-pulse"></div>
                 <div className="absolute inset-0 rounded-full border border-dashed border-gray-200 dark:border-gray-700 scale-125 opacity-50"></div>
                 
-                <img 
-                  alt="360 View" 
-                  className="relative w-full h-full object-contain z-10" 
-                  src={images[0]} 
-                  style={{ filter: 'drop-shadow(0 20px 30px rgba(0,0,0,0.15))' }}
+                <img
+                  alt="360 View"
+                  className="relative w-full h-full object-contain z-10 product-360-shadow"
+                  src={images[0]}
                 />
                 
                 <div className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 pointer-events-none">

@@ -67,8 +67,7 @@ export default function Product360() {
                 environment-image="neutral"
                 ar
                 ar-modes="webxr scene-viewer quick-look"
-                className="w-full h-full min-h-[300px] z-10"
-                style={{ backgroundColor: 'transparent' }}
+                className="w-full h-full min-h-[300px] z-10 bg-transparent"
               >
                 <div slot="poster" className="absolute inset-0 flex items-center justify-center bg-transparent">
                   <div className="w-8 h-8 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
@@ -80,7 +79,7 @@ export default function Product360() {
                 <span className="text-[10px] font-bold uppercase tracking-wider text-gray-600 dark:text-gray-300">Drag to Rotate</span>
               </div>
               {/* Hotspot: Aluminum */}
-              <div className="hotspot" style={{ top: '30%', right: '15%' }}>
+              <div className="hotspot top-[30%] right-[15%]">
                 <div className="hotspot-card w-64!">
                   <h5 className="text-sm font-bold text-gray-900 dark:text-white mb-1">Aerospace-grade Aluminum</h5>
                   <p className="text-xs text-gray-500 mb-2 leading-relaxed">Lightweight yet incredibly durable frame construction for extended listening sessions without fatigue.</p>
@@ -91,14 +90,14 @@ export default function Product360() {
                 </div>
               </div>
               {/* Hotspot: Memory Foam */}
-              <div className="hotspot" style={{ bottom: '30%', left: '20%' }}>
+              <div className="hotspot bottom-[30%] left-[20%]">
                 <div className="hotspot-card w-64!">
                   <h5 className="text-sm font-bold text-gray-900 dark:text-white mb-1">Memory Foam Comfort</h5>
                   <p className="text-xs text-gray-500 mb-2 leading-relaxed">Cloud-soft protein leather cushions that adapt to your unique ear shape for superior noise isolation.</p>
                 </div>
               </div>
               {/* Hotspot: Drivers (Center Earcup) */}
-              <div className="hotspot" style={{ top: '62%', left: '65%' }}>
+              <div className="hotspot top-[62%] left-[65%]">
                 <div className="hotspot-card w-64!">
                   <h5 className="text-sm font-bold text-gray-900 dark:text-white mb-1">High-Fidelity Drivers</h5>
                   <p className="text-xs text-gray-500 mb-2 leading-relaxed">Custom 40mm drivers delivering rich bass and crystal-clear highs across the entire frequency spectrum.</p>

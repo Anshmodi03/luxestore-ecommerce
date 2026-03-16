@@ -1,5 +1,5 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react'
-import { Product } from '../data/products'
+import React, { createContext, useContext, useState, useCallback, useMemo, ReactNode } from 'react'
+import { Product } from '../services/product.service'
 
 interface ProductModalContextType {
   isOpen: boolean
@@ -14,22 +14,27 @@ export function ProductModalProvider({ children }: { children: ReactNode }) {
   const [isOpen, setIsOpen] = useState(false)
   const [activeProduct, setActiveProduct] = useState<Product | null>(null)
 
-  const openProductModal = (product: Product) => {
+  const openProductModal = useCallback((product: Product) => {
     setActiveProduct(product)
     setIsOpen(true)
     document.body.style.overflow = 'hidden'
-  }
+  }, [])
 
-  const closeProductModal = () => {
+  const closeProductModal = useCallback(() => {
     setIsOpen(false)
     setTimeout(() => {
       setActiveProduct(null)
       document.body.style.overflow = 'auto'
     }, 300) // wait for exit animation
-  }
+  }, [])
+
+  const value = useMemo(
+    () => ({ isOpen, activeProduct, openProductModal, closeProductModal }),
+    [isOpen, activeProduct, openProductModal, closeProductModal]
+  )
 
   return (
-    <ProductModalContext.Provider value={{ isOpen, activeProduct, openProductModal, closeProductModal }}>
+    <ProductModalContext.Provider value={value}>
       {children}
     </ProductModalContext.Provider>
   )

@@ -17,7 +17,6 @@ const EditorialPage = lazy(() => import('./pages/EditorialPage'))
 const ClientServicesPage = lazy(() => import('./pages/ClientServicesPage'))
 const ProductDetailsPage = lazy(() => import('./pages/ProductDetailsPage'))
 const CheckoutPage = lazy(() => import('./pages/CheckoutPage'))
-const AuthPage = lazy(() => import('./pages/AuthPage'))
 const DashboardPage = lazy(() => import('./pages/DashboardPage'))
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage'))
 import { gsap } from 'gsap'
@@ -35,9 +34,7 @@ export default function App() {
   })
   const [loading, setLoading] = useState(true)
   const location = useLocation()
-  const isCheckout = location.pathname === '/checkout'
-  const isAuth = location.pathname === '/auth'
-  const hideNav = isCheckout || isAuth
+  const hideNav = location.pathname === '/checkout'
 
   const lenisRef = useRef<Lenis | null>(null)
 
@@ -94,8 +91,6 @@ export default function App() {
                 <Route path="/editorial" element={<EditorialPage />} />
                 <Route path="/services" element={<ClientServicesPage />} />
                 <Route path="/checkout" element={<ProtectedRoute><CheckoutPage /></ProtectedRoute>} />
-                <Route path="/auth" element={<AuthPage />} />
-                <Route path="/auth/callback" element={<AuthPage />} />
                 <Route path="/dashboard" element={<ProtectedRoute><DashboardPage /></ProtectedRoute>} />
                 <Route path="/product/:id" element={<ProductDetailsPage />} />
                 <Route path="*" element={<NotFoundPage />} />

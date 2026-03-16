@@ -1,10 +1,11 @@
-import { createContext, useContext, useState, useCallback, useEffect, ReactNode } from 'react'
-import { Product } from '../data/products'
+import { createContext, useContext, useState, useCallback, useEffect, useMemo, ReactNode } from 'react'
+import { Product } from '../services/product.service'
 import * as cartApi from '../services/cart.service'
 
 export interface CartItem {
   product: Product
   quantity: number
+  _itemId?: string // backend cart item _id (set after syncCartWithBackend)
 }
 
 interface CartContextType {
@@ -55,10 +56,10 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   const addItem = useCallback((product: Product, quantity = 1) => {
     setItems(prev => {
-      const existing = prev.find(item => item.product.id === product.id)
+      const existing = prev.find(item => item.product._id === product._id)
       if (existing) {
         return prev.map(item =>
-          item.product.id === product.id
+          item.product._id === product._id
             ? { ...item, quantity: item.quantity + quantity }
             : item
         )
@@ -67,31 +68,40 @@ export function CartProvider({ children }: { children: ReactNode }) {
     })
 
     // Fire-and-forget backend sync (don't block UI)
-    cartApi.addToCart(product.id, quantity).catch(() => {
+    cartApi.addToCart(product._id, quantity).catch(() => {
       // Backend unavailable — localStorage already updated
     })
   }, [])
 
   const removeItem = useCallback((productId: string) => {
     setItems(prev => {
-      const item = prev.find(i => i.product.id === productId)
-      if (item) {
-        // Note: backend uses cart item _id, not product id
-        // Full sync handles the mapping; this is a best-effort attempt
+      const item = prev.find(i => i.product._id === productId)
+      if (item?._itemId) {
+        cartApi.removeCartItem(item._itemId).catch(() => {})
       }
-      return prev.filter(item => item.product.id !== productId)
+      return prev.filter(i => i.product._id !== productId)
     })
   }, [])
 
   const updateQuantity = useCallback((productId: string, quantity: number) => {
     if (quantity <= 0) {
-      setItems(prev => prev.filter(item => item.product.id !== productId))
+      setItems(prev => {
+        const item = prev.find(i => i.product._id === productId)
+        if (item?._itemId) {
+          cartApi.removeCartItem(item._itemId).catch(() => {})
+        }
+        return prev.filter(i => i.product._id !== productId)
+      })
       return
     }
     setItems(prev =>
-      prev.map(item =>
-        item.product.id === productId ? { ...item, quantity } : item
-      )
+      prev.map(item => {
+        if (item.product._id !== productId) return item
+        if (item._itemId) {
+          cartApi.updateCartItem(item._itemId, quantity).catch(() => {})
+        }
+        return { ...item, quantity }
+      })
     )
   }, [])
 
@@ -106,24 +116,15 @@ export function CartProvider({ children }: { children: ReactNode }) {
       // Push local items to backend
       const localItems = loadCartFromStorage()
       for (const item of localItems) {
-        await cartApi.addToCart(item.product.id, item.quantity)
+        await cartApi.addToCart(item.product._id, item.quantity)
       }
 
       // Fetch merged cart from backend
       const serverCart = await cartApi.getCart()
       if (serverCart?.items?.length > 0) {
         const mergedItems: CartItem[] = serverCart.items.map((item: any) => ({
-          product: {
-            id: item.product.slug || item.product._id,
-            name: item.product.name,
-            category: item.product.category,
-            price: item.product.price,
-            image: item.product.images?.[0]?.url || '',
-            description: item.product.description,
-            oldPrice: item.product.oldPrice,
-            badge: item.product.badge,
-            badgeClass: item.product.badgeClass,
-          },
+          _itemId: item._id,
+          product: item.product,
           quantity: item.quantity,
         }))
         setItems(mergedItems)
@@ -133,8 +134,8 @@ export function CartProvider({ children }: { children: ReactNode }) {
     }
   }, [])
 
-  const totalItems = items.reduce((sum, item) => sum + item.quantity, 0)
-  const subtotal = items.reduce((sum, item) => sum + item.product.price * item.quantity, 0)
+  const totalItems = useMemo(() => items.reduce((sum, item) => sum + item.quantity, 0), [items])
+  const subtotal = useMemo(() => items.reduce((sum, item) => sum + item.product.price * item.quantity, 0), [items])
 
   return (
     <CartContext.Provider value={{ isCartOpen, openCart, closeCart, items, addItem, removeItem, updateQuantity, clearCart, totalItems, subtotal, syncCartWithBackend }}>

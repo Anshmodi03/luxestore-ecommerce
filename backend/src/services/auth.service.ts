@@ -1,23 +1,23 @@
 import { User, IUser } from '../models/User.model';
 
-export async function findOrCreateUser(auth0Id: string, profileData?: {
+export async function findOrCreateUser(firebaseUid: string, profileData?: {
   email?: string;
   firstName?: string;
   lastName?: string;
   avatarUrl?: string;
-  provider?: 'auth0' | 'google';
+  provider?: 'email' | 'google';
   isVerified?: boolean;
 }): Promise<IUser> {
-  let user = await User.findOne({ auth0Id });
+  let user = await User.findOne({ firebaseUid });
 
   if (!user && profileData) {
     user = await User.create({
-      auth0Id,
-      email: profileData.email || `${auth0Id}@placeholder.com`,
+      firebaseUid,
+      email: profileData.email || `${firebaseUid}@placeholder.com`,
       firstName: profileData.firstName || 'User',
       lastName: profileData.lastName || '',
       avatarUrl: profileData.avatarUrl,
-      provider: profileData.provider || 'auth0',
+      provider: profileData.provider || 'email',
       isVerified: profileData.isVerified || false,
     });
   }

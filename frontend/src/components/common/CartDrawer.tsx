@@ -114,7 +114,7 @@ export default function CartDrawer() {
                       <AnimatePresence mode="popLayout">
                         {items.map((item) => (
                           <motion.div
-                            key={item.product.id}
+                            key={item.product._id}
                             layout
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
@@ -124,7 +124,7 @@ export default function CartDrawer() {
                           >
                             <div className="shrink-0">
                               <div className="h-24 w-24 md:h-28 md:w-28 bg-gray-50 dark:bg-white/5 flex items-center justify-center overflow-hidden">
-                                <img alt={item.product.name} loading="lazy" decoding="async" className="w-full h-full object-cover mix-blend-multiply dark:mix-blend-normal opacity-90 transition-transform duration-700 group-hover:scale-105" src={item.product.image} />
+                                <img alt={item.product.name} loading="lazy" decoding="async" className="w-full h-full object-cover mix-blend-multiply dark:mix-blend-normal opacity-90 transition-transform duration-700 group-hover:scale-105" src={item.product.images?.[0]?.url || ''} />
                               </div>
                             </div>
                             <div className="flex flex-1 flex-col justify-between py-1">
@@ -134,7 +134,7 @@ export default function CartDrawer() {
                                   <p className="text-[10px] uppercase tracking-wider text-gray-500 dark:text-gray-400">{item.product.category}</p>
                                 </div>
                                 <button
-                                  onClick={() => removeItem(item.product.id)}
+                                  onClick={() => removeItem(item.product._id)}
                                   aria-label={`Remove ${item.product.name}`}
                                   className="text-gray-300 dark:text-gray-600 hover:text-red-500 dark:hover:text-red-400 transition-colors duration-300 mt-1"
                                 >
@@ -144,7 +144,7 @@ export default function CartDrawer() {
                               <div className="flex items-center justify-between mt-3">
                                 <div className="flex items-center gap-3 border border-gray-200 dark:border-white/10 rounded-full px-2 py-1">
                                   <button
-                                    onClick={() => updateQuantity(item.product.id, item.quantity - 1)}
+                                    onClick={() => updateQuantity(item.product._id, item.quantity - 1)}
                                     aria-label={`Decrease quantity of ${item.product.name}`}
                                     className="text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
                                   >
@@ -152,7 +152,7 @@ export default function CartDrawer() {
                                   </button>
                                   <span className="text-xs font-medium w-6 text-center text-gray-900 dark:text-white">{item.quantity}</span>
                                   <button
-                                    onClick={() => updateQuantity(item.product.id, item.quantity + 1)}
+                                    onClick={() => updateQuantity(item.product._id, item.quantity + 1)}
                                     aria-label={`Increase quantity of ${item.product.name}`}
                                     className="text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
                                   >

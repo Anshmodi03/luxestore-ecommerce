@@ -1,38 +1,55 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { ShoppingBag, Heart, Diamond } from '@phosphor-icons/react'
 import { gsap } from 'gsap'
-
-const stats = [
-  {
-    label: 'Total Orders',
-    value: '24',
-    sub: 'Lifetime',
-    icon: ShoppingBag,
-    accent: false,
-  },
-  {
-    label: 'Wishlist',
-    value: '8',
-    sub: 'Saved Items',
-    icon: Heart,
-    accent: false,
-  },
-  {
-    label: 'Loyalty Points',
-    value: '3,250',
-    sub: 'Gold Tier',
-    icon: Diamond,
-    accent: true,
-  },
-]
+import { getProfile } from '../../services/user.service'
+import { getOrders } from '../../services/order.service'
+import { getWishlist } from '../../services/wishlist.service'
 
 export default function ProfileOverview() {
   const sectionRef = useRef<HTMLDivElement>(null)
+  const [firstName, setFirstName] = useState('')
+  const [totalOrders, setTotalOrders] = useState<number | null>(null)
+  const [wishlistCount, setWishlistCount] = useState<number | null>(null)
+
+  useEffect(() => {
+    getProfile()
+      .then(user => setFirstName(user.firstName || user.email?.split('@')[0] || 'Guest'))
+      .catch(() => {})
+    getOrders(1, 1)
+      .then(res => setTotalOrders(res.pagination?.total ?? res.data?.length ?? 0))
+      .catch(() => setTotalOrders(0))
+    getWishlist()
+      .then(items => setWishlistCount(Array.isArray(items) ? items.length : 0))
+      .catch(() => setWishlistCount(0))
+  }, [])
+
+  const stats = [
+    {
+      label: 'Total Orders',
+      value: totalOrders !== null ? String(totalOrders) : '—',
+      sub: 'Lifetime',
+      icon: ShoppingBag,
+      accent: false,
+    },
+    {
+      label: 'Wishlist',
+      value: wishlistCount !== null ? String(wishlistCount) : '—',
+      sub: 'Saved Items',
+      icon: Heart,
+      accent: false,
+    },
+    {
+      label: 'Loyalty Points',
+      value: '3,250',
+      sub: 'Gold Tier',
+      icon: Diamond,
+      accent: true,
+    },
+  ]
 
   useEffect(() => {
     if (!sectionRef.current) return
     const ctx = gsap.context(() => {
-      // Animate heading
       gsap.fromTo(
         '.dash-heading',
         { y: 40, opacity: 0, filter: 'blur(8px)' },
@@ -43,8 +60,6 @@ export default function ProfileOverview() {
         { y: 20, opacity: 0 },
         { y: 0, opacity: 1, duration: 0.6, ease: 'power3.out', delay: 0.4 }
       )
-
-      // Animate stat cards
       gsap.fromTo(
         '.stat-card',
         { y: 50, opacity: 0, scale: 0.95 },
@@ -69,7 +84,7 @@ export default function ProfileOverview() {
         <h1 className="dash-heading font-serif italic text-4xl sm:text-5xl md:text-6xl text-gray-900 dark:text-white leading-tight tracking-wide">
           Welcome back,{' '}
           <span className="bg-clip-text text-transparent bg-linear-to-r from-gray-900 via-gray-900 to-gray-400 dark:from-white dark:via-white dark:to-slate-400">
-            Isabella
+            {firstName || '…'}
           </span>
         </h1>
         <p className="dash-subtext text-gray-500 dark:text-slate-400 max-w-lg text-sm tracking-wide font-light leading-relaxed">

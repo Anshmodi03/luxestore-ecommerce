@@ -9,10 +9,10 @@ const api = axios.create({
   },
 });
 
-// Auth0 token interceptor — set by AuthProvider after login
+// Firebase token interceptor — set by FirebaseAuthProvider after login
 let getAccessToken: (() => Promise<string>) | null = null;
 
-export function setTokenGetter(fn: () => Promise<string>) {
+export function setTokenGetter(fn: (() => Promise<string>) | null) {
   getAccessToken = fn;
 }
 
@@ -31,10 +31,6 @@ api.interceptors.request.use(async (config) => {
 api.interceptors.response.use(
   (response) => response,
   (error) => {
-    if (error.response?.status === 401) {
-      // Token expired or invalid — could trigger re-login
-      console.warn('Unauthorized request — token may be expired');
-    }
     return Promise.reject(error);
   }
 );
