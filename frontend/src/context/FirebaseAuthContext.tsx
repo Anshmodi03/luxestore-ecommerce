@@ -46,12 +46,27 @@ export function FirebaseAuthProvider({ children }: { children: ReactNode }) {
   }, [])
 
   const triggerLogin = useCallback(async (type: 'signin' | 'register' = 'signin') => {
-    try {
+    const attemptPopup = async () => {
+      await setPersistence(auth, browserLocalPersistence)
       await signInWithPopup(auth, googleProvider)
+    }
+    try {
+      await attemptPopup()
       setSuccessType(type)
       setShowSuccess(true)
-    } catch {
-      // User closed popup or browser blocked it — ignore
+    } catch (err: any) {
+      // "missing initial state" in private tabs / partitioned storage — retry once
+      if (err?.message?.includes('missing initial state') || err?.code === 'auth/internal-error') {
+        try {
+          await attemptPopup()
+          setSuccessType(type)
+          setShowSuccess(true)
+        } catch {
+          // second attempt also failed — user closed popup or browser blocked it
+        }
+        return
+      }
+      // any other error (popup closed by user, blocked) — ignore silently
     }
   }, [])
 
