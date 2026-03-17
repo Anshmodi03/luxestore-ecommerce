@@ -16,7 +16,7 @@
 LuxeStore is a production-grade luxury e-commerce application built with React 19, Express 5, and MongoDB.
 It features Google Sign-In, Stripe payments, animated UI, wishlists, a full dashboard, and a REST API backend.
 
-[Live Demo](https://luxestore-ecommerce.vercel.app) · [API Health](https://luxestore-api.koyeb.app/api/health) · [Report Bug](https://github.com/Anshmodi03/luxestore-ecommerce/issues)
+[Live Demo](https://luxestore-ecommerce.vercel.app) · [API Health](https://luxestore-api.onrender.com/api/health) · [Report Bug](https://github.com/Anshmodi03/luxestore-ecommerce/issues)
 
 </div>
 
