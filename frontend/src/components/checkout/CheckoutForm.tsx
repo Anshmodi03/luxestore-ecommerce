@@ -39,6 +39,15 @@ function CheckoutFormInner() {
   const [clientSecret, setClientSecret] = useState<string | null>(null)
   const [paymentIntentId, setPaymentIntentId] = useState<string | null>(null)
   const [savedPaymentMethodId, setSavedPaymentMethodId] = useState<string | null>(null)
+  const [isDark, setIsDark] = useState(() => document.documentElement.classList.contains('dark'))
+
+  useEffect(() => {
+    const observer = new MutationObserver(() => {
+      setIsDark(document.documentElement.classList.contains('dark'))
+    })
+    observer.observe(document.documentElement, { attributeFilter: ['class'] })
+    return () => observer.disconnect()
+  }, [])
 
   // Pre-fill form from user's default saved address
   useEffect(() => {
@@ -309,8 +318,9 @@ function CheckoutFormInner() {
                             base: {
                               fontSize: '14px',
                               fontFamily: '"Plus Jakarta Sans", sans-serif',
-                              color: '#1F2937',
-                              '::placeholder': { color: '#9ca3af' },
+                              color: isDark ? '#f1f5f9' : '#1F2937',
+                              iconColor: isDark ? '#f1f5f9' : '#1F2937',
+                              '::placeholder': { color: isDark ? '#64748b' : '#9ca3af' },
                               letterSpacing: '0.025em',
                             },
                             invalid: { color: '#ef4444' },
