@@ -23,6 +23,7 @@ export const itemVariants: Variants = {
 
 export default function ProductCard({ product }: ProductCardProps) {
   const { openCart, addItem } = useCart()
+  const { showToast } = useToast()
   const { isWishlisted, toggleWishlist } = useWishlist()
   const { isAuthenticated, triggerLogin } = useFirebaseAuth()
   const wishlisted = isWishlisted(product._id)

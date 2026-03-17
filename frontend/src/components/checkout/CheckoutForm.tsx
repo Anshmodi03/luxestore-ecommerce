@@ -100,7 +100,7 @@ function CheckoutFormInner() {
       setAddressId(savedAddressId)
 
       // Create order immediately so we get the clientSecret for Stripe
-      const orderResp = await orderService.createOrder({ addressId: savedAddressId })
+      const orderResp = await orderService.createOrder({ addressId: savedAddressId! })
       setOrderNumber(orderResp.order.orderNumber)
       setClientSecret(orderResp.clientSecret)
       setPaymentIntentId(orderResp.paymentIntentId)
