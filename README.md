@@ -222,17 +222,21 @@ All endpoints are prefixed with `/api`. Protected routes require a Firebase ID t
 | | Platform | Notes |
 |---|---|---|
 | **Frontend** | [Vercel](https://vercel.com) | Auto-deploys on push to `main` |
-| **Backend** | [Koyeb](https://koyeb.com) | Always-on free tier, no cold starts |
+| **Backend** | [Render](https://render.com) + [UptimeRobot](https://uptimerobot.com) | Free tier, keep-alive ping every 14 min |
 | **Database** | [MongoDB Atlas](https://www.mongodb.com/atlas) | M0 free cluster |
 | **Auth** | [Firebase](https://firebase.google.com) | Google Sign-In, Spark plan |
 | **Payments** | [Stripe](https://stripe.com) | Test mode → swap to live keys when ready |
 
-### Deploy Backend to Koyeb
+### Deploy Backend to Render
 
-1. Connect GitHub repo at [app.koyeb.com](https://app.koyeb.com)
-2. Set **Root directory** → `backend`, **Build** → `npm install && npm run build`, **Run** → `npm start`
-3. Add all environment variables from `backend/.env`
+1. Sign up at [render.com](https://render.com) → **New Web Service** → connect GitHub repo
+2. Set **Root directory** → `backend`, **Build command** → `npm install && npm run build`, **Start command** → `npm start`
+3. Add all environment variables from `backend/.env.example` in the **Environment** tab
+   - Set `FRONTEND_URL` to your Vercel frontend URL (e.g. `https://luxestore-ecommerce.vercel.app`)
+   - Set `NODE_ENV` to `production`
 4. Set **Health check path** → `/api/health`
+5. After deploy, go to [uptimerobot.com](https://uptimerobot.com) → **Add New Monitor** → HTTP(s) → paste your Render URL + `/api/health` → interval **14 minutes** (free)
+   > This prevents Render's free tier from sleeping after 15 min of inactivity.
 
 ### Deploy Frontend to Vercel
 
@@ -241,8 +245,18 @@ All endpoints are prefixed with `/api`. Protected routes require a Firebase ID t
 npm i -g vercel
 vercel --cwd frontend
 
-# Set VITE_API_URL to your Koyeb backend URL, then redeploy
+# Set VITE_API_URL to your Render backend URL, then redeploy
 ```
+
+### Firebase — Add Production Domain
+
+Google Sign-In only works from domains Firebase explicitly trusts.
+
+**Firebase Console → Authentication → Settings → Authorized domains → Add domain**
+
+Add your Vercel frontend URL: `luxestore-ecommerce.vercel.app`
+
+> The backend URL does **not** need to be added — Firebase Admin SDK verifies tokens server-side using your `FIREBASE_PROJECT_ID` only.
 
 ---
 
