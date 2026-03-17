@@ -26,23 +26,6 @@ It features Google Sign-In, Stripe payments, animated UI, wishlists, a full dash
 
 ---
 
-## 📸 Screenshots
-
-<table>
-  <tr>
-    <td align="center" width="50%">
-      <b>Collection</b><br/>
-      <img src="frontend/public/screenshots/collection.png" alt="Collection page" />
-    </td>
-    <td align="center" width="50%">
-      <b>Product Detail</b><br/>
-      <img src="frontend/public/screenshots/product.png" alt="Product detail page" />
-    </td>
-  </tr>
-</table>
-
----
-
 ## ✨ Features
 
 - 🔐 **Google Sign-In** — Firebase Authentication with persistent sessions

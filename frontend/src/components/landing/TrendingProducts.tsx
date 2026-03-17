@@ -10,7 +10,7 @@ export default function TrendingProducts() {
 
   useEffect(() => {
     getProducts({ limit: 8 })
-      .then(res => setTrendingItems(res.data.filter(p => p.isTrending).slice(0, 4)))
+      .then(res => setTrendingItems(res.data.filter(p => p.isTrending).slice(0, 8)))
       .catch(() => setTrendingItems([]))
   }, [])
 
