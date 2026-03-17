@@ -18,7 +18,28 @@ It features Google Sign-In, Stripe payments, animated UI, wishlists, a full dash
 
 [Live Demo](https://luxestore-ecommerce.vercel.app) · [API Health](https://luxestore-api.onrender.com/api/health) · [Report Bug](https://github.com/Anshmodi03/luxestore-ecommerce/issues)
 
+<br/>
+
+![Homepage](frontend/public/screenshots/homepage.png)
+
 </div>
+
+---
+
+## 📸 Screenshots
+
+<table>
+  <tr>
+    <td align="center" width="50%">
+      <b>Collection</b><br/>
+      <img src="frontend/public/screenshots/collection.png" alt="Collection page" />
+    </td>
+    <td align="center" width="50%">
+      <b>Product Detail</b><br/>
+      <img src="frontend/public/screenshots/product.png" alt="Product detail page" />
+    </td>
+  </tr>
+</table>
 
 ---
 

@@ -103,21 +103,27 @@ export default function OrderSuccessModal({ orderNumber }: OrderSuccessModalProp
           </div>
 
           {/* Action Buttons */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.9, duration: 0.6 }}
-            className="flex flex-col items-center gap-4 mt-4 w-full px-4"
+            className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-6 w-full px-2 sm:px-4"
           >
-            <button className="relative overflow-hidden group bg-primary text-white px-8 py-4 rounded-sm uppercase tracking-[0.2em] text-xs font-semibold shadow-lg shadow-primary/30 hover:shadow-primary/50 transition-all duration-500 w-full sm:w-auto hover:-translate-y-1">
-              <span className="relative z-10">Track Your Order</span>
-              <div className="absolute inset-0 bg-linear-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-[shimmer-sweep_2s_infinite]"></div>
-            </button>
-            
-            <Link to="/" className="group inline-flex items-center gap-2 text-[10px] sm:text-xs uppercase tracking-[0.15em] relative text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors duration-300 mt-2">
-              Continue Shopping
+            <Link
+              to="/collection"
+              className="relative overflow-hidden group bg-primary text-white px-8 py-4 rounded-sm uppercase tracking-[0.2em] text-xs font-semibold shadow-lg shadow-primary/30 hover:shadow-primary/50 transition-all duration-500 w-full sm:w-auto text-center hover:-translate-y-0.5"
+            >
+              <span className="relative z-10">Continue Shopping</span>
+              <div className="absolute inset-0 bg-linear-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
+            </Link>
+
+            <Link
+              to="/dashboard"
+              className="group inline-flex items-center gap-2 text-[10px] sm:text-xs uppercase tracking-[0.15em] relative text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors duration-300 px-4 py-4"
+            >
+              View Orders
               <span className="material-symbols-outlined text-sm sm:text-base thin-icon group-hover:translate-x-1 transition-transform">arrow_forward</span>
-              <div className="absolute bottom-0 left-1/2 w-0 h-px bg-slate-900 dark:bg-white transition-all duration-300 -translate-x-1/2 group-hover:w-full"></div>
+              <div className="absolute bottom-2 left-1/2 w-0 h-px bg-slate-900 dark:bg-white transition-all duration-300 -translate-x-1/2 group-hover:w-full"></div>
             </Link>
           </motion.div>
           

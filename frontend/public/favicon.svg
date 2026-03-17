@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <style>
+      @keyframes pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.7; }
+      }
+      @keyframes shimmer {
+        0% { stop-color: #FF5C35; }
+        50% { stop-color: #ff8c6e; }
+        100% { stop-color: #FF5C35; }
+      }
+      .gem { animation: pulse 2.4s ease-in-out infinite; }
+      .stop1 { animation: shimmer 2.4s ease-in-out infinite; }
+    </style>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop class="stop1" offset="0%" stop-color="#FF5C35"/>
+      <stop offset="100%" stop-color="#c93d1e"/>
+    </linearGradient>
+  </defs>
+  <!-- Diamond / gem shape -->
+  <g class="gem">
+    <!-- top facets -->
+    <polygon points="32,4 48,22 32,28 16,22" fill="url(#g)" opacity="0.95"/>
+    <!-- bottom body -->
+    <polygon points="16,22 32,28 48,22 32,60" fill="#c93d1e"/>
+    <!-- inner highlight facets -->
+    <polygon points="32,4 16,22 32,28" fill="#ff8c6e" opacity="0.5"/>
+    <polygon points="32,28 48,22 32,60" fill="#a03010" opacity="0.4"/>
+  </g>
+</svg>
