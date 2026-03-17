@@ -187,23 +187,23 @@ async function seed() {
   await User.deleteMany({ email: { $in: ['admin@luxestore.com', 'customer@luxestore.com'] } });
 
   const admin = await User.create({
-    auth0Id: 'auth0|admin-placeholder',
+    firebaseUid: 'firebase|admin-placeholder',
     email: 'admin@luxestore.com',
     firstName: 'Admin',
     lastName: 'LuxeStore',
     role: 'admin',
-    provider: 'auth0',
+    provider: 'google',
     isVerified: true,
   });
   console.log(`   ✅ admin@luxestore.com (role: admin)`);
 
   const customer = await User.create({
-    auth0Id: 'dev|customer-placeholder',
+    firebaseUid: 'dev|customer-placeholder',
     email: 'customer@luxestore.com',
     firstName: 'Test',
     lastName: 'Customer',
     role: 'customer',
-    provider: 'auth0',
+    provider: 'google',
     isVerified: true,
   });
   console.log(`   ✅ customer@luxestore.com (role: customer)`);
