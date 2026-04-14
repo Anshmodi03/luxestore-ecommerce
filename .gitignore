@@ -10,8 +10,6 @@ npm-debug.log*
 Thumbs.db
 stitch_design.html
 stitch_screenshot.png
-Claude_code_mcp_skills_plugins.pdf
-.claude/
 .vscode/
 BACKEND_PLAN.md
 .playwright-mcp/
