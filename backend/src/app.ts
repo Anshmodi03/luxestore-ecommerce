@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
-import { env, isDevMode, isStripeConfigured } from './config/env';
+import { env } from './config/env';
 import { connectDatabase } from './config/database';
 import { generalLimiter } from './middleware/rateLimiter';
 import { errorHandler } from './middleware/errorHandler';
@@ -61,13 +61,13 @@ app.use('/api/users', userRoutes);
 // Error handler (must be last)
 app.use(errorHandler);
 
-// Connect DB (cached — safe for serverless)
-connectDatabase().then(() => {
-  if (isDevMode) {
-    console.warn('⚠️  DEV MODE — Firebase disabled, using mock authentication');
-  }
-  if (!isStripeConfigured) {
-    console.warn('⚠️  Stripe not configured — using mock payments');
+// Connect DB per-request (cached after first success — safe for serverless)
+app.use(async (_req, _res, next) => {
+  try {
+    await connectDatabase();
+    next();
+  } catch (err) {
+    next(err);
   }
 });
 

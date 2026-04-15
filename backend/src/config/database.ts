@@ -20,7 +20,7 @@ export async function connectDatabase(): Promise<typeof mongoose> {
   } catch (error) {
     cache.promise = null;
     console.error('❌ MongoDB connection error:', error);
-    process.exit(1);
+    throw error;
   }
 
   return cache.conn;
